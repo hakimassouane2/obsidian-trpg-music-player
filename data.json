@@ -1,0 +1,412 @@
+{
+  "tracks": [
+    {
+      "id": "0d585e0f-5ac7-43aa-80e1-50b5874b11a6",
+      "name": "Tense Path | D&D/TTRPG Music | 1 Hour",
+      "youtubeId": "fv_7EurNAss",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Mystérieux"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "f85f8ec1-8655-4a95-85e3-714e3d5dac9b",
+      "name": "Village | D&D/TTRPG Ambience | 1 Hour",
+      "youtubeId": "q9yaKpYS9qc",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "ef6266d9-b70c-4bf2-8960-63caa7b64ef5",
+      "name": "Festival Town | D&D/TTRPG Music | 1 Hour",
+      "youtubeId": "8u9ZC8WLIiU",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Joyeux"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "3fa96181-d029-46ee-85a4-bd0637db4748",
+      "name": "Medieval City Sounds | Market Day Ambience | 1 Hour",
+      "youtubeId": "o-b5nMCj5hI",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "2cc118a5-af88-4644-8aec-2b7eff61d1ad",
+      "name": "Sailing Ship | High Seas Ambience | 1 Hour",
+      "youtubeId": "beOw8MEojQ4",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Océan"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "971772a5-6e41-4543-9dc5-2a91bc6ab919",
+      "name": "Prison | Immersive Medieval Ambience | 1 Hour #dnd",
+      "youtubeId": "FVmWdIwjgKA",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Donjon"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "40903e8c-b2d2-44a9-bd57-453b58923685",
+      "name": "Dungeons and Dragons Horror Music | “Something’s Not Right”| Suspense Theme",
+      "youtubeId": "CNf6BL8gwbw",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "3dbbb969-a90c-4744-bc41-419c79eeb87e",
+      "name": "Action 2 - Combat music van helsing",
+      "youtubeId": "WWWioDefbeQ",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "7f20ff0e-8bf9-49dd-be17-f20136e62b6a",
+      "name": "Bossfight 2 - Combat music Van Helsing",
+      "youtubeId": "7XbTjHj1s2M",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "8089a6d1-b52d-4399-827f-17a85f8e4cc9",
+      "name": "Panicking Crowd | Realistic Ambience | 1 Hour #DnD #RPG",
+      "youtubeId": "whtz44p9oII",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Ville",
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "ff0db52a-326b-499c-bb3b-e59b61f0a035",
+      "name": "Castlevania Lords of Shadow Music - The Warg",
+      "youtubeId": "3ZsWiIvWeD0",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "82aef72f-348c-4196-a577-dc58d807e04a",
+      "name": "Castlevania Lords of Shadow Music - The Ice Titan",
+      "youtubeId": "W4-AVow9WBc",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "7738fcf0-bb02-47c2-90f5-1ddb580f4c28",
+      "name": "Chaotic Battle - Castlevania: Lords of Shadow 2 OST",
+      "youtubeId": "M0GwSyubRoU",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "e8378f90-1885-41d7-ad0c-48f908b72ac6",
+      "name": "Carmilla Fight I - Castlevania: Lords of Shadow 2 OST",
+      "youtubeId": "7AStQSVbSRI",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "c4f87c67-d6f8-4ee9-9d23-ddf9100c5b74",
+      "name": "Pillars of Eternity OST: Combat D (Extended)",
+      "youtubeId": "g1hdqjUtqR8",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "6b2a631a-4316-4ad2-bdee-b48ef39b92e1",
+      "name": "Unicorn Overlord OST: Battlefield Disaster (Extended)",
+      "youtubeId": "Ey8FuTNPvYo",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "e9d63ec9-9aa2-4f20-9b8c-50cb1795e4da",
+      "name": "Pillars of Eternity OST: Combat A (Extended)",
+      "youtubeId": "oLtLDxZz9ng",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "0bfa317a-151e-4f62-8474-ab7f7ca1dbde",
+      "name": "Pillars of Eternity OST: Combat E (Extended)",
+      "youtubeId": "5OV_3HVIBpw",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "616c6630-bedc-4df4-b83a-201344eeb342",
+      "name": "Battle In City | Distant Fight, Ruined District, Building Collapsing, Ambience | 1 Hour",
+      "youtubeId": "nEjMmL1nfsk",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "d8492888-64b5-4088-aded-bcbdf66b50d9",
+      "name": "Quiet Tavern | Innkeeper ASMR Ambience | 1 Hour",
+      "youtubeId": "b1DUhonNQXM",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "85f6ba10-4bdf-42ba-9b26-94504a73e5d2",
+      "name": "Crowded Tavern | Adventure Ambience | 1 Hour #dnd",
+      "youtubeId": "KecVJnJcSI4",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "a2c973c6-b954-42f7-b57b-5e1cef0d999b",
+      "name": "Bardcore/Modern Medieval Music | Medieval Instrumental Music Compilation",
+      "youtubeId": "tLb89fCUsWo",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "6f4d855c-6f23-4f25-b6d8-f05c0b9613f1",
+      "name": "Ale and Anecdotes | D&D/TTRPG Tavern/Inn Music | 1 Hour",
+      "youtubeId": "u2jLHdpo2AQ",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    }
+  ],
+  "presets": [
+    {
+      "id": "0c9065aa-7690-43be-a571-edb23b513cd1",
+      "name": "Taverne Pleine - A",
+      "ambianceTrackId": "85f6ba10-4bdf-42ba-9b26-94504a73e5d2",
+      "musiqueTrackId": "6f4d855c-6f23-4f25-b6d8-f05c0b9613f1",
+      "ambianceVolume": 0.1,
+      "musiqueVolume": 0.49
+    }
+  ],
+  "settings": {
+    "ambianceVolume": 0.91,
+    "musiqueVolume": 0.62,
+    "crossfadeDuration": 6000,
+    "masterVolume": 1
+  }
+}

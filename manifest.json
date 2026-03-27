@@ -1,0 +1,10 @@
+{
+  "id": "obsidian-trpg-music-player",
+  "name": "TRPG Music Player",
+  "version": "0.1.0",
+  "minAppVersion": "1.4.0",
+  "description": "Lecteur musical pour JDR avec lecture YouTube 2 canaux, bibliothèque de pistes, préréglages de scènes et fondu enchaîné.",
+  "author": "Hakim",
+  "authorUrl": "",
+  "isDesktopOnly": false
+}

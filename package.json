@@ -1,0 +1,27 @@
+{
+  "name": "obsidian-trpg-music-player",
+  "version": "0.1.0",
+  "description": "Lecteur musical pour JDR avec lecture YouTube 2 canaux dans Obsidian",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "npx tsc -noEmit -skipLibCheck && node esbuild.config.mjs production"
+  },
+  "keywords": [
+    "obsidian",
+    "plugin",
+    "music",
+    "rpg",
+    "ttrpg",
+    "youtube"
+  ],
+  "author": "Hakim",
+  "license": "MIT",
+  "devDependencies": {
+    "builtin-modules": "^3.3.0",
+    "esbuild": "^0.19.9",
+    "obsidian": "latest",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
+  }
+}
