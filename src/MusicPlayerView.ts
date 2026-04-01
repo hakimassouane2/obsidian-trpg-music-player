@@ -47,13 +47,18 @@ export class MusicPlayerView extends ItemView {
     this.buildPresetsSection(contentEl);
     this.buildAddPresetSection(contentEl);
 
-    // YouTube iframe containers (hidden)
-    const iframeContainer = contentEl.createDiv({ cls: 'trpg-youtube-containers' });
-    const ambianceContainer = iframeContainer.createDiv({ cls: 'trpg-youtube-container' });
-    const musiqueContainer = iframeContainer.createDiv({ cls: 'trpg-youtube-container' });
-
-    await this.plugin.playerService.createPlayer('ambiance', ambianceContainer);
-    await this.plugin.playerService.createPlayer('musique', musiqueContainer);
+    // YouTube iframe containers (hidden) — only create if not already initialized
+    if (!this.plugin.playerService.isPlayerInitialized('ambiance') || !this.plugin.playerService.isPlayerInitialized('musique')) {
+      const iframeContainer = contentEl.createDiv({ cls: 'trpg-youtube-containers' });
+      if (!this.plugin.playerService.isPlayerInitialized('ambiance')) {
+        const ambianceContainer = iframeContainer.createDiv({ cls: 'trpg-youtube-container' });
+        await this.plugin.playerService.createPlayer('ambiance', ambianceContainer);
+      }
+      if (!this.plugin.playerService.isPlayerInitialized('musique')) {
+        const musiqueContainer = iframeContainer.createDiv({ cls: 'trpg-youtube-container' });
+        await this.plugin.playerService.createPlayer('musique', musiqueContainer);
+      }
+    }
   }
 
   async onClose(): Promise<void> {

@@ -27,6 +27,7 @@ export class LibraryView extends ItemView {
   private searchRowEl: HTMLElement | null = null;
   private presetSearchRowEl: HTMLElement | null = null;
   private presetSearchQuery = '';
+  private resetBtn: HTMLElement | null = null;
 
   // Mini player refs
   private miniAmbianceNameEl: HTMLElement | null = null;
@@ -68,6 +69,19 @@ export class LibraryView extends ItemView {
     const { contentEl } = this;
     contentEl.empty();
     contentEl.addClass('trpg-library-view');
+
+    // Ensure YouTube players are initialized (they may not exist if side panel was never opened)
+    if (!this.plugin.playerService.isPlayerInitialized('ambiance') || !this.plugin.playerService.isPlayerInitialized('musique')) {
+      const iframeContainer = contentEl.createDiv({ cls: 'trpg-youtube-containers' });
+      if (!this.plugin.playerService.isPlayerInitialized('ambiance')) {
+        const ambianceContainer = iframeContainer.createDiv({ cls: 'trpg-youtube-container' });
+        await this.plugin.playerService.createPlayer('ambiance', ambianceContainer);
+      }
+      if (!this.plugin.playerService.isPlayerInitialized('musique')) {
+        const musiqueContainer = iframeContainer.createDiv({ cls: 'trpg-youtube-container' });
+        await this.plugin.playerService.createPlayer('musique', musiqueContainer);
+      }
+    }
 
     const header = contentEl.createDiv({ cls: 'trpg-lib-header' });
 
@@ -123,6 +137,19 @@ export class LibraryView extends ItemView {
     });
     this.createFilterChip(this.filtersRowEl, UI.FILTER_INTENSITE, CATEGORIES.intensite as unknown as string[], (val) => {
       this.filterIntensite = val;
+      this.refreshGrid();
+    });
+
+    // Reset filters button (hidden by default, shown when filters are active)
+    this.resetBtn = this.filtersRowEl.createEl('button', { cls: 'trpg-lib-reset-btn trpg-lib-hidden', text: 'Réinitialiser' });
+    this.resetBtn.addEventListener('click', () => {
+      this.searchQuery = '';
+      this.filterChannel = '';
+      this.filterHumeur = '';
+      this.filterLieu = '';
+      this.filterIntensite = '';
+      searchInput.value = '';
+      this.filtersRowEl?.querySelectorAll('select').forEach((s) => { (s as HTMLSelectElement).value = ''; });
       this.refreshGrid();
     });
 
@@ -327,6 +354,9 @@ export class LibraryView extends ItemView {
     if (this.countEl) {
       this.countEl.textContent = `${tracks.length} ${UI.TRACK_COUNT}`;
     }
+
+    const hasActiveFilters = !!(this.searchQuery || this.filterChannel || this.filterHumeur || this.filterLieu || this.filterIntensite);
+    this.resetBtn?.toggleClass('trpg-lib-hidden', !hasActiveFilters);
 
     if (tracks.length === 0) {
       const empty = this.gridEl.createDiv({ cls: 'trpg-lib-empty' });

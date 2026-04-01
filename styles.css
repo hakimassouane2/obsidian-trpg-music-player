@@ -555,7 +555,7 @@
 
 .trpg-lib-title-icon {
   display: flex;
-  color: var(--interactive-accent);
+  color: var(--text-normal);
 }
 
 .trpg-lib-title-icon svg {
@@ -900,7 +900,22 @@
   border-color: var(--interactive-accent);
 }
 
+.trpg-lib-reset-btn {
+  padding: 4px 14px;
+  font-size: 12px;
+  border-radius: 16px;
+  border: 1px solid #c0392b !important;
+  background: #c0392b !important;
+  color: #fff !important;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
 
+.trpg-lib-reset-btn:hover {
+  opacity: 0.85;
+}
 
 /* Grid — default large */
 .trpg-lib-grid {
@@ -908,6 +923,7 @@
   gap: 16px;
   padding: 12px;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  align-content: start;
 }
 
 /* Medium: container < 700px */

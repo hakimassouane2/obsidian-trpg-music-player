@@ -359,23 +359,6 @@
       }
     },
     {
-      "id": "a2c973c6-b954-42f7-b57b-5e1cef0d999b",
-      "name": "Bardcore/Modern Medieval Music | Medieval Instrumental Music Compilation",
-      "youtubeId": "tLb89fCUsWo",
-      "channel": "musique",
-      "categories": {
-        "humeur": [
-          "Tendu"
-        ],
-        "lieu": [
-          "Taverne"
-        ],
-        "intensite": [
-          "Moyenne"
-        ]
-      }
-    },
-    {
       "id": "6f4d855c-6f23-4f25-b6d8-f05c0b9613f1",
       "name": "Ale and Anecdotes | D&D/TTRPG Tavern/Inn Music | 1 Hour",
       "youtubeId": "u2jLHdpo2AQ",
@@ -391,6 +374,1400 @@
           "Faible"
         ]
       }
+    },
+    {
+      "id": "0b801165-00f5-4665-af07-8ad5b7637ccb",
+      "name": "Tales of Symphonia: Small town by the ocean, Izoold ~ 1 hour",
+      "youtubeId": "ilatDHssEu4",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "35c6da86-eaf1-4bc0-bfbd-ba576de7d5d2",
+      "name": "Fantasy Medieval City | Immersive Ambience | 1 Hour #DnD",
+      "youtubeId": "WJrqwa6tMQY",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "b6ee62e7-23d9-4178-bd23-6fc7a186366e",
+      "name": "Siege Battle | Combat Ambience | 1 Hour #dnd",
+      "youtubeId": "EspwQ6Phw0g",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "7055a27a-6271-40de-a0d2-0af16ea10946",
+      "name": "Dark Swamp | Exploration Ambience | 1 Hour #dnd",
+      "youtubeId": "kzBx8TWcrG4",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Forêt"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "0b88cad8-d14c-4af9-9bdc-23692cd657e9",
+      "name": "Building on Fire | Inferno Ambience | 1 Hour",
+      "youtubeId": "2ya2drfb4rA",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "5acb0d0b-4383-4436-a8bf-cf9b02256b47",
+      "name": "Medieval Harbor | Medieval Ambience | 1 Hour #dnd",
+      "youtubeId": "t0AmfPQMs4k",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "7bacdba4-97dd-4682-b2e4-11ebfda108b0",
+      "name": "Sewers | Adventure Ambience | 1 Hour #dnd",
+      "youtubeId": "pv7sc85UZ-4",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Donjon"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "ac3239c1-69b1-4f6b-869a-04361761bc7d",
+      "name": "Evening In The City | Guards, Stealthy Figures, Medieval, Ambience | 1 Hour",
+      "youtubeId": "FvgV3G-EnnQ",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "0bf80098-01ed-45dc-b9af-cc05e732dd7d",
+      "name": "Countryside | Farms, Peasants, Medieval, Relaxing Ambience | 1 Hour",
+      "youtubeId": "wEEc9RhHTzU",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "7c45e391-11af-4b01-bfab-98105703a1b4",
+      "name": "Medieval Village | Adventure Ambience | 1 Hour",
+      "youtubeId": "Wd3kd0zY2bQ",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "80872f30-1ecd-4a1a-83fa-a7221e98ab78",
+      "name": "Daytime Forest | Nature Ambience | 1 Hour",
+      "youtubeId": "HAw37tUHcOo",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Forêt"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "3cd72b18-eafb-46c7-963b-14d727026126",
+      "name": "Medieval City Indoor (Layer it!) | Calm ASMR Ambience | 1 Hour #DnD #RPG",
+      "youtubeId": "inG4BLxwlJ4",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "f153e659-9807-4e1d-a978-fe5b84d06d78",
+      "name": "Decadent Noble Party | Baroque Ambience | Whips, Moans, Lust, Baroque Music",
+      "youtubeId": "1-i516hTgB8",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "08752fa2-fb14-4ba7-889b-4d4069e395de",
+      "name": "Horseback | Travel Ambience | 1 Hour",
+      "youtubeId": "mtvETuH3q4M",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "7e41083c-5127-4421-b6fb-5537781b0bf0",
+      "name": "Alchemy Laboratory | Medieval Ambience | 1 Hour #dnd",
+      "youtubeId": "b7bdcpbdjB4",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "c9c98fb2-e0e8-43e1-a9d1-ffec05e1c58d",
+      "name": "Blacksmith | Medieval Ambience | 1 Hour #dnd",
+      "youtubeId": "pRkFl9j3NLk",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "a383c879-24e5-4716-97dd-ee3394646bfb",
+      "name": "Campfire In Woods (Night) | Nature Ambience | 1 Hour #dnd",
+      "youtubeId": "imxILmKjjCQ",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Forêt"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "f4d9dd65-a1ff-4691-a74e-1f8715e031df",
+      "name": "Library | Relaxing Ambience | 1 Hour #dnd",
+      "youtubeId": "VvC12NAf-Cw",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "054122bc-c5a2-4fb9-9f28-4d5fe588ea8e",
+      "name": "City's Dungeon | Prison Ambience | 1 Hour",
+      "youtubeId": "ztYZ1xaUMCc",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "b24c5bd4-6d5e-4ed2-ab92-5855374b5722",
+      "name": "Carpenter's Workshop | Woodwork Ambience | 1 Hour #dnd",
+      "youtubeId": "or7IiL1i5sE",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "8a861b7a-9e4e-4a69-bfcd-6cef1781f7b7",
+      "name": "Underwater | Exploration Ambience | 1 Hour #dnd",
+      "youtubeId": "L93zhTneGBU",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Océan"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "89db9cf3-7fa9-4865-bea1-6ba74ba3a8ee",
+      "name": "Ancient City - Market | Antiquity Agora Ambience - Collaboration with @AdrianvonZiegler | 3 Hours",
+      "youtubeId": "c2iMlggmX2A",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "d2a039b9-0258-4749-8ff3-c672c4546d45",
+      "name": "Herbalist's Shop | ASMR Ambience | 1 Hour #DnD #rpg",
+      "youtubeId": "vPk2W2L3Lbw",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "94704478-5622-4098-9768-04d6883257ea",
+      "name": "Lumber Camp | Medieval Ambience | 3 Hours",
+      "youtubeId": "qkXlgCFnJC8",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "ffc39350-eb7b-4e61-8215-123d3f9a35d1",
+      "name": "Stables | Hooves, Neighing, Snorting, Horse ASMR Ambience | 3 Hours",
+      "youtubeId": "UBqSBqzArsw",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "19878aa6-631d-4255-99ee-f03eba3fb504",
+      "name": "Generic Dungeon 1 | Mysterious Ambience | 1 Hour #dnd",
+      "youtubeId": "nhP7goJYSmc",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Mystérieux"
+        ],
+        "lieu": [
+          "Donjon"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "aa5c4fcf-d754-4f79-abb0-9120f2ad290b",
+      "name": "Tavern Brawl | Fantasy RPG Ambience | 3 Hours",
+      "youtubeId": "iJiuzEYlLR4",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "eb199d9e-bf4c-49fc-9849-c5d783039da7",
+      "name": "Common Dungeon | Exploration Ambience | 1 Hour #dnd",
+      "youtubeId": "M7iPE6-OvzA",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Mystérieux"
+        ],
+        "lieu": [
+          "Donjon"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "25627731-5689-4670-99a1-b8298c3b1424",
+      "name": "Torchlit Dungeon | Exploration Ambience | 1 Hour #dnd",
+      "youtubeId": "CSPjCl_7hXo",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Mystérieux"
+        ],
+        "lieu": [
+          "Donjon"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "2727e715-67b8-42ac-b061-fb9edb7a2d41",
+      "name": "Generic Dungeon 2 | Eerie, Sinister, Dark, Ambience | 1 Hour #dnd",
+      "youtubeId": "bUGyf79WmRA",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Donjon"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "b3f94e95-7dd4-4076-b064-1b121a6a3d09",
+      "name": "Horseback | Travel Ambience (No Background) | 1 Hour",
+      "youtubeId": "49TLUjcIWYI",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "524e1268-2b49-48f4-86e3-c2b73c1ec42a",
+      "name": "Village Cemetery | Daytime, Village Mid Distance, RPG Ambience, Not Creepy (Yet) | 3 Hours",
+      "youtubeId": "_h315tvm6v8",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "2260d5dc-6ec7-42f2-a76e-782a2e7eebab",
+      "name": "General Goods Store | Medieval RPG Ambience | 3 Hours",
+      "youtubeId": "oHNZwc7D53o",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "4244c8ee-1526-4782-8504-5c691da6ca6a",
+      "name": "Silent Medieval Village | Fantasy RPG Ambience | 3 Hours",
+      "youtubeId": "tEWbTLrT_pc",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "e9d63a9b-3e0b-4cfe-9193-40a09a122d66",
+      "name": "Light Rain | Relaxing, Natural ASMR Ambience | 3 Hours",
+      "youtubeId": "jxUsLxrlfNU",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "0c65ecbd-e1ed-4e19-a357-e678c8eba59b",
+      "name": "Woodworker Workshop | Immersive RPG Ambience | 3 Hours",
+      "youtubeId": "rGn4NaUhKUs",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "04fdc5ae-61aa-439c-a285-fe42e68e12b4",
+      "name": "Tarrey Town (The Legend of Zelda: Breath of the Wild OST)",
+      "youtubeId": "2pGapEXcn30",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "54ecf133-1ff7-4e75-9db5-e0e83570de2f",
+      "name": "Monster Hunter - Pokke Village Theme",
+      "youtubeId": "__QdAxqBi5Y",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "8c95f915-8570-429a-8384-da59f583edfc",
+      "name": "Stardew Valley OST - Spring (The Valley Comes Alive)",
+      "youtubeId": "fI9QzlD_sm0",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "a132257b-4812-44dd-8a7d-b642c7f8faa5",
+      "name": "Shirobako OST - 01 - SHIROBAKO",
+      "youtubeId": "hD5AxYh0tGI",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "d009abaa-4ff4-4101-bbab-e95c3d92701c",
+      "name": "FFXIV OST Kholusia Theme #1 ( A World Divided )",
+      "youtubeId": "2yEqYSkNlus",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "dcd0006a-c7bb-4bb3-a9b2-154b48e9646c",
+      "name": "Island Sanctuary Theme \"Island Paradise\" - FFXIV OST",
+      "youtubeId": "KvsLnDrKt4A",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "5fd2c7ca-a1c1-4d17-b295-14a4ba4678d9",
+      "name": "Baten Kaitos OST - To the Garden of the Moon Butterflies in the Moonless Night",
+      "youtubeId": "bv8SydHgYCM",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Forêt"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "3c3fc107-95f7-4ef8-9d8d-3c44249672fa",
+      "name": "D&D Ambience -  Forest Daytime",
+      "youtubeId": "6Em9tLXbhfo",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Forêt"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "2e6ff3bd-2d85-4bc7-ac3d-d819421c470d",
+      "name": "Forest (Night) | D&D/TTRPG Ambience | 1 Hour",
+      "youtubeId": "NvBS6NWewxU",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Forêt"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "553bad8e-8298-4992-9fc3-b32db34c9f83",
+      "name": "Mysterious Forest | D&D/TTRPG Music | 1 Hour",
+      "youtubeId": "4Y6n-1XQSfE",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Mystérieux"
+        ],
+        "lieu": [
+          "Forêt"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "2db15071-811f-4c15-9277-79326a01bd54",
+      "name": "Night Time Forest | Nature Ambience | 1 Hour",
+      "youtubeId": "ybTXj_OE4-k",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Forêt"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "fd5b84d0-fdb9-4640-8d90-1a728b0d34cf",
+      "name": "Enclosed Forest | Eerie Fauna, Creepy Noises, Nighttime Ambience | 3 Hours",
+      "youtubeId": "9b20XeIfjs8",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Forêt"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "4b6cdd17-66d7-4409-8361-a36a5c6da0c7",
+      "name": "City Temple | D&D/TTRPG Music | 1 Hour",
+      "youtubeId": "6H2JbT4BRDU",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Épique"
+        ],
+        "lieu": [
+          "Temple"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "052ec464-499d-4536-9587-2719b9c4f125",
+      "name": "Holy Temple | Sacred Ambience | 1 Hour #dnd",
+      "youtubeId": "bD4L0j5SrFM",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Temple"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "6031ec9c-0ba3-4d3e-b29f-cfe2831fb26f",
+      "name": "🎵 RPG Mystery Music | Chronospheres",
+      "youtubeId": "Xwmr4VUK4DA",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Mystérieux"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "c099a60f-e53a-4ebd-b5c0-3505be110491",
+      "name": "🎵 RPG Mystery Music | Joran's Woods",
+      "youtubeId": "DQV76hQ12Co",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Mystérieux"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "c0253953-1038-4ee4-8e7a-91d2aaa244f1",
+      "name": "Marks of the Heretics - Action | Inquisitor - Martyr Soundtrack",
+      "youtubeId": "jNiD8_ymgdA",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "db466c8a-6135-4e16-8b1f-12bf5e598e39",
+      "name": "Skirmish",
+      "youtubeId": "6CpjQkDaAoQ",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "da9e4f9b-e764-452b-a21d-eb64a2cffd9b",
+      "name": "Kevin MacLeod ~ Volatile Reaction",
+      "youtubeId": "u3Jr9t_jFcE",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "e9dd5bee-2caa-4a54-bd48-82db48b1ecdb",
+      "name": "David Arkenstone & Jason Hayes - Salty Sailor",
+      "youtubeId": "mc4LJrDJUEk",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Joyeux"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "be961c46-b94a-4800-aec2-768449a3df5c",
+      "name": "Inon Zur - Tavern Music | Dragon Age 2 (OST)",
+      "youtubeId": "offZKRRJBP8",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Joyeux"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "93ceb393-3ea1-491d-8b5c-7d3d2366cd68",
+      "name": "Bilbo Baggins' Birthday Background",
+      "youtubeId": "O7vW9CB86Mc",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Joyeux"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "f5d0f176-ba66-460c-a6f1-d659ee964512",
+      "name": "The Hellion Tavern | Epic Fantasy Tavern Music | ASKII",
+      "youtubeId": "3X9ACIeRRHg",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "8de0bac7-8c8c-4b48-a1f3-3aeac513ea8e",
+      "name": "Old Man Willow",
+      "youtubeId": "wOtk4nj_mDo",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "1cc8b5f6-98c7-465e-8fb7-31d65cc10e24",
+      "name": "Mr. Underhill's Mishap",
+      "youtubeId": "NGVLtdFO0fc",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "90b156eb-8fd8-48e2-afa0-64caef9888e7",
+      "name": "A Tavern on the Riverbank",
+      "youtubeId": "40S04c7ZUlo",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "d748ff1e-abc8-47a6-b965-19a8f49e6bdc",
+      "name": "Tavern background",
+      "youtubeId": "P8eiK73PKhs",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Joyeux"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "ce402f92-85dd-44dd-b05a-7d767c7207da",
+      "name": "Another Round For Everyone",
+      "youtubeId": "UI3EdZNHB78",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Joyeux"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "91d6a850-5893-4438-95cc-f1a5c760a5cf",
+      "name": "The Dragonborn Comes (new verses) - performed by Erutan ( katethegreat19 )",
+      "youtubeId": "DpcXr5LtsYA",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "4c43b446-6cba-40c8-a622-482e86ea3db0",
+      "name": "The Musty Scent of Fresh Pâté",
+      "youtubeId": "O3DGGy9eHFQ",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "f6aa496a-f4ef-4483-8568-a5c04620ece8",
+      "name": "Dressed Ship",
+      "youtubeId": "_c6ym2zEF2Y",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Joyeux"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "bdb8edba-6a20-4b09-b4eb-c0d4e84f197f",
+      "name": "Fisher's Hornpipe",
+      "youtubeId": "ei8ZFZTV79k",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Joyeux"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "e5425026-b561-4a17-8cd4-f8d156cf07f4",
+      "name": "Road to Camelot",
+      "youtubeId": "1nc5srTU92E",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Joyeux"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "719641ef-67e9-43f8-bdd5-d1840f85324d",
+      "name": "Medieval Music – Wild Boar's Inn",
+      "youtubeId": "t2rs-OyJ-Q8",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "a63bf861-2a35-4515-bd4e-33cf55bdc792",
+      "name": "Medieval Minstrel Music – English Bard",
+      "youtubeId": "fAohiRL1_nI",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "043897cd-08a8-40f7-b7e1-051c9d2f97c1",
+      "name": "Lionheart",
+      "youtubeId": "ZG7bP8CaKY0",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "6a1de996-1f7b-4fd5-85c8-4f105481cd74",
+      "name": "Octopath Traveler: Tranquil Days Extended",
+      "youtubeId": "m280Qqn7sp0",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "42090907-0df3-4b1f-a3db-73a68efb09f7",
+      "name": "Cobbleston, Nestled in the Hills (Octopath Traveler) ~ 1 Hour Deep Ambience Loop",
+      "youtubeId": "q8gLwJtASQI",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "cad5df62-7aa8-4569-bf7d-07b8f70e6499",
+      "name": "Octopath Traveler - Sunshade, City of Pleasures [Extended]",
+      "youtubeId": "1aw_C9XHR9s",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "510583e7-c6a8-4ce6-958a-31f625cfad59",
+      "name": "Octopath Traveler - My Quiet Forest Home [Extended]",
+      "youtubeId": "Dw1kjpRXoAQ",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "88b6cf2a-3c20-4de4-931f-3a84668b935b",
+      "name": "Marcin Przybyłowicz - What Lies Unseen | The Witcher 3 ost",
+      "youtubeId": "Z0UefQb23lA",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Donjon"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "daa4eae4-f425-42ff-89cb-2317340006eb",
+      "name": "🎵 RPG Exploration Music | Eyes In The Dark",
+      "youtubeId": "zZxiJkwPJ10",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Mystérieux"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "bce0f0f0-b731-432a-a9c8-d1d704183ac3",
+      "name": "The Fight for All",
+      "youtubeId": "xOTbwX5D1fY",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "bd5a62c2-fb66-4c60-9ced-f7a3fabe66e8",
+      "name": "Assassin’s Creed 3 / Lorne Balfe - Battle at Sea (Track 21)",
+      "youtubeId": "iSYTOjyPYn0",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "43bff553-f8fe-4eea-ab47-e1726a82d55b",
+      "name": "Raid on the Castle (Score)",
+      "youtubeId": "_OgtCe8lc58",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "ce9909e8-8f1e-4ea1-ae95-2c331aa3a8aa",
+      "name": "Fight for the Crypts",
+      "youtubeId": "2ngwfupp0y0",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
     }
   ],
   "presets": [
@@ -404,8 +1781,8 @@
     }
   ],
   "settings": {
-    "ambianceVolume": 0.91,
-    "musiqueVolume": 0.62,
+    "ambianceVolume": 0.31,
+    "musiqueVolume": 0.1,
     "crossfadeDuration": 6000,
     "masterVolume": 1
   }

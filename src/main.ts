@@ -1,4 +1,4 @@
-import { Plugin, WorkspaceLeaf, setIcon } from 'obsidian';
+import { Plugin, WorkspaceLeaf, setIcon, Notice } from 'obsidian';
 import type { PluginData, Channel } from './types';
 import { VIEW_TYPE, VIEW_TYPE_LIBRARY, DEFAULT_DATA, LOG_PREFIX, UI } from './constants';
 import { PlayerService } from './PlayerService';
@@ -35,6 +35,11 @@ export default class TRPGMusicPlugin extends Plugin {
     // Set volumes from saved settings
     this.playerService.setVolume('ambiance', this.data.settings.ambianceVolume * 100);
     this.playerService.setVolume('musique', this.data.settings.musiqueVolume * 100);
+
+    // Show notice on player errors
+    this.playerService.onError((_channel, message) => {
+      new Notice(message, 5000);
+    });
 
     // Register views
     this.registerView(VIEW_TYPE, (leaf) => new MusicPlayerView(leaf, this));

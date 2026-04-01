@@ -318,6 +318,10 @@ export class PlayerService {
     });
   }
 
+  isPlayerInitialized(channel: Channel): boolean {
+    return this.channels[channel].player !== null;
+  }
+
   getChannelState(channel: Channel): { isPlaying: boolean; isPaused: boolean; videoId: string | null; volume: number } {
     const state = this.channels[channel];
     return {
