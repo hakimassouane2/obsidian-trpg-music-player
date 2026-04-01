@@ -43,6 +43,11 @@ export default class TRPGMusicPlugin extends Plugin {
       new Notice(message, 5000);
     });
 
+    // Sequential mode: update now-playing when track auto-advances
+    this.playerService.onTrackAdvance = (trackName: string) => {
+      this.updateNowPlaying('musique', trackName);
+    };
+
     // Register views
     this.registerView(VIEW_TYPE, (leaf) => new MusicPlayerView(leaf, this));
     this.registerView(VIEW_TYPE_LIBRARY, (leaf) => new LibraryView(leaf, this));
@@ -247,6 +252,7 @@ export default class TRPGMusicPlugin extends Plugin {
       const view = leaf.view as LibraryView;
       if (view.refreshGrid) view.refreshGrid();
       if (view.refreshMiniPlayer) view.refreshMiniPlayer();
+      if (view.refreshPlaylist) view.refreshPlaylist();
     }
   }
 

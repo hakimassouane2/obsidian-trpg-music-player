@@ -2448,6 +2448,123 @@
           "Faible"
         ]
       }
+    },
+    {
+      "id": "261d8ed4-c9b4-4495-a732-16e8141be67e",
+      "name": "Steins;Gate [VN] OST - Walking on sleeping [Extended]",
+      "youtubeId": "ejrcYU56M_E",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "177edeb4-4a96-4076-a99c-7ad33c0eab7f",
+      "name": "GTO - Six Mat Happiness SOUNDTRACK - 1HOUR VERSION",
+      "youtubeId": "o_zEg9fubGg",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "be9b75e6-bbc4-485d-95e2-683edc6e1140",
+      "name": "GTO - Cresta of love SOUNDTRACKS",
+      "youtubeId": "2_s3WF8K-uU",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "115bb33b-2b03-431d-a6ab-cff8e94ce61e",
+      "name": "GTO - One day record SOUNDTRACKS",
+      "youtubeId": "RRqEG70qM-k",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "843ca238-42ed-44a9-8fff-0f9d2f7c010d",
+      "name": "Dr. Stone Original Soundtrack OST #05 - Senku & Taiju",
+      "youtubeId": "fuA_C3N8RzQ",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "d059335f-0162-483f-92f0-796de0892e7f",
+      "name": "10 - Home no Nakama Tachi",
+      "youtubeId": "H878nyzCriI",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "04edd4bc-9e99-4f4f-8dae-b4c344cc787c",
+      "name": "Octopath Traveler II - Carefree Days [Extended]",
+      "youtubeId": "0hqE4qqeynI",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
     }
   ],
   "presets": [
@@ -2461,8 +2578,8 @@
     }
   ],
   "settings": {
-    "ambianceVolume": 0.31,
-    "musiqueVolume": 0.34,
+    "ambianceVolume": 0.22,
+    "musiqueVolume": 0.1,
     "crossfadeDuration": 6000,
     "masterVolume": 1
   }

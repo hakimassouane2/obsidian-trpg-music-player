@@ -77,6 +77,11 @@ export const UI = {
   // Settings
   SETTINGS_DEFAULT_AMBIANCE: 'Volume ambiance par défaut',
   SETTINGS_DEFAULT_MUSIQUE: 'Volume musique par défaut',
+
+  // Sequential mode
+  SEQUENTIAL_MODE: 'Mode séquentiel',
+  SEQUENTIAL_ON: 'Mode séquentiel activé',
+  SEQUENTIAL_OFF: 'Mode séquentiel désactivé',
 } as const;
 
 export const LOG_PREFIX = '[TRPG Music]';

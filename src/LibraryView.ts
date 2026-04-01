@@ -7,7 +7,7 @@ import { EditPresetModal } from './EditPresetModal';
 import { AddTrackModal } from './AddTrackModal';
 import { AddPresetModal } from './AddPresetModal';
 
-type LibraryTab = 'tracks' | 'presets';
+type LibraryTab = 'tracks' | 'presets' | 'playlist';
 
 export class LibraryView extends ItemView {
   private plugin: TRPGMusicPlugin;
@@ -22,6 +22,10 @@ export class LibraryView extends ItemView {
   private countEl: HTMLElement | null = null;
   private tracksTabEl: HTMLElement | null = null;
   private presetsTabEl: HTMLElement | null = null;
+  private playlistTabEl: HTMLElement | null = null;
+  private playlistEl: HTMLElement | null = null;
+  private playlistQueueEl: HTMLElement | null = null;
+  private playlistFilters = { humeur: '', lieu: '', intensite: '' };
   private addBtn: HTMLElement | null = null;
   private filtersRowEl: HTMLElement | null = null;
   private searchRowEl: HTMLElement | null = null;
@@ -96,9 +100,11 @@ export class LibraryView extends ItemView {
     const tabGroup = tabBar.createDiv({ cls: 'trpg-lib-tab-group' });
     this.tracksTabEl = tabGroup.createEl('button', { cls: 'trpg-lib-tab trpg-lib-tab-active', text: 'Pistes' });
     this.presetsTabEl = tabGroup.createEl('button', { cls: 'trpg-lib-tab', text: 'Presets' });
+    this.playlistTabEl = tabGroup.createEl('button', { cls: 'trpg-lib-tab', text: 'Playlist' });
 
     this.tracksTabEl.addEventListener('click', () => this.switchTab('tracks'));
     this.presetsTabEl.addEventListener('click', () => this.switchTab('presets'));
+    this.playlistTabEl.addEventListener('click', () => this.switchTab('playlist'));
 
     this.addBtn = tabBar.createEl('button', { cls: 'trpg-lib-add-btn' });
     const addIcon = this.addBtn.createSpan();
@@ -169,6 +175,7 @@ export class LibraryView extends ItemView {
     // Content areas
     this.gridEl = contentEl.createDiv({ cls: 'trpg-lib-grid' });
     this.presetsEl = contentEl.createDiv({ cls: 'trpg-lib-presets-panel trpg-lib-hidden' });
+    this.playlistEl = contentEl.createDiv({ cls: 'trpg-lib-playlist-panel trpg-lib-hidden' });
 
     // Mini player bar (sticky bottom)
     this.buildMiniPlayer(contentEl);
@@ -187,24 +194,31 @@ export class LibraryView extends ItemView {
 
   private switchTab(tab: LibraryTab): void {
     this.activeTab = tab;
-    const isPresets = tab === 'presets';
 
-    this.tracksTabEl?.toggleClass('trpg-lib-tab-active', !isPresets);
-    this.presetsTabEl?.toggleClass('trpg-lib-tab-active', isPresets);
+    this.tracksTabEl?.toggleClass('trpg-lib-tab-active', tab === 'tracks');
+    this.presetsTabEl?.toggleClass('trpg-lib-tab-active', tab === 'presets');
+    this.playlistTabEl?.toggleClass('trpg-lib-tab-active', tab === 'playlist');
 
-    this.searchRowEl?.toggleClass('trpg-lib-hidden', isPresets);
-    this.filtersRowEl?.toggleClass('trpg-lib-hidden', isPresets);
-    this.presetSearchRowEl?.toggleClass('trpg-lib-hidden', !isPresets);
-    this.gridEl?.toggleClass('trpg-lib-hidden', isPresets);
-    this.presetsEl?.toggleClass('trpg-lib-hidden', !isPresets);
+    this.searchRowEl?.toggleClass('trpg-lib-hidden', tab !== 'tracks');
+    this.filtersRowEl?.toggleClass('trpg-lib-hidden', tab !== 'tracks');
+    this.presetSearchRowEl?.toggleClass('trpg-lib-hidden', tab !== 'presets');
+    this.gridEl?.toggleClass('trpg-lib-hidden', tab !== 'tracks');
+    this.presetsEl?.toggleClass('trpg-lib-hidden', tab !== 'presets');
+    this.playlistEl?.toggleClass('trpg-lib-hidden', tab !== 'playlist');
 
-    // Update add button label
+    // Update add button
     if (this.addBtn) {
-      const labelSpan = this.addBtn.querySelectorAll('span')[1];
-      if (labelSpan) labelSpan.textContent = isPresets ? 'Ajouter un preset' : 'Ajouter une piste';
+      if (tab === 'playlist') {
+        this.addBtn.toggleClass('trpg-lib-hidden', true);
+      } else {
+        this.addBtn.toggleClass('trpg-lib-hidden', false);
+        const labelSpan = this.addBtn.querySelectorAll('span')[1];
+        if (labelSpan) labelSpan.textContent = tab === 'presets' ? 'Ajouter un preset' : 'Ajouter une piste';
+      }
     }
 
-    if (isPresets) this.refreshPresets();
+    if (tab === 'presets') this.refreshPresets();
+    if (tab === 'playlist') this.refreshPlaylist();
   }
 
   private openAddModal(): void {
@@ -377,6 +391,225 @@ export class LibraryView extends ItemView {
     }
   }
 
+  // --- Playlist ---
+
+  /** Deactivate playlist when user plays something from tracks/presets tabs */
+  private deactivatePlaylist(): void {
+    const sq = this.plugin.playerService.sequentialQueue;
+    if (sq.isActive()) {
+      sq.setActive(false);
+    }
+  }
+
+  private playPlaylistTrack(index: number): void {
+    const sq = this.plugin.playerService.sequentialQueue;
+    const track = sq.jumpTo(index);
+    if (track) {
+      this.plugin.playerService.play('musique', track.youtubeId);
+      this.plugin.updateNowPlaying('musique', track.name);
+    }
+    this.refreshPlaylist();
+  }
+
+  playlistNext(): void {
+    const sq = this.plugin.playerService.sequentialQueue;
+    if (!sq.isActive()) return;
+    const track = sq.next();
+    if (track) {
+      this.plugin.playerService.play('musique', track.youtubeId);
+      this.plugin.updateNowPlaying('musique', track.name);
+    }
+  }
+
+  playlistPrevious(): void {
+    const sq = this.plugin.playerService.sequentialQueue;
+    if (!sq.isActive()) return;
+    const idx = sq.getIndex();
+    if (idx > 0) {
+      this.playPlaylistTrack(idx - 1);
+    }
+  }
+
+  refreshPlaylist(): void {
+    if (!this.playlistEl) return;
+    this.playlistEl.empty();
+
+    const sq = this.plugin.playerService.sequentialQueue;
+
+    // -- Filters row --
+    const filtersRow = this.playlistEl.createDiv({ cls: 'trpg-lib-playlist-filters' });
+
+    this.createPlaylistFilter(filtersRow, UI.FILTER_HUMEUR, CATEGORIES.humeur as unknown as string[], this.playlistFilters.humeur, (val) => {
+      this.playlistFilters.humeur = val;
+    });
+    this.createPlaylistFilter(filtersRow, UI.FILTER_LIEU, CATEGORIES.lieu as unknown as string[], this.playlistFilters.lieu, (val) => {
+      this.playlistFilters.lieu = val;
+    });
+    this.createPlaylistFilter(filtersRow, UI.FILTER_INTENSITE, CATEGORIES.intensite as unknown as string[], this.playlistFilters.intensite, (val) => {
+      this.playlistFilters.intensite = val;
+    });
+
+    // Track count preview
+    const previewTracks = this.getPlaylistFilteredTracks();
+    filtersRow.createSpan({ cls: 'trpg-lib-playlist-count', text: `${previewTracks.length} pistes` });
+
+    // Clear filters button
+    const hasFilters = !!(this.playlistFilters.humeur || this.playlistFilters.lieu || this.playlistFilters.intensite);
+    if (hasFilters) {
+      const clearBtn = filtersRow.createEl('button', { cls: 'trpg-lib-reset-btn', text: 'Réinitialiser' });
+      clearBtn.addEventListener('click', () => {
+        this.playlistFilters = { humeur: '', lieu: '', intensite: '' };
+        this.refreshPlaylist();
+      });
+    }
+
+    // -- Action buttons --
+    const actionsRow = this.playlistEl.createDiv({ cls: 'trpg-lib-playlist-actions' });
+
+    const launchPlaylist = () => {
+      const tracks = this.getPlaylistFilteredTracks();
+      if (tracks.length === 0) return;
+
+      sq.setActive(true);
+      sq.build(tracks);
+
+      const firstTrack = sq.next();
+      if (firstTrack) {
+        this.plugin.playerService.play('musique', firstTrack.youtubeId);
+        this.plugin.updateNowPlaying('musique', firstTrack.name);
+      }
+
+      this.refreshPlaylist();
+    };
+
+    if (sq.isActive()) {
+      // Previous
+      const prevBtn = actionsRow.createEl('button', { cls: 'trpg-lib-playlist-nav-btn', attr: { 'aria-label': 'Précédent' } });
+      setIcon(prevBtn, 'skip-back');
+      prevBtn.addEventListener('click', () => this.playlistPrevious());
+
+      // Next
+      const nextBtn = actionsRow.createEl('button', { cls: 'trpg-lib-playlist-nav-btn', attr: { 'aria-label': 'Suivant' } });
+      setIcon(nextBtn, 'skip-forward');
+      nextBtn.addEventListener('click', () => this.playlistNext());
+
+      // Stop
+      const stopBtn = actionsRow.createEl('button', { cls: 'trpg-lib-playlist-nav-btn', attr: { 'aria-label': 'Arrêter' } });
+      setIcon(stopBtn, 'square');
+      stopBtn.addEventListener('click', () => {
+        sq.setActive(false);
+        this.plugin.playerService.stop('musique');
+        this.plugin.updateNowPlaying('musique', '');
+        this.refreshPlaylist();
+      });
+
+      // Relaunch
+      const relaunchBtn = actionsRow.createEl('button', { cls: 'trpg-lib-playlist-launch-btn' });
+      const relaunchIcon = relaunchBtn.createSpan();
+      setIcon(relaunchIcon, 'shuffle');
+      relaunchBtn.createSpan({ text: 'Relancer' });
+      relaunchBtn.addEventListener('click', launchPlaylist);
+    } else {
+      // Launch
+      const launchBtn = actionsRow.createEl('button', { cls: 'trpg-lib-playlist-launch-btn' });
+      const launchIcon = launchBtn.createSpan();
+      setIcon(launchIcon, 'shuffle');
+      launchBtn.createSpan({ text: 'Lancer la playlist' });
+      launchBtn.addEventListener('click', launchPlaylist);
+    }
+
+    // -- Queue list --
+    this.playlistQueueEl = this.playlistEl.createDiv({ cls: 'trpg-lib-playlist-queue' });
+
+    if (!sq.isActive()) {
+      const empty = this.playlistQueueEl.createDiv({ cls: 'trpg-lib-empty' });
+      const iconEl = empty.createDiv({ cls: 'trpg-lib-empty-icon' });
+      setIcon(iconEl, 'list-music');
+      empty.createDiv({ text: 'Aucune playlist active', cls: 'trpg-lib-empty-text' });
+      empty.createDiv({ text: 'Sélectionnez des filtres et lancez la lecture', cls: 'trpg-lib-empty-hint' });
+      return;
+    }
+
+    this.renderPlaylistQueue();
+  }
+
+  private getPlaylistFilteredTracks(): Track[] {
+    const filters: { channel: Channel; humeur?: string; lieu?: string; intensite?: string } = { channel: 'musique' };
+    if (this.playlistFilters.humeur) filters.humeur = this.playlistFilters.humeur;
+    if (this.playlistFilters.lieu) filters.lieu = this.playlistFilters.lieu;
+    if (this.playlistFilters.intensite) filters.intensite = this.playlistFilters.intensite;
+    return this.plugin.trackLibrary.getTracks(filters);
+  }
+
+  private createPlaylistFilter(parent: HTMLElement, label: string, options: string[], currentVal: string, onChange: (val: string) => void): void {
+    const wrapper = parent.createDiv({ cls: 'trpg-lib-filter-chip' });
+    const select = wrapper.createEl('select', { cls: 'trpg-lib-filter-select' });
+    select.createEl('option', { text: label, attr: { value: '' } });
+    for (const opt of options) {
+      const optEl = select.createEl('option', { text: opt, attr: { value: opt } });
+      if (opt === currentVal) optEl.selected = true;
+    }
+    select.addEventListener('change', () => {
+      onChange(select.value);
+      this.refreshPlaylist();
+    });
+  }
+
+  private renderPlaylistQueue(): void {
+    if (!this.playlistQueueEl) return;
+
+    const sq = this.plugin.playerService.sequentialQueue;
+    const queue = sq.getQueue();
+    const currentIndex = sq.getIndex();
+
+    for (let i = 0; i < queue.length; i++) {
+      const track = queue[i];
+      const isCurrent = i === currentIndex;
+
+      const row = this.playlistQueueEl.createDiv({
+        cls: `trpg-lib-playlist-item${isCurrent ? ' trpg-lib-playlist-item-active' : ''}`,
+      });
+
+      // Track number or EQ bars
+      if (isCurrent) {
+        const eqBars = row.createDiv({ cls: 'trpg-lib-playlist-eq' });
+        eqBars.createSpan({ cls: 'trpg-lib-eq-bar' });
+        eqBars.createSpan({ cls: 'trpg-lib-eq-bar' });
+        eqBars.createSpan({ cls: 'trpg-lib-eq-bar' });
+      } else {
+        row.createSpan({ cls: 'trpg-lib-playlist-num', text: String(i + 1) });
+      }
+
+      // Thumbnail
+      const thumb = row.createEl('img', {
+        cls: 'trpg-lib-playlist-thumb',
+        attr: {
+          src: `https://img.youtube.com/vi/${track.youtubeId}/default.jpg`,
+          alt: track.name,
+          loading: 'lazy',
+        },
+      });
+      thumb.onerror = () => { thumb.style.display = 'none'; };
+
+      // Track name
+      row.createSpan({ cls: 'trpg-lib-playlist-name', text: track.name });
+
+      // Tags
+      const allCats = [...track.categories.humeur, ...track.categories.lieu, ...track.categories.intensite];
+      if (allCats.length > 0) {
+        const tags = row.createSpan({ cls: 'trpg-lib-playlist-tags' });
+        for (const cat of allCats.slice(0, 3)) {
+          tags.createSpan({ cls: 'trpg-lib-tag', text: cat });
+        }
+      }
+
+      // Click to jump to this track
+      row.addEventListener('click', () => {
+        this.playPlaylistTrack(i);
+      });
+    }
+  }
+
   // --- Preset grid ---
 
   refreshPresets(): void {
@@ -442,6 +675,7 @@ export class LibraryView extends ItemView {
 
     // Click to launch
     card.addEventListener('click', async () => {
+      this.deactivatePlaylist();
       await this.plugin.presetManager.applyPreset(preset);
       if (ambianceTrack) this.plugin.updateNowPlaying('ambiance', ambianceTrack.name);
       if (musiqueTrack) this.plugin.updateNowPlaying('musique', musiqueTrack.name);
@@ -546,6 +780,7 @@ export class LibraryView extends ItemView {
       if (isPlaying || isPaused) {
         this.plugin.playerService.togglePause(track.channel);
       } else {
+        if (track.channel === 'musique') this.deactivatePlaylist();
         await this.plugin.playerService.play(track.channel, track.youtubeId);
         this.plugin.updateNowPlaying(track.channel, track.name);
       }

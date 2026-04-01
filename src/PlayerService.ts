@@ -1,5 +1,6 @@
 import type { Channel } from './types';
 import { LOG_PREFIX, UI } from './constants';
+import { SequentialQueue } from './SequentialQueue';
 
 // YouTube IFrame API types
 declare global {
@@ -65,6 +66,13 @@ export class PlayerService {
   private apiLoading: Promise<void> | null = null;
   private onErrorCallback: ((channel: Channel, message: string) => void) | null = null;
   private scriptTag: HTMLScriptElement | null = null;
+  private _sequentialQueue = new SequentialQueue();
+  private isAdvancing = false;
+  onTrackAdvance: ((trackName: string) => void) | null = null;
+
+  get sequentialQueue(): SequentialQueue {
+    return this._sequentialQueue;
+  }
 
   onError(callback: (channel: Channel, message: string) => void): void {
     this.onErrorCallback = callback;
@@ -142,13 +150,37 @@ export class PlayerService {
             resolve();
           },
           onStateChange: (event) => {
-            // Auto-loop: when video ends, replay it
             if (event.data === YT.PlayerState.ENDED) {
               const state = this.channels[channel];
-              if (state.currentVideoId && state.player) {
-                state.player.loadVideoById(state.currentVideoId);
-                state.player.setVolume(this.getEffectiveVolume(channel));
+              if (!state.currentVideoId || !state.player) return;
+
+              // Guard against reentrant ENDED events (YouTube can fire multiple)
+              if (this.isAdvancing) return;
+
+              // Sequential mode: advance to next track in queue (musique only)
+              if (channel === 'musique' && this._sequentialQueue.isActive()) {
+                this.isAdvancing = true;
+                try {
+                  const nextTrack = this._sequentialQueue.next();
+                  if (nextTrack) {
+                    state.player.loadVideoById(nextTrack.youtubeId);
+                    state.player.setVolume(this.getEffectiveVolume(channel));
+                    state.currentVideoId = nextTrack.youtubeId;
+                    if (this.onTrackAdvance) {
+                      this.onTrackAdvance(nextTrack.name);
+                    }
+                    return;
+                  }
+                  // Queue returned null while active — deactivate to keep UI in sync
+                  this._sequentialQueue.setActive(false);
+                } finally {
+                  this.isAdvancing = false;
+                }
               }
+
+              // Default: auto-loop
+              state.player.loadVideoById(state.currentVideoId);
+              state.player.setVolume(this.getEffectiveVolume(channel));
             }
           },
           onError: (event) => {
