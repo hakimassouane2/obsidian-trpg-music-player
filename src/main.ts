@@ -14,6 +14,8 @@ export default class TRPGMusicPlugin extends Plugin {
   playerService: PlayerService = new PlayerService();
   trackLibrary!: TrackLibrary;
   presetManager!: PresetManager;
+  nowPlayingNames: Record<Channel, string> = { ambiance: '', musique: '' };
+  private hiddenPlayerContainer: HTMLElement | null = null;
   private codeBlockButtons: Array<{
     btn: HTMLElement;
     iconSpan: HTMLElement;
@@ -88,6 +90,7 @@ export default class TRPGMusicPlugin extends Plugin {
       const lines = source.trim().split('\n');
       let presetName = '';
       let trackName = '';
+      let customName = '';
 
       for (const line of lines) {
         const presetMatch = line.match(/^preset:\s*(.+)$/i);
@@ -98,6 +101,10 @@ export default class TRPGMusicPlugin extends Plugin {
         if (trackMatch) {
           trackName = trackMatch[1].trim();
         }
+        const nameMatch = line.match(/^name:\s*(.+)$/i);
+        if (nameMatch) {
+          customName = nameMatch[1].trim();
+        }
       }
 
       if (!presetName && !trackName) {
@@ -105,7 +112,7 @@ export default class TRPGMusicPlugin extends Plugin {
         return;
       }
 
-      const label = presetName || trackName;
+      const label = customName || presetName || trackName;
       const btn = el.createEl('button', { cls: 'trpg-codeblock-btn' });
       const iconSpan = btn.createSpan({ cls: 'trpg-codeblock-icon' });
       setIcon(iconSpan, 'play');
@@ -120,6 +127,7 @@ export default class TRPGMusicPlugin extends Plugin {
 
       btn.addEventListener('click', async () => {
         try {
+          await this.ensurePlayersReady();
           if (presetName) {
             const preset = this.presetManager.getPresetByName(presetName);
             if (!preset) {
@@ -128,7 +136,9 @@ export default class TRPGMusicPlugin extends Plugin {
               btn.addClass('trpg-codeblock-error');
               return;
             }
-            await this.presetManager.applyPreset(preset);
+            const played = await this.presetManager.applyPreset(preset);
+            if (played.ambiance) this.updateNowPlaying('ambiance', played.ambiance);
+            if (played.musique) this.updateNowPlaying('musique', played.musique);
           } else {
             const track = this.trackLibrary.getTracks()
               .find((t) => t.name.toLowerCase() === trackName.toLowerCase());
@@ -161,6 +171,8 @@ export default class TRPGMusicPlugin extends Plugin {
   onunload(): void {
     console.log(LOG_PREFIX, 'Unloading plugin...');
     this.playerService.destroy();
+    this.hiddenPlayerContainer?.remove();
+    this.hiddenPlayerContainer = null;
   }
 
   async loadPluginData(): Promise<void> {
@@ -240,6 +252,7 @@ export default class TRPGMusicPlugin extends Plugin {
 
   /** Update the "now playing" track name in the side panel and library mini player */
   updateNowPlaying(channel: Channel, trackName: string): void {
+    this.nowPlayingNames[channel] = trackName;
     const leaves = this.app.workspace.getLeavesOfType(VIEW_TYPE);
     for (const leaf of leaves) {
       const view = leaf.view as MusicPlayerView;
@@ -254,6 +267,27 @@ export default class TRPGMusicPlugin extends Plugin {
     }
     this.refreshLibrary();
     this.refreshCodeBlockButtons();
+  }
+
+  /** Ensure YouTube players are initialized, creating a hidden container if no view is open */
+  async ensurePlayersReady(): Promise<void> {
+    const ambianceReady = this.playerService.isPlayerInitialized('ambiance');
+    const musiqueReady = this.playerService.isPlayerInitialized('musique');
+    if (ambianceReady && musiqueReady) return;
+
+    if (!this.hiddenPlayerContainer) {
+      this.hiddenPlayerContainer = document.body.createDiv({ cls: 'trpg-youtube-containers' });
+      this.hiddenPlayerContainer.style.cssText = 'position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden;';
+    }
+
+    if (!ambianceReady) {
+      const c = this.hiddenPlayerContainer.createDiv({ cls: 'trpg-youtube-container' });
+      await this.playerService.createPlayer('ambiance', c);
+    }
+    if (!musiqueReady) {
+      const c = this.hiddenPlayerContainer.createDiv({ cls: 'trpg-youtube-container' });
+      await this.playerService.createPlayer('musique', c);
+    }
   }
 
   private syncCodeBlockButton(entry: (typeof this.codeBlockButtons)[number]): void {

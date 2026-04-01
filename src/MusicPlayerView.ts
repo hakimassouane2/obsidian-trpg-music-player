@@ -47,6 +47,12 @@ export class MusicPlayerView extends ItemView {
     this.buildPresetsSection(contentEl);
     this.buildAddPresetSection(contentEl);
 
+    // Restore now-playing state from plugin
+    for (const channel of ['ambiance', 'musique'] as Channel[]) {
+      const name = this.plugin.nowPlayingNames[channel];
+      if (name) this.setNowPlaying(channel, name);
+    }
+
     // YouTube iframe containers (hidden) — only create if not already initialized
     if (!this.plugin.playerService.isPlayerInitialized('ambiance') || !this.plugin.playerService.isPlayerInitialized('musique')) {
       const iframeContainer = contentEl.createDiv({ cls: 'trpg-youtube-containers' });
@@ -309,22 +315,18 @@ export class MusicPlayerView extends ItemView {
 
       const btn = row.createEl('button', { cls: 'trpg-preset-btn', text: preset.name });
       btn.addEventListener('click', async () => {
-        await this.plugin.presetManager.applyPreset(preset);
-        if (preset.ambianceTrackId) {
-          const t = this.plugin.trackLibrary.getTrackById(preset.ambianceTrackId);
-          if (t && this.ambianceTrackNameEl) this.ambianceTrackNameEl.textContent = t.name;
-        }
-        if (preset.musiqueTrackId) {
-          const t = this.plugin.trackLibrary.getTrackById(preset.musiqueTrackId);
-          if (t && this.musiqueTrackNameEl) this.musiqueTrackNameEl.textContent = t.name;
-        }
+        const played = await this.plugin.presetManager.applyPreset(preset);
+        if (played.ambiance) this.plugin.updateNowPlaying('ambiance', played.ambiance);
+        if (played.musique) this.plugin.updateNowPlaying('musique', played.musique);
       });
 
       const deleteBtn = row.createEl('button', { cls: 'trpg-btn-small trpg-btn-delete', attr: { 'aria-label': UI.DELETE_BUTTON } });
       setIcon(deleteBtn, 'trash-2');
       deleteBtn.addEventListener('click', () => {
-        this.plugin.presetManager.removePreset(preset.id);
-        this.refreshPresetSection();
+        if (confirm(`Supprimer le preset "${preset.name}" ?`)) {
+          this.plugin.presetManager.removePreset(preset.id);
+          this.refreshPresetSection();
+        }
       });
     }
   }

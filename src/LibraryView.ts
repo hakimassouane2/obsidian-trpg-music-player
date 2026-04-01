@@ -173,6 +173,12 @@ export class LibraryView extends ItemView {
     // Mini player bar (sticky bottom)
     this.buildMiniPlayer(contentEl);
 
+    // Restore now-playing state from plugin
+    for (const channel of ['ambiance', 'musique'] as Channel[]) {
+      const name = this.plugin.nowPlayingNames[channel];
+      if (name) this.setMiniPlayerNowPlaying(channel, name);
+    }
+
     this.refreshGrid();
     this.refreshPresets();
   }
@@ -452,6 +458,14 @@ export class LibraryView extends ItemView {
             this.plugin.refreshSidePanel();
           }).open();
         });
+      });
+      menu.addSeparator();
+      menu.addItem((item) => {
+        item.setTitle('Copier le bloc trpg-play')
+          .setIcon('code')
+          .onClick(() => {
+            navigator.clipboard.writeText(`\`\`\`trpg-play\npreset: ${preset.name}\n\`\`\``);
+          });
       });
       menu.addSeparator();
       menu.addItem((item) => {

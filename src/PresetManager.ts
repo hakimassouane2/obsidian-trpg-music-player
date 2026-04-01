@@ -57,7 +57,9 @@ export class PresetManager {
   }
 
   // F2: Volumes are 0-1 in presets, multiplied by 100 for PlayerService (0-100 scale)
-  async applyPreset(preset: Preset): Promise<void> {
+  async applyPreset(preset: Preset): Promise<{ ambiance?: string; musique?: string }> {
+    const played: { ambiance?: string; musique?: string } = {};
+
     if (preset.ambianceVolume !== undefined) {
       this.playerService.setVolume('ambiance', Math.round(preset.ambianceVolume * 100));
     }
@@ -69,6 +71,7 @@ export class PresetManager {
       const track = this.trackLibrary.getTrackById(preset.ambianceTrackId);
       if (track) {
         await this.playerService.play('ambiance', track.youtubeId);
+        played.ambiance = track.name;
       }
     }
 
@@ -76,7 +79,10 @@ export class PresetManager {
       const track = this.trackLibrary.getTrackById(preset.musiqueTrackId);
       if (track) {
         await this.playerService.play('musique', track.youtubeId);
+        played.musique = track.name;
       }
     }
+
+    return played;
   }
 }

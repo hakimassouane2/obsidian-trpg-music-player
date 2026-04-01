@@ -1768,6 +1768,686 @@
           "Élevée"
         ]
       }
+    },
+    {
+      "id": "b5ff7906-0a77-4fde-8dbd-c25a75c5624f",
+      "name": "Exploring The Stolen Lands (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "n8BusGvbcV0",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Exploration"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "b7c8914b-4b9f-46e9-8a94-d1f8c5c1934e",
+      "name": "Peaceful Lands (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "h6LQ820JfOE",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Exploration"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "ff6ac301-b216-44f2-8e88-0b7027e39ddd",
+      "name": "Brevoy Folk Melody - Tavern Theme 1 (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "rCIjgRq0fWg",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Joyeux"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "97948e3e-59a9-49f9-bf48-c45ae0b28f15",
+      "name": "The Heart Of The Land - Tavern Theme 2 (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "pRV587Zg550",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Joyeux"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "0ac8fa60-a660-44f1-a3ee-fdac8302b248",
+      "name": "Fey In The Hills - Tavern Theme 3 (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "97n0wRSfx4M",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Joyeux"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "344890bb-bde5-48db-bbf6-3814c564dd0c",
+      "name": "Lazy Morning - Tavern Theme 4 (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "cfE8zgXcFjQ",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Joyeux"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "4b770e5c-d4b0-4ebe-a3f1-50575192e633",
+      "name": "Rushlight Festival - Tavern Theme 5 (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "knTaCzhOAIU",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Joyeux"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "5e9a6004-7e24-441c-b647-a7bc756df142",
+      "name": "Lake Of Mysts And Veils - Tavern Theme 6 (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "3i81loPxLDQ",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Joyeux"
+        ],
+        "lieu": [
+          "Taverne"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "7f5b2865-0752-4266-a494-5e50bf36d6a2",
+      "name": "The Shrike Hills Battle Theme (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "E7MG-6vp4zs",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "52b7789e-6315-42b2-a7b7-34a32e4cdc60",
+      "name": "Uplands Battle Theme (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "ZltwQXdJ3JM",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "21b7e949-b214-446d-bdce-422ec70b79fc",
+      "name": "The Dunsward Battle Theme (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "8ErjcbEJuUg",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "e80744d2-8ff1-44e2-81d3-b41a12ad3929",
+      "name": "The Narlmarches Battle Theme (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "Bmv6-2VZLmg",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "602f04d1-1421-43dd-bb2d-6f88a3c7b85a",
+      "name": "Dungeon Battle Theme 1 (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "ShV9IDlTifY",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "89c6b2b4-feea-405d-a150-e7fd54ee7732",
+      "name": "Dungeon Battle Theme 2 (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "DCJVURZT_28",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "90db86a6-73cc-4eeb-841f-59cda7912ead",
+      "name": "First World Battle Theme (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "tBcPonJ7vhE",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "6fbdda3b-85e8-495f-9554-50c52291eb6b",
+      "name": "Capital Under Attack (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "g-KFaSuIa0c",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "c56e6682-c4b8-4b1d-9ead-60555122f354",
+      "name": "Ancient Ruins Battle Theme (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "g_N3y5cjP-c",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "699e7655-bba4-4360-b925-1153454562d6",
+      "name": "Caves Battle Theme (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "YDjmj4odNOg",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "72258bdf-5bcd-4f31-9b8c-997a90def8e4",
+      "name": "In The Name Of My Dream (slightly Extended) · Pathfinder: Kingmaker OST",
+      "youtubeId": "hlDggPAInMw",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "e357957b-bd76-4485-b5b7-159be8e2565c",
+      "name": "Corrupted Caves Battle Theme (slightly Extended) · Pathfinder: Wrath of the Righteous OST",
+      "youtubeId": "TQthAsfmUNo",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "a23e2b39-730c-44a0-a0fc-02b7e3b51965",
+      "name": "Corrupted Lands Battle Theme (slightly Extended)  · Pathfinder: Wrath of the Righteous OST",
+      "youtubeId": "rrI6ORDYZoQ",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "bdd9a9c0-5452-41f3-bc81-f98dd8f47a7b",
+      "name": "Greengates Battle Theme (slightly Extended) · Pathfinder: Wrath of the Righteous OST",
+      "youtubeId": "LSFoXMWwqiA",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "c5d84cb8-de9f-49a2-97fc-b979163072da",
+      "name": "D&D ambience - Battle Sounds    #dnd #dungeonsanddragons #rpg",
+      "youtubeId": "lCdvgdhwCfE",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "26d8a67c-f75f-4ecd-91e4-008d477a5482",
+      "name": "RPG | D&D Ambience - Training Ground (swords, bows, marching troops).",
+      "youtubeId": "DnmcTBFZRwU",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "88f4d35d-f29d-4ac1-b393-75654adf5f14",
+      "name": "Small Melee Battle | Fantasy RPG Ambience | 3 Hours",
+      "youtubeId": "Z98ZMt1zc94",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "89aaa561-b932-4e16-b9bc-aa1acaad4717",
+      "name": "Assassin'S CreeD III: Liberation OST / Aveline's Escape / Winifred Phillips",
+      "youtubeId": "AzTtu46Ge5A",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Poursuite"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "11a7a8a3-0808-4baa-8787-40f791207f7c",
+      "name": "Assassin's Creed IV Black Flag - Ships of Legend (Track 32)",
+      "youtubeId": "ZTINK3Z6AN0",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Poursuite"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "8ad11d13-ff4b-450f-b68e-f9922e2a92bb",
+      "name": "Naruto OST 1 - Sadness and Sorrow [HQ]",
+      "youtubeId": "VGS9nrEwXmw",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "5825d82e-02ab-4633-b6b5-45deff522842",
+      "name": "Naruto Ost 2 07 Afternoon Of Konoha Konoha No Gogo EXTENDED",
+      "youtubeId": "ajHrMjV2QhM",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "8980fdef-64cb-4952-9032-6eec4da4209a",
+      "name": "Naruto Theme『 Fooling Mode 』Funny Soundtrack - Extended",
+      "youtubeId": "uabw2v1LsJM",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "e4b666d8-b925-4301-9595-209e42e25109",
+      "name": "My Homie - Persona 5",
+      "youtubeId": "KkyCSrq_UyQ",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "69ef083e-793d-4968-ae5b-a600d89143fa",
+      "name": "Are you listening Kiryu (Extended) | YAKUZA 0 OST",
+      "youtubeId": "E3O8WOoHybU",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "5e2f2b15-16cd-4f36-a494-c0e41c395bc1",
+      "name": "Naruto OST 1-11-Kakashi's Theme -EXTENDED",
+      "youtubeId": "3OekmEM7ypA",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "d5f3d4e0-464a-4658-bd87-977a6b8aa477",
+      "name": "Clannad OST- 16- A Couple of Idiots 30min",
+      "youtubeId": "GwPhuHPmfKM",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "d1c40816-e671-492c-973a-0019c9760187",
+      "name": "Inuyasha OST 2 - Careless and Carefree",
+      "youtubeId": "AbSevx1vzv4",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "ca18b4c5-29e1-4a7e-aca3-66376fd42cd6",
+      "name": "Inuyasha OST 1 - SIT!",
+      "youtubeId": "k9KbCTCsG8w",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "7166d146-d2c8-4e4a-a60b-cc9e9f9c5200",
+      "name": "One Punch Man OST-Peaceful Days(Extended Loop)",
+      "youtubeId": "5bIal5ogWKw",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "e02b042e-bbb5-41fb-9d3f-abe884d9a329",
+      "name": "Inuyasha OST 1 - Shikon No Tama Wo Motomete",
+      "youtubeId": "earEWSQynkM",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "6e83cb6c-0abc-4650-ae9f-70bc0ea7e007",
+      "name": "Clannad Soundtrack: Track 15: Dumb",
+      "youtubeId": "E-WtTvqyALA",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "5ce995b7-7ab0-4b3f-bb62-dd09d06e959b",
+      "name": "Cowboy Bebop OST 1 - Felt Tip Pen",
+      "youtubeId": "SUNvJ5Plo-0",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Comique"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
     }
   ],
   "presets": [
@@ -1782,7 +2462,7 @@
   ],
   "settings": {
     "ambianceVolume": 0.31,
-    "musiqueVolume": 0.1,
+    "musiqueVolume": 0.34,
     "crossfadeDuration": 6000,
     "masterVolume": 1
   }
