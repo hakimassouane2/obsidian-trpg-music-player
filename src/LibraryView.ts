@@ -14,9 +14,9 @@ export class LibraryView extends ItemView {
   private activeTab: LibraryTab = 'tracks';
   private searchQuery = '';
   private filterChannel: Channel | '' = '';
-  private filterHumeur = '';
-  private filterLieu = '';
-  private filterIntensite = '';
+  private filterHumeur: string[] = [];
+  private filterLieu: string[] = [];
+  private filterIntensite: string[] = [];
   private gridEl: HTMLElement | null = null;
   private presetsEl: HTMLElement | null = null;
   private countEl: HTMLElement | null = null;
@@ -25,7 +25,7 @@ export class LibraryView extends ItemView {
   private playlistTabEl: HTMLElement | null = null;
   private playlistEl: HTMLElement | null = null;
   private playlistQueueEl: HTMLElement | null = null;
-  private playlistFilters = { humeur: '', lieu: '', intensite: '' };
+  private playlistFilters: { humeur: string[]; lieu: string[]; intensite: string[] } = { humeur: [], lieu: [], intensite: [] };
   private addBtn: HTMLElement | null = null;
   private filtersRowEl: HTMLElement | null = null;
   private searchRowEl: HTMLElement | null = null;
@@ -133,15 +133,15 @@ export class LibraryView extends ItemView {
       this.filterChannel = val === UI.CHANNEL_AMBIANCE ? 'ambiance' : val === UI.CHANNEL_MUSIQUE ? 'musique' : '';
       this.refreshGrid();
     });
-    this.createFilterChip(this.filtersRowEl, UI.FILTER_HUMEUR, CATEGORIES.humeur as unknown as string[], (val) => {
+    this.createMultiSelectDropdown(this.filtersRowEl, UI.FILTER_HUMEUR, CATEGORIES.humeur as unknown as string[], this.filterHumeur, (val) => {
       this.filterHumeur = val;
       this.refreshGrid();
     });
-    this.createFilterChip(this.filtersRowEl, UI.FILTER_LIEU, CATEGORIES.lieu as unknown as string[], (val) => {
+    this.createMultiSelectDropdown(this.filtersRowEl, UI.FILTER_LIEU, CATEGORIES.lieu as unknown as string[], this.filterLieu, (val) => {
       this.filterLieu = val;
       this.refreshGrid();
     });
-    this.createFilterChip(this.filtersRowEl, UI.FILTER_INTENSITE, CATEGORIES.intensite as unknown as string[], (val) => {
+    this.createMultiSelectDropdown(this.filtersRowEl, UI.FILTER_INTENSITE, CATEGORIES.intensite as unknown as string[], this.filterIntensite, (val) => {
       this.filterIntensite = val;
       this.refreshGrid();
     });
@@ -151,12 +151,13 @@ export class LibraryView extends ItemView {
     this.resetBtn.addEventListener('click', () => {
       this.searchQuery = '';
       this.filterChannel = '';
-      this.filterHumeur = '';
-      this.filterLieu = '';
-      this.filterIntensite = '';
+      this.filterHumeur = [];
+      this.filterLieu = [];
+      this.filterIntensite = [];
       searchInput.value = '';
       this.filtersRowEl?.querySelectorAll('select').forEach((s) => { (s as HTMLSelectElement).value = ''; });
-      this.refreshGrid();
+      // Re-render the whole view to reset chip states
+      this.onOpen();
     });
 
     // Preset search (hidden on tracks tab)
@@ -359,11 +360,11 @@ export class LibraryView extends ItemView {
     if (!this.gridEl) return;
     this.gridEl.empty();
 
-    const filters: { channel?: Channel; humeur?: string; lieu?: string; intensite?: string } = {};
+    const filters: { channel?: Channel; humeur?: string[]; lieu?: string[]; intensite?: string[] } = {};
     if (this.filterChannel) filters.channel = this.filterChannel;
-    if (this.filterHumeur) filters.humeur = this.filterHumeur;
-    if (this.filterLieu) filters.lieu = this.filterLieu;
-    if (this.filterIntensite) filters.intensite = this.filterIntensite;
+    if (this.filterHumeur.length > 0) filters.humeur = this.filterHumeur;
+    if (this.filterLieu.length > 0) filters.lieu = this.filterLieu;
+    if (this.filterIntensite.length > 0) filters.intensite = this.filterIntensite;
 
     let tracks = this.plugin.trackLibrary.getTracks(Object.keys(filters).length > 0 ? filters : undefined);
 
@@ -375,7 +376,7 @@ export class LibraryView extends ItemView {
       this.countEl.textContent = `${tracks.length} ${UI.TRACK_COUNT}`;
     }
 
-    const hasActiveFilters = !!(this.searchQuery || this.filterChannel || this.filterHumeur || this.filterLieu || this.filterIntensite);
+    const hasActiveFilters = !!(this.searchQuery || this.filterChannel || this.filterHumeur.length || this.filterLieu.length || this.filterIntensite.length);
     this.resetBtn?.toggleClass('trpg-lib-hidden', !hasActiveFilters);
 
     if (tracks.length === 0) {
@@ -439,26 +440,26 @@ export class LibraryView extends ItemView {
     // -- Filters row --
     const filtersRow = this.playlistEl.createDiv({ cls: 'trpg-lib-playlist-filters' });
 
-    this.createPlaylistFilter(filtersRow, UI.FILTER_HUMEUR, CATEGORIES.humeur as unknown as string[], this.playlistFilters.humeur, (val) => {
+    this.createMultiSelectDropdown(filtersRow, UI.FILTER_HUMEUR, CATEGORIES.humeur as unknown as string[], this.playlistFilters.humeur, (val) => {
       this.playlistFilters.humeur = val;
-    });
-    this.createPlaylistFilter(filtersRow, UI.FILTER_LIEU, CATEGORIES.lieu as unknown as string[], this.playlistFilters.lieu, (val) => {
+    }, () => this.refreshPlaylist());
+    this.createMultiSelectDropdown(filtersRow, UI.FILTER_LIEU, CATEGORIES.lieu as unknown as string[], this.playlistFilters.lieu, (val) => {
       this.playlistFilters.lieu = val;
-    });
-    this.createPlaylistFilter(filtersRow, UI.FILTER_INTENSITE, CATEGORIES.intensite as unknown as string[], this.playlistFilters.intensite, (val) => {
+    }, () => this.refreshPlaylist());
+    this.createMultiSelectDropdown(filtersRow, UI.FILTER_INTENSITE, CATEGORIES.intensite as unknown as string[], this.playlistFilters.intensite, (val) => {
       this.playlistFilters.intensite = val;
-    });
+    }, () => this.refreshPlaylist());
 
     // Track count preview
     const previewTracks = this.getPlaylistFilteredTracks();
     filtersRow.createSpan({ cls: 'trpg-lib-playlist-count', text: `${previewTracks.length} pistes` });
 
     // Clear filters button
-    const hasFilters = !!(this.playlistFilters.humeur || this.playlistFilters.lieu || this.playlistFilters.intensite);
+    const hasFilters = !!(this.playlistFilters.humeur.length || this.playlistFilters.lieu.length || this.playlistFilters.intensite.length);
     if (hasFilters) {
       const clearBtn = filtersRow.createEl('button', { cls: 'trpg-lib-reset-btn', text: 'Réinitialiser' });
       clearBtn.addEventListener('click', () => {
-        this.playlistFilters = { humeur: '', lieu: '', intensite: '' };
+        this.playlistFilters = { humeur: [], lieu: [], intensite: [] };
         this.refreshPlaylist();
       });
     }
@@ -534,25 +535,88 @@ export class LibraryView extends ItemView {
   }
 
   private getPlaylistFilteredTracks(): Track[] {
-    const filters: { channel: Channel; humeur?: string; lieu?: string; intensite?: string } = { channel: 'musique' };
-    if (this.playlistFilters.humeur) filters.humeur = this.playlistFilters.humeur;
-    if (this.playlistFilters.lieu) filters.lieu = this.playlistFilters.lieu;
-    if (this.playlistFilters.intensite) filters.intensite = this.playlistFilters.intensite;
+    const filters: { channel: Channel; humeur?: string[]; lieu?: string[]; intensite?: string[] } = { channel: 'musique' };
+    if (this.playlistFilters.humeur.length > 0) filters.humeur = this.playlistFilters.humeur;
+    if (this.playlistFilters.lieu.length > 0) filters.lieu = this.playlistFilters.lieu;
+    if (this.playlistFilters.intensite.length > 0) filters.intensite = this.playlistFilters.intensite;
     return this.plugin.trackLibrary.getTracks(filters);
   }
 
-  private createPlaylistFilter(parent: HTMLElement, label: string, options: string[], currentVal: string, onChange: (val: string) => void): void {
-    const wrapper = parent.createDiv({ cls: 'trpg-lib-filter-chip' });
-    const select = wrapper.createEl('select', { cls: 'trpg-lib-filter-select' });
-    select.createEl('option', { text: label, attr: { value: '' } });
+  private createMultiSelectDropdown(parent: HTMLElement, label: string, options: string[], selected: string[], onChange: (val: string[]) => void, extraRefresh?: () => void): void {
+    const wrapper = parent.createDiv({ cls: 'trpg-multiselect' });
+
+    const trigger = wrapper.createEl('button', { cls: 'trpg-multiselect-trigger' });
+    const triggerText = trigger.createSpan({ cls: 'trpg-multiselect-text' });
+    const chevron = trigger.createSpan({ cls: 'trpg-multiselect-chevron' });
+    setIcon(chevron, 'chevron-down');
+
+    const dropdown = wrapper.createDiv({ cls: 'trpg-multiselect-dropdown' });
+
+    const updateTrigger = () => {
+      if (selected.length === 0) {
+        triggerText.textContent = label;
+        trigger.removeClass('trpg-multiselect-active');
+      } else {
+        triggerText.textContent = `${label} (${selected.length})`;
+        trigger.addClass('trpg-multiselect-active');
+      }
+    };
+
     for (const opt of options) {
-      const optEl = select.createEl('option', { text: opt, attr: { value: opt } });
-      if (opt === currentVal) optEl.selected = true;
+      const row = dropdown.createDiv({ cls: 'trpg-multiselect-option' });
+      const checkbox = row.createEl('input', { attr: { type: 'checkbox' } });
+      checkbox.checked = selected.includes(opt);
+      row.createSpan({ text: opt });
+
+      row.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (selected.includes(opt)) {
+          selected.splice(selected.indexOf(opt), 1);
+          checkbox.checked = false;
+        } else {
+          selected.push(opt);
+          checkbox.checked = true;
+        }
+        onChange(selected);
+        updateTrigger();
+      });
     }
-    select.addEventListener('change', () => {
-      onChange(select.value);
-      this.refreshPlaylist();
+
+    const closeDropdown = () => {
+      if (wrapper.hasClass('trpg-multiselect-open')) {
+        wrapper.removeClass('trpg-multiselect-open');
+        if (extraRefresh) extraRefresh();
+      }
+    };
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = wrapper.hasClass('trpg-multiselect-open');
+      // Close all other open dropdowns first
+      wrapper.closest('.trpg-lib-filters, .trpg-lib-playlist-filters, .trpg-filters')
+        ?.querySelectorAll('.trpg-multiselect-open')
+        .forEach((el) => el.removeClass('trpg-multiselect-open'));
+      if (isOpen) {
+        closeDropdown();
+      } else {
+        wrapper.addClass('trpg-multiselect-open');
+      }
     });
+
+    dropdown.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Close on click outside
+    const closeHandler = (e: MouseEvent) => {
+      if (!wrapper.contains(e.target as Node)) {
+        closeDropdown();
+      }
+    };
+    document.addEventListener('click', closeHandler);
+    this.register(() => document.removeEventListener('click', closeHandler));
+
+    updateTrigger();
   }
 
   private renderPlaylistQueue(): void {

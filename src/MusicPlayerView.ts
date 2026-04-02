@@ -6,10 +6,10 @@ import { EditTrackModal } from './EditTrackModal';
 
 export class MusicPlayerView extends ItemView {
   private plugin: TRPGMusicPlugin;
-  private filters: { humeur: string; lieu: string; intensite: string } = {
-    humeur: '',
-    lieu: '',
-    intensite: '',
+  private filters: { humeur: string[]; lieu: string[]; intensite: string[] } = {
+    humeur: [],
+    lieu: [],
+    intensite: [],
   };
   private trackListEl: HTMLElement | null = null;
   private ambianceTrackNameEl: HTMLElement | null = null;
@@ -157,15 +157,15 @@ export class MusicPlayerView extends ItemView {
 
     const filtersRow = section.createDiv({ cls: 'trpg-filters' });
 
-    this.createFilterDropdown(filtersRow, UI.FILTER_HUMEUR, CATEGORIES.humeur as unknown as string[], (val) => {
+    this.createMultiSelectDropdown(filtersRow, UI.FILTER_HUMEUR, CATEGORIES.humeur as unknown as string[], this.filters.humeur, (val) => {
       this.filters.humeur = val;
       this.refreshTrackList();
     });
-    this.createFilterDropdown(filtersRow, UI.FILTER_LIEU, CATEGORIES.lieu as unknown as string[], (val) => {
+    this.createMultiSelectDropdown(filtersRow, UI.FILTER_LIEU, CATEGORIES.lieu as unknown as string[], this.filters.lieu, (val) => {
       this.filters.lieu = val;
       this.refreshTrackList();
     });
-    this.createFilterDropdown(filtersRow, UI.FILTER_INTENSITE, CATEGORIES.intensite as unknown as string[], (val) => {
+    this.createMultiSelectDropdown(filtersRow, UI.FILTER_INTENSITE, CATEGORIES.intensite as unknown as string[], this.filters.intensite, (val) => {
       this.filters.intensite = val;
       this.refreshTrackList();
     });
@@ -174,30 +174,84 @@ export class MusicPlayerView extends ItemView {
     this.refreshTrackList();
   }
 
-  private createFilterDropdown(
+  private createMultiSelectDropdown(
     parent: HTMLElement,
     label: string,
     options: string[],
-    onChange: (val: string) => void
+    selected: string[],
+    onChange: (val: string[]) => void
   ): void {
-    const wrapper = parent.createDiv({ cls: 'trpg-filter' });
-    wrapper.createDiv({ cls: 'trpg-filter-label', text: label });
-    const select = wrapper.createEl('select', { cls: 'trpg-filter-select' });
-    select.createEl('option', { text: UI.FILTER_ALL, attr: { value: '' } });
+    const wrapper = parent.createDiv({ cls: 'trpg-multiselect' });
+
+    const trigger = wrapper.createEl('button', { cls: 'trpg-multiselect-trigger' });
+    const triggerText = trigger.createSpan({ cls: 'trpg-multiselect-text' });
+    const chevron = trigger.createSpan({ cls: 'trpg-multiselect-chevron' });
+    setIcon(chevron, 'chevron-down');
+
+    const dropdown = wrapper.createDiv({ cls: 'trpg-multiselect-dropdown' });
+
+    const updateTrigger = () => {
+      if (selected.length === 0) {
+        triggerText.textContent = label;
+        trigger.removeClass('trpg-multiselect-active');
+      } else {
+        triggerText.textContent = `${label} (${selected.length})`;
+        trigger.addClass('trpg-multiselect-active');
+      }
+    };
+
     for (const opt of options) {
-      select.createEl('option', { text: opt, attr: { value: opt } });
+      const row = dropdown.createDiv({ cls: 'trpg-multiselect-option' });
+      const checkbox = row.createEl('input', { attr: { type: 'checkbox' } });
+      checkbox.checked = selected.includes(opt);
+      row.createSpan({ text: opt });
+
+      row.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (selected.includes(opt)) {
+          selected.splice(selected.indexOf(opt), 1);
+          checkbox.checked = false;
+        } else {
+          selected.push(opt);
+          checkbox.checked = true;
+        }
+        onChange(selected);
+        updateTrigger();
+      });
     }
-    select.addEventListener('change', () => onChange(select.value));
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = wrapper.hasClass('trpg-multiselect-open');
+      wrapper.closest('.trpg-filters')
+        ?.querySelectorAll('.trpg-multiselect-open')
+        .forEach((el) => el.removeClass('trpg-multiselect-open'));
+      if (!isOpen) wrapper.addClass('trpg-multiselect-open');
+    });
+
+    dropdown.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    const closeHandler = (e: MouseEvent) => {
+      if (!wrapper.contains(e.target as Node)) {
+        wrapper.removeClass('trpg-multiselect-open');
+      }
+    };
+    document.addEventListener('click', closeHandler);
+    this.register(() => document.removeEventListener('click', closeHandler));
+
+    updateTrigger();
   }
 
   refreshTrackList(): void {
     if (!this.trackListEl) return;
     this.trackListEl.empty();
 
-    const filters: { humeur?: string; lieu?: string; intensite?: string } = {};
-    if (this.filters.humeur) filters.humeur = this.filters.humeur;
-    if (this.filters.lieu) filters.lieu = this.filters.lieu;
-    if (this.filters.intensite) filters.intensite = this.filters.intensite;
+    const filters: { humeur?: string[]; lieu?: string[]; intensite?: string[] } = {};
+    if (this.filters.humeur.length > 0) filters.humeur = this.filters.humeur;
+    if (this.filters.lieu.length > 0) filters.lieu = this.filters.lieu;
+    if (this.filters.intensite.length > 0) filters.intensite = this.filters.intensite;
 
     const tracks = this.plugin.trackLibrary.getTracks(Object.keys(filters).length > 0 ? filters : undefined);
 
@@ -358,10 +412,11 @@ export class MusicPlayerView extends ItemView {
     channelSelect.createEl('option', { text: UI.CHANNEL_MUSIQUE, attr: { value: 'musique' } });
 
     const catContainer = form.createDiv({ cls: 'trpg-category-selects' });
+    const addCategories: { humeur: string[]; lieu: string[]; intensite: string[] } = { humeur: [], lieu: [], intensite: [] };
 
-    const humeurSelect = this.createMultiCategorySelect(catContainer, UI.FILTER_HUMEUR, CATEGORIES.humeur as unknown as string[]);
-    const lieuSelect = this.createMultiCategorySelect(catContainer, UI.FILTER_LIEU, CATEGORIES.lieu as unknown as string[]);
-    const intensiteSelect = this.createMultiCategorySelect(catContainer, UI.FILTER_INTENSITE, CATEGORIES.intensite as unknown as string[]);
+    this.createCategoryDropdown(catContainer, UI.FILTER_HUMEUR, CATEGORIES.humeur as unknown as string[], addCategories.humeur);
+    this.createCategoryDropdown(catContainer, UI.FILTER_LIEU, CATEGORIES.lieu as unknown as string[], addCategories.lieu);
+    this.createCategoryDropdown(catContainer, UI.FILTER_INTENSITE, CATEGORIES.intensite as unknown as string[], addCategories.intensite);
 
     const errorEl = form.createDiv({ cls: 'trpg-error' });
 
@@ -377,13 +432,12 @@ export class MusicPlayerView extends ItemView {
       }
 
       const channel = channelSelect.value as Channel;
-      const categories = {
-        humeur: this.getSelectedOptions(humeurSelect),
-        lieu: this.getSelectedOptions(lieuSelect),
-        intensite: this.getSelectedOptions(intensiteSelect),
-      };
+      const result = this.plugin.trackLibrary.addTrack(name, url, channel, {
+        humeur: [...addCategories.humeur],
+        lieu: [...addCategories.lieu],
+        intensite: [...addCategories.intensite],
+      });
 
-      const result = this.plugin.trackLibrary.addTrack(name, url, channel, categories);
       if (typeof result === 'string') {
         errorEl.textContent = result;
         return;
@@ -391,35 +445,77 @@ export class MusicPlayerView extends ItemView {
 
       urlInput.value = '';
       nameInput.value = '';
-      this.clearMultiSelect(humeurSelect);
-      this.clearMultiSelect(lieuSelect);
-      this.clearMultiSelect(intensiteSelect);
+      addCategories.humeur.length = 0;
+      addCategories.lieu.length = 0;
+      addCategories.intensite.length = 0;
+      catContainer.empty();
+      this.createCategoryDropdown(catContainer, UI.FILTER_HUMEUR, CATEGORIES.humeur as unknown as string[], addCategories.humeur);
+      this.createCategoryDropdown(catContainer, UI.FILTER_LIEU, CATEGORIES.lieu as unknown as string[], addCategories.lieu);
+      this.createCategoryDropdown(catContainer, UI.FILTER_INTENSITE, CATEGORIES.intensite as unknown as string[], addCategories.intensite);
       this.refreshTrackList();
     });
   }
 
-  private createMultiCategorySelect(parent: HTMLElement, label: string, options: string[]): HTMLSelectElement {
-    const wrapper = parent.createDiv({ cls: 'trpg-category-select' });
-    wrapper.createDiv({ cls: 'trpg-filter-label', text: label });
-    const select = wrapper.createEl('select', { cls: 'trpg-input', attr: { multiple: 'true' } });
+  private createCategoryDropdown(parent: HTMLElement, label: string, options: string[], selected: string[]): void {
+    const wrapper = parent.createDiv({ cls: 'trpg-multiselect' });
+
+    const trigger = wrapper.createEl('button', { cls: 'trpg-multiselect-trigger' });
+    const triggerText = trigger.createSpan({ cls: 'trpg-multiselect-text' });
+    const chevron = trigger.createSpan({ cls: 'trpg-multiselect-chevron' });
+    setIcon(chevron, 'chevron-down');
+
+    const dropdown = wrapper.createDiv({ cls: 'trpg-multiselect-dropdown' });
+
+    const updateTrigger = () => {
+      if (selected.length === 0) {
+        triggerText.textContent = label;
+        trigger.removeClass('trpg-multiselect-active');
+      } else {
+        triggerText.textContent = `${label} (${selected.length})`;
+        trigger.addClass('trpg-multiselect-active');
+      }
+    };
+
     for (const opt of options) {
-      select.createEl('option', { text: opt, attr: { value: opt } });
-    }
-    return select;
-  }
+      const row = dropdown.createDiv({ cls: 'trpg-multiselect-option' });
+      const checkbox = row.createEl('input', { attr: { type: 'checkbox' } });
+      checkbox.checked = selected.includes(opt);
+      row.createSpan({ text: opt });
 
-  private getSelectedOptions(select: HTMLSelectElement): string[] {
-    const result: string[] = [];
-    for (const option of Array.from(select.options)) {
-      if (option.selected) result.push(option.value);
+      row.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (selected.includes(opt)) {
+          selected.splice(selected.indexOf(opt), 1);
+          checkbox.checked = false;
+        } else {
+          selected.push(opt);
+          checkbox.checked = true;
+        }
+        updateTrigger();
+      });
     }
-    return result;
-  }
 
-  private clearMultiSelect(select: HTMLSelectElement): void {
-    for (const option of Array.from(select.options)) {
-      option.selected = false;
-    }
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = wrapper.hasClass('trpg-multiselect-open');
+      parent.querySelectorAll('.trpg-multiselect-open')
+        .forEach((el) => el.removeClass('trpg-multiselect-open'));
+      if (!isOpen) wrapper.addClass('trpg-multiselect-open');
+    });
+
+    dropdown.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    const closeHandler = (e: MouseEvent) => {
+      if (!wrapper.contains(e.target as Node)) {
+        wrapper.removeClass('trpg-multiselect-open');
+      }
+    };
+    document.addEventListener('click', closeHandler);
+    this.register(() => document.removeEventListener('click', closeHandler));
+
+    updateTrigger();
   }
 
   // --- Add Preset Section ---

@@ -5,9 +5,9 @@ import { generateId } from './utils';
 
 interface TrackFilters {
   channel?: Channel;
-  humeur?: string;
-  lieu?: string;
-  intensite?: string;
+  humeur?: string[];
+  lieu?: string[];
+  intensite?: string[];
 }
 
 export class TrackLibrary {
@@ -58,14 +58,14 @@ export class TrackLibrary {
       if (filters.channel) {
         tracks = tracks.filter((t) => t.channel === filters.channel);
       }
-      if (filters.humeur) {
-        tracks = tracks.filter((t) => t.categories.humeur.includes(filters.humeur!));
+      if (filters.humeur && filters.humeur.length > 0) {
+        tracks = tracks.filter((t) => filters.humeur!.some((h) => t.categories.humeur.includes(h)));
       }
-      if (filters.lieu) {
-        tracks = tracks.filter((t) => t.categories.lieu.includes(filters.lieu!));
+      if (filters.lieu && filters.lieu.length > 0) {
+        tracks = tracks.filter((t) => filters.lieu!.some((l) => t.categories.lieu.includes(l)));
       }
-      if (filters.intensite) {
-        tracks = tracks.filter((t) => t.categories.intensite.includes(filters.intensite!));
+      if (filters.intensite && filters.intensite.length > 0) {
+        tracks = tracks.filter((t) => filters.intensite!.some((i) => t.categories.intensite.includes(i)));
       }
     }
 

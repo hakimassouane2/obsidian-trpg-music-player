@@ -18,7 +18,7 @@ export class EditPresetModal extends Modal {
   onOpen(): void {
     const { contentEl } = this;
     contentEl.addClass('trpg-add-modal');
-    contentEl.createEl('h3', { text: 'Modifier le preset' });
+    this.setTitle('Modifier le preset');
 
     const form = contentEl.createDiv({ cls: 'trpg-form' });
 
