@@ -1246,7 +1246,7 @@
       "id": "c099a60f-e53a-4ebd-b5c0-3505be110491",
       "name": "🎵 RPG Mystery Music | Joran's Woods",
       "youtubeId": "DQV76hQ12Co",
-      "channel": "ambiance",
+      "channel": "musique",
       "categories": {
         "humeur": [
           "Mystérieux"
@@ -2851,7 +2851,7 @@
   ],
   "settings": {
     "ambianceVolume": 0.22,
-    "musiqueVolume": 0.1,
+    "musiqueVolume": 0.44,
     "crossfadeDuration": 6000,
     "masterVolume": 1
   }
