@@ -1,7 +1,7 @@
 import { Plugin, WorkspaceLeaf, setIcon, Notice } from 'obsidian';
 import type { PluginData, Channel } from './types';
 import { VIEW_TYPE, VIEW_TYPE_LIBRARY, DEFAULT_DATA, LOG_PREFIX, UI } from './constants';
-import { PlayerService } from './PlayerService';
+import { PlayerService, extractYoutubeId } from './PlayerService';
 import { TrackLibrary } from './TrackLibrary';
 import { PresetManager } from './PresetManager';
 import { MusicPlayerView } from './MusicPlayerView';
@@ -22,6 +22,8 @@ export default class TRPGMusicPlugin extends Plugin {
     labelSpan: HTMLElement;
     trackName: string;
     presetName: string;
+    youtubeId?: string;
+    channel?: Channel;
   }> = [];
 
   async onload(): Promise<void> {
@@ -96,35 +98,47 @@ export default class TRPGMusicPlugin extends Plugin {
       let presetName = '';
       let trackName = '';
       let customName = '';
+      let urlValue = '';
+      let channelValue: Channel = 'musique';
+      let volumeValue = -1;
 
       for (const line of lines) {
         const presetMatch = line.match(/^preset:\s*(.+)$/i);
-        if (presetMatch) {
-          presetName = presetMatch[1].trim();
-        }
+        if (presetMatch) presetName = presetMatch[1].trim();
         const trackMatch = line.match(/^track:\s*(.+)$/i);
-        if (trackMatch) {
-          trackName = trackMatch[1].trim();
-        }
+        if (trackMatch) trackName = trackMatch[1].trim();
         const nameMatch = line.match(/^name:\s*(.+)$/i);
-        if (nameMatch) {
-          customName = nameMatch[1].trim();
+        if (nameMatch) customName = nameMatch[1].trim();
+        const urlMatch = line.match(/^url:\s*(.+)$/i);
+        if (urlMatch) urlValue = urlMatch[1].trim();
+        const channelMatch = line.match(/^channel:\s*(.+)$/i);
+        if (channelMatch) {
+          const ch = channelMatch[1].trim().toLowerCase();
+          if (ch === 'ambiance' || ch === 'musique') channelValue = ch;
         }
+        const volumeMatch = line.match(/^volume:\s*(\d+)$/i);
+        if (volumeMatch) volumeValue = Math.min(100, Math.max(0, parseInt(volumeMatch[1])));
       }
 
-      if (!presetName && !trackName) {
-        el.createDiv({ cls: 'trpg-codeblock-error', text: UI.MISSING_FIELDS });
+      // Validate: need at least one of preset, track, or url
+      const youtubeId = urlValue ? extractYoutubeId(urlValue) : null;
+      if (!presetName && !trackName && !youtubeId) {
+        if (urlValue) {
+          el.createDiv({ cls: 'trpg-codeblock-error', text: UI.INVALID_URL });
+        } else {
+          el.createDiv({ cls: 'trpg-codeblock-error', text: UI.MISSING_FIELDS });
+        }
         return;
       }
 
-      const label = customName || presetName || trackName;
+      const label = customName || presetName || trackName || 'YouTube';
       const btn = el.createEl('button', { cls: 'trpg-codeblock-btn' });
       const iconSpan = btn.createSpan({ cls: 'trpg-codeblock-icon' });
       setIcon(iconSpan, 'play');
       const labelSpan = btn.createSpan({ text: label });
 
       // Register this button for state updates
-      const entry = { btn, iconSpan, labelSpan, trackName, presetName };
+      const entry = { btn, iconSpan, labelSpan, trackName, presetName, youtubeId: youtubeId || undefined, channel: youtubeId ? channelValue : undefined };
       this.codeBlockButtons.push(entry);
 
       // Sync initial state
@@ -133,6 +147,7 @@ export default class TRPGMusicPlugin extends Plugin {
       btn.addEventListener('click', async () => {
         try {
           await this.ensurePlayersReady();
+
           if (presetName) {
             const preset = this.presetManager.getPresetByName(presetName);
             if (!preset) {
@@ -144,6 +159,20 @@ export default class TRPGMusicPlugin extends Plugin {
             const played = await this.presetManager.applyPreset(preset);
             if (played.ambiance) this.updateNowPlaying('ambiance', played.ambiance);
             if (played.musique) this.updateNowPlaying('musique', played.musique);
+          } else if (youtubeId) {
+            // Direct YouTube URL playback (not in library)
+            const ch = channelValue;
+            const state = this.playerService.getChannelState(ch);
+            if (state.isPlaying && state.videoId === youtubeId) {
+              this.playerService.stop(ch);
+              this.updateNowPlaying(ch, '');
+            } else {
+              if (volumeValue >= 0) {
+                this.playerService.setVolume(ch, volumeValue);
+              }
+              await this.playerService.play(ch, youtubeId);
+              this.updateNowPlaying(ch, label);
+            }
           } else {
             const track = this.trackLibrary.getTracks()
               .find((t) => t.name.toLowerCase() === trackName.toLowerCase());
@@ -298,14 +327,23 @@ export default class TRPGMusicPlugin extends Plugin {
 
   private syncCodeBlockButton(entry: (typeof this.codeBlockButtons)[number]): void {
     if (entry.presetName) return; // Presets don't toggle
-    if (!entry.trackName) return;
 
-    const track = this.trackLibrary.getTracks()
-      .find((t) => t.name.toLowerCase() === entry.trackName.toLowerCase());
-    if (!track) return;
+    let isPlaying = false;
 
-    const state = this.playerService.getChannelState(track.channel);
-    const isPlaying = state.isPlaying && state.videoId === track.youtubeId;
+    if (entry.youtubeId && entry.channel) {
+      // Direct URL mode
+      const state = this.playerService.getChannelState(entry.channel);
+      isPlaying = state.isPlaying && state.videoId === entry.youtubeId;
+    } else if (entry.trackName) {
+      // Library track mode
+      const track = this.trackLibrary.getTracks()
+        .find((t) => t.name.toLowerCase() === entry.trackName.toLowerCase());
+      if (!track) return;
+      const state = this.playerService.getChannelState(track.channel);
+      isPlaying = state.isPlaying && state.videoId === track.youtubeId;
+    } else {
+      return;
+    }
 
     entry.iconSpan.empty();
     setIcon(entry.iconSpan, isPlaying ? 'square' : 'play');

@@ -1736,23 +1736,6 @@
       }
     },
     {
-      "id": "43bff553-f8fe-4eea-ab47-e1726a82d55b",
-      "name": "Raid on the Castle (Score)",
-      "youtubeId": "_OgtCe8lc58",
-      "channel": "musique",
-      "categories": {
-        "humeur": [
-          "Combat"
-        ],
-        "lieu": [
-          "Générique"
-        ],
-        "intensite": [
-          "Élevée"
-        ]
-      }
-    },
-    {
       "id": "ce9909e8-8f1e-4ea1-ae95-2c331aa3a8aa",
       "name": "Fight for the Crypts",
       "youtubeId": "2ngwfupp0y0",
@@ -2835,6 +2818,125 @@
         ],
         "intensite": [
           "Faible"
+        ]
+      }
+    },
+    {
+      "id": "aa642002-b222-496a-ab98-5bb3570b3dec",
+      "name": "Mother of All",
+      "youtubeId": "MgLhci84A3E",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "163b3f62-b652-44cd-8ffc-2990f28fae05",
+      "name": "As Light Trickles Into the Greenhouse",
+      "youtubeId": "7iVZueSeEBc",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "46b69dcf-2220-47a6-bd77-5defb9edb043",
+      "name": "Shelter at Last",
+      "youtubeId": "KScUZKWWAB8",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "67864110-a587-4704-9033-cafaf14d395c",
+      "name": "Mead, Meat, and Millet",
+      "youtubeId": "ccX-NJ7nGqI",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "9aee9163-a613-4089-9346-30aed13b4a07",
+      "name": "Boundless Acres - Tabletop RPG Music (orchestral theme)",
+      "youtubeId": "c8ZDgTtQW4A",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "6aa8da61-d2ce-4b9b-8c08-b4debe639bcc",
+      "name": "Ark Seeker",
+      "youtubeId": "n3acTbL8e9s",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "1e705123-4416-4702-b0b6-9b44595eb839",
+      "name": "FINAL FANTASY XV OST Ravus Boss Theme ( RAVUS AETERNA )",
+      "youtubeId": "7i48mZznLmo",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
         ]
       }
     }

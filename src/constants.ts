@@ -4,7 +4,7 @@ export const VIEW_TYPE = 'trpg-music-player';
 export const VIEW_TYPE_LIBRARY = 'trpg-music-library';
 
 export const CATEGORIES = {
-  humeur: ['Tendu', 'Calme', 'Épique', 'Mystérieux', 'Triste', 'Joyeux', 'Comique', 'Combat', 'Poursuite', 'Narratif', 'Exploration'] as const,
+  humeur: ['Tendu', 'Calme', 'Épique', 'Mystérieux', 'Triste', 'Joyeux', 'Comique', 'Combat', 'Poursuite', 'Narratif', 'Exploration', 'Voyage'] as const,
   lieu: ['Taverne', 'Donjon', 'Forêt', 'Ville', 'Océan', 'Temple', 'Générique'] as const,
   intensite: ['Faible', 'Moyenne', 'Élevée'] as const,
 };
