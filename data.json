@@ -52,23 +52,6 @@
       }
     },
     {
-      "id": "3fa96181-d029-46ee-85a4-bd0637db4748",
-      "name": "Medieval City Sounds | Market Day Ambience | 1 Hour",
-      "youtubeId": "o-b5nMCj5hI",
-      "channel": "ambiance",
-      "categories": {
-        "humeur": [
-          "Calme"
-        ],
-        "lieu": [
-          "Ville"
-        ],
-        "intensite": [
-          "Faible"
-        ]
-      }
-    },
-    {
       "id": "2cc118a5-af88-4644-8aec-2b7eff61d1ad",
       "name": "Sailing Ship | High Seas Ambience | 1 Hour",
       "youtubeId": "beOw8MEojQ4",
@@ -541,7 +524,7 @@
           "Ville"
         ],
         "intensite": [
-          "Faible"
+          "Moyenne"
         ]
       }
     },
@@ -2939,6 +2922,1301 @@
           "Élevée"
         ]
       }
+    },
+    {
+      "id": "90f0a1f4-b5d4-4803-892d-855d680cff26",
+      "name": "Medieval City | Realistic Ambience | 1 Hour #dnd",
+      "youtubeId": "_52K0E_gNY0",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "40303d96-98db-4082-94df-498247a477e4",
+      "name": "City of Thieves | D&D/TTRPG Music | 1 Hour",
+      "youtubeId": "_RsnVOK6Fdg",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "ec326fca-8c89-449f-a1ad-8468d76bdb8c",
+      "name": "Courtyard | Medieval City ASMR Ambience | 3 Hours",
+      "youtubeId": "pYW6BYObVQM",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "e1d4c08a-0593-4eeb-a162-fee50cfd5aa7",
+      "name": "Medieval Slums | Poverty, Underprivileged, Rats, Sickness, Ambience | 1 Hour",
+      "youtubeId": "UlbxDQMo1o4",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Narratif"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "7c055d60-620a-4cc5-a2cb-5172c56f1551",
+      "name": "🎵 RPG Exploration Music | Ethereal Caverns",
+      "youtubeId": "-THDmotC8D0",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Exploration"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "6cf35b4b-4457-4292-9404-5248082e6063",
+      "name": "Exploration Music | Ruins of Galmeth",
+      "youtubeId": "a5yNa6VK6oU",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Exploration",
+          "Mystérieux"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "fb6d4f86-0dfe-48c7-984c-c786f22a5159",
+      "name": "🎵 RPG Exploration Music | Into The Unknown",
+      "youtubeId": "fA8j3wOVzcw",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Mystérieux",
+          "Épique",
+          "Exploration"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "4c3df90e-c599-4d9b-bcc6-4a4ae96d6257",
+      "name": "🎵 RPG Exploration Music | Crossing",
+      "youtubeId": "tVN0FVTax7Y",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Exploration",
+          "Voyage"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "01eef28c-feb4-4ad1-bc7e-84b91a462f91",
+      "name": "🎵 RPG Exploration Music | The Adventure Begins",
+      "youtubeId": "rIf3ZmBQKso",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Joyeux",
+          "Exploration",
+          "Voyage",
+          "Narratif"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "75a8bcc4-2c57-4831-8923-6b5b7d80b927",
+      "name": "🎵 RPG Dungeon Music | The Spider Den",
+      "youtubeId": "zOHTYUiAXUc",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Tendu",
+          "Exploration"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "c5e5cb99-9f36-42ef-bb86-71c789c35054",
+      "name": "🎵 RPG Exploration Music | Ashes & Bones",
+      "youtubeId": "uaCFm9RYkQw",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Tendu",
+          "Mystérieux",
+          "Exploration"
+        ],
+        "lieu": [
+          "Générique",
+          "Donjon"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "a0931119-8621-4b3c-848b-dafc73731c76",
+      "name": "Calm Fantasy Music | Whispers of the Elven Forest",
+      "youtubeId": "jzqRyIFk0rI",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme",
+          "Mystérieux",
+          "Exploration",
+          "Voyage"
+        ],
+        "lieu": [
+          "Forêt",
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "dd5614ae-72da-4deb-acca-056efba3ce52",
+      "name": "Exploration Fantasy Music | Underwater Village | D&D/RPG Series",
+      "youtubeId": "w5xjwFCwu5Y",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme",
+          "Exploration",
+          "Voyage"
+        ],
+        "lieu": [
+          "Océan",
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "10f88103-aa90-457c-b587-774afed35b4b",
+      "name": "Mystic Forest | D&D/TTRPG Music | 1 Hour",
+      "youtubeId": "GmqYX67OfdY",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme"
+        ],
+        "lieu": [
+          "Forêt"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "b8b4ddac-21bb-47fa-9ac0-d8a7e40fa81a",
+      "name": "Justin Bell (Pillars of Eternity) — “Elmshore” [Extended] (90 Min.)",
+      "youtubeId": "utuZuL_IWm0",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Calme",
+          "Exploration",
+          "Voyage"
+        ],
+        "lieu": [
+          "Forêt"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "11e68cc7-1ac2-4d85-83ae-29502a985f5f",
+      "name": "Uncharted 4 OST - E3 Sam Pursuit/Convoy Music",
+      "youtubeId": "B7MyuyQJN1k",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Poursuite"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "023d7b09-973f-4a38-9ceb-4b2d8cb329f6",
+      "name": "Hold Resolve | Combat",
+      "youtubeId": "oxIom-1aB18",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "97d29ba2-7dc0-471d-bf88-3383548f17aa",
+      "name": "Chains Won't Stop Us",
+      "youtubeId": "z6PV4KEn1Io",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "71024cd8-86f4-409b-8aeb-d2a3dbeedee8",
+      "name": "Human Resource Violations | The Outer Worlds OST",
+      "youtubeId": "JVo3dp0R16E",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "98b2c283-18c7-4fb4-8ac2-f536d28039f8",
+      "name": "Caldera",
+      "youtubeId": "LxWA7ODSH6M",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "ee0076af-6345-402c-949a-ed7146564f2f",
+      "name": "The Sixth Exodus (Valor)",
+      "youtubeId": "SfJ8tDB5ZuQ",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "7d4d8544-d20c-44fb-8f2d-c4f3083bf735",
+      "name": "Crel-Vohr the Blight",
+      "youtubeId": "TTD8G6ZL9Hk",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "3a4e34ec-2b77-4b22-8021-414f4c9c8d36",
+      "name": "Allies Against the Murk",
+      "youtubeId": "eGfnrTHOG-A",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "ff163710-7dd7-4942-ad2d-c925745dad91",
+      "name": "Winterborn",
+      "youtubeId": "cyv9wir958k",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "ee523260-b30c-44cc-aa81-b9d10cb4f244",
+      "name": "Hordebreaker",
+      "youtubeId": "1FW2YAVdifc",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "8d49bf85-b64f-4550-87ed-60113c1fded5",
+      "name": "The Boars",
+      "youtubeId": "vlYFvwFgigU",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "9e867baf-b46c-4273-96d6-074ad9a9ee1f",
+      "name": "Hollow Knight OST - False Knight",
+      "youtubeId": "vKDQNGDOdE4",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "8275722d-5d86-47fb-bf7c-4b9ca5aaa74d",
+      "name": "Kill Bulgreck",
+      "youtubeId": "liyNqIgGE7U",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "52d19598-867e-40d7-884e-bd1e5b945cf4",
+      "name": "Clarity and Cut",
+      "youtubeId": "n34CiGDv0dU",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "5efd1b3b-9c70-4811-bca3-bc4a71cddb3d",
+      "name": "Takkobo Mig",
+      "youtubeId": "F2BtOyZnsFU",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "29f51758-b765-4a3d-b901-e3e53d7d42a8",
+      "name": "Honor in the Storm",
+      "youtubeId": "Kpb7zkQbv8o",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "1a052db5-dd5a-4f4f-a577-8f942282f85e",
+      "name": "Destabilizers",
+      "youtubeId": "K7kkmB3V4wU",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "f994ccdd-9b03-46fd-b1da-92c3f88c90d5",
+      "name": "Wine Wars",
+      "youtubeId": "LrBPHQkmseU",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "1e671405-112d-444d-9c79-56ed8f684262",
+      "name": "Banish Thee",
+      "youtubeId": "J4uteSnakM4",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "17496d09-37ab-4a6c-b91d-b542675cb31b",
+      "name": "Pyroclast Blitz",
+      "youtubeId": "BhSn6I0kao4",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "558bb587-b22c-4adf-8418-40f1cda7c485",
+      "name": "01 Hive Knight (Hollow Knight: Gods & Nightmares)",
+      "youtubeId": "RVyJmhiJjA8",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "218378b8-29f1-4928-b4a4-47e69a59cab8",
+      "name": "Belly of the Beast (Shadow)",
+      "youtubeId": "FC4TGX0Rxq8",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "5d1108de-6557-420a-bd20-e3fe965cd5f0",
+      "name": "Beastmen",
+      "youtubeId": "wIOnVwboY_Y",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "0af5f07b-cd7e-4999-a03c-234717231410",
+      "name": "Crabtank",
+      "youtubeId": "_4zKpVi2IfQ",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "deadc0f6-23e3-40fc-bdb0-91ae739e4047",
+      "name": "Archers on the Wall",
+      "youtubeId": "rfnfzZN4cyE",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "3eb41bf4-bdec-4ce9-b507-4b2ab00782bd",
+      "name": "Battle the Blight",
+      "youtubeId": "zmNcwSv3xik",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "784370e4-cd49-4262-9c32-5804a64ab2ff",
+      "name": "Duel Compulsion",
+      "youtubeId": "7BG-Delk8ek",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "10484562-b67f-47c0-ad13-9fc7ecccdd2a",
+      "name": "Pierce the Perimeter (Sneaking)",
+      "youtubeId": "eEyzY5aJjXw",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "d6f44136-e99d-478a-8d39-78e521a1f698",
+      "name": "Assassin's Creed 2 OST / Jesper Kyd - Venice Combat (Track 26)",
+      "youtubeId": "-51_oLom9xE",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "10733b25-911b-4779-adfe-472f5fd875ce",
+      "name": "The Old Gods Hunger",
+      "youtubeId": "X_PyzYy61Lg",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "83c396bf-77aa-469e-a815-b6a4372e1884",
+      "name": "Pyroclast Blitz (Frenzy)",
+      "youtubeId": "qrKsRQEb6p8",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "3e3c4f73-b1eb-4e9a-a3cc-9cd83eb4eb20",
+      "name": "For Honor! for Toussaint!",
+      "youtubeId": "2zgWGTs5jd0",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "11a7015f-7a50-4f28-8f48-169eff18c040",
+      "name": "The Cogs",
+      "youtubeId": "iuOzlsXPiZU",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "edf848a6-8eb9-4e74-8fca-9a4bcaf95341",
+      "name": "Hordebreaker (Jit'Jit)",
+      "youtubeId": "vZS9mbK78dE",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "581da91b-a0af-41d0-b38e-2780e9f356fa",
+      "name": "Guts Match",
+      "youtubeId": "2Y8nl_b_ZM4",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "402c83bb-d6ab-4e3a-b35b-d3da8cd8cdbf",
+      "name": "Lord Merriweather Wants You Dead",
+      "youtubeId": "Rrajuz-gQAY",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "5a94f093-071c-42b4-be7e-218c05227eb4",
+      "name": "Revenant Knight",
+      "youtubeId": "UlAzj8lRiWs",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "451ea048-6f45-4bb0-a521-740deeadd10a",
+      "name": "Ironwood",
+      "youtubeId": "assFNbHSBVs",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "d57ffdbb-2d59-4f3b-9c9d-eefd9cac2c90",
+      "name": "Streets of Iron and Blood",
+      "youtubeId": "yqdVE41RjQ0",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "12b0a5ff-e38f-41a4-b2d3-57eaf02fd145",
+      "name": "Hope",
+      "youtubeId": "yi77OoEegyc",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "848fcb41-771c-415c-a0b9-2d0edae457dd",
+      "name": "Blackgate Tension",
+      "youtubeId": "K8jigDCkbRg",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "a6fe1ef4-3d6e-4d76-b5c4-2e333ccfa543",
+      "name": "She Lives (Future)",
+      "youtubeId": "Z-MTuoURf8A",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "75f07e50-f184-45ee-9c79-c52d6b5f7c95",
+      "name": "The Shivering War",
+      "youtubeId": "NqYd_9tFn58",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "99d9a7c9-0236-43bf-8d78-f5309b1f6e8c",
+      "name": "Abomination",
+      "youtubeId": "9PR2eVwnIS4",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "87371742-1434-4098-be6d-e60dbe183844",
+      "name": "Divinity Unshackled",
+      "youtubeId": "DkWmSvZWWjE",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "907b2f6c-5bcc-413b-b796-8f4554af5f62",
+      "name": "Assassin's Creed IV Black Flag - Batten Down the Hatches (Track 22)",
+      "youtubeId": "nXAVh_8yWTs",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "f2d30c7d-04a1-4ad6-b0d0-8e8235d94135",
+      "name": "The BattleField III",
+      "youtubeId": "dOZbwjwMBQQ",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "cd3ab4f2-1aee-4171-acd0-1882c2385800",
+      "name": "The Fiend Approaches",
+      "youtubeId": "WUeZwz2nOUE",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "a05b4a10-fd74-466d-ac23-0b6750d2146f",
+      "name": "Pierce the Perimeter",
+      "youtubeId": "21tLIjRZIP4",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "58009e06-fa2b-4a83-801e-c97823984bda",
+      "name": "Come soft winds of death  Extended",
+      "youtubeId": "7OSQK0EFfrg",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "5cd27974-8425-4384-a246-d727e5b34062",
+      "name": "The Night of Long Fangs",
+      "youtubeId": "PjT1oAoIDS8",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "4d4d8f05-1e38-4d02-9962-17dad34d4e18",
+      "name": "Assassin's Creed IV Black Flag - Men of War (Track 18)",
+      "youtubeId": "kFQpCGztcH4",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "8116734f-436f-4755-a888-b94150fe4799",
+      "name": "Wasteland War - Tabletop RPG Music (Combat / Battle)",
+      "youtubeId": "XieT7VpcWNs",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "4fcec0b6-1322-440a-80c0-fb3155c992ff",
+      "name": "Kingdoms & Conquerors",
+      "youtubeId": "2gJcR3Kni_g",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "5d8ee4db-e082-45cc-82ce-3f6d45e42ea1",
+      "name": "Last Goodbye | D&D/TTRPG Music | 1 Hour",
+      "youtubeId": "mFsQpCjRyvY",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "c6e4405c-6c3a-427c-8f93-1b17a11b1094",
+      "name": "Mahou Shoujo Madoka Magica Rebellion OST - Take Your Hands",
+      "youtubeId": "z0PkQiP6uME",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "52c4d8ea-d3ba-4663-9219-4f71a83a1af8",
+      "name": "Naruto Shippuuden Sountrack (Man of the world)",
+      "youtubeId": "zPLdULCbjFI",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "160912d6-0bb7-4540-9c2f-94f514f62214",
+      "name": "One Piece Original Soundtrack - Haha Naru Umi (Mother Sea) EXTENDED VERSION",
+      "youtubeId": "hxRch5iUmAU",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "90f4b242-b7b5-47a1-a5e6-f106d550ba19",
+      "name": "Demon Slayer Movie OST: Rengoku's Last Smile (Sad Theme)",
+      "youtubeId": "iwHHagLkmtE",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "24700f65-be95-4060-9fa5-fa6a22e56b21",
+      "name": "Violet Evergarden - The Ultimate Price",
+      "youtubeId": "lFUlliTQEfk",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
     }
   ],
   "presets": [
@@ -2952,8 +4230,8 @@
     }
   ],
   "settings": {
-    "ambianceVolume": 0.22,
-    "musiqueVolume": 0.44,
+    "ambianceVolume": 0.12,
+    "musiqueVolume": 0.49,
     "crossfadeDuration": 6000,
     "masterVolume": 1
   }

@@ -3,6 +3,7 @@ import type TRPGMusicPlugin from './main';
 import type { Channel, Track } from './types';
 import { VIEW_TYPE, CATEGORIES, UI } from './constants';
 import { EditTrackModal } from './EditTrackModal';
+import { BatchAddTrackModal } from './BatchAddTrackModal';
 
 export class MusicPlayerView extends ItemView {
   private plugin: TRPGMusicPlugin;
@@ -53,22 +54,13 @@ export class MusicPlayerView extends ItemView {
       if (name) this.setNowPlaying(channel, name);
     }
 
-    // YouTube iframe containers (hidden) — only create if not already initialized
-    if (!this.plugin.playerService.isPlayerInitialized('ambiance') || !this.plugin.playerService.isPlayerInitialized('musique')) {
-      const iframeContainer = contentEl.createDiv({ cls: 'trpg-youtube-containers' });
-      if (!this.plugin.playerService.isPlayerInitialized('ambiance')) {
-        const ambianceContainer = iframeContainer.createDiv({ cls: 'trpg-youtube-container' });
-        await this.plugin.playerService.createPlayer('ambiance', ambianceContainer);
-      }
-      if (!this.plugin.playerService.isPlayerInitialized('musique')) {
-        const musiqueContainer = iframeContainer.createDiv({ cls: 'trpg-youtube-container' });
-        await this.plugin.playerService.createPlayer('musique', musiqueContainer);
-      }
-    }
+    // Ensure YouTube players are ready (created in a persistent hidden container, not in this view's DOM)
+    await this.plugin.ensurePlayersReady();
   }
 
   async onClose(): Promise<void> {
-    this.plugin.playerService.stopPlayback();
+    // Do NOT stop playback — players live in a persistent hidden container
+    // and should keep playing even when this view is closed.
   }
 
   // --- Player Section ---
@@ -453,6 +445,14 @@ export class MusicPlayerView extends ItemView {
       this.createCategoryDropdown(catContainer, UI.FILTER_LIEU, CATEGORIES.lieu as unknown as string[], addCategories.lieu);
       this.createCategoryDropdown(catContainer, UI.FILTER_INTENSITE, CATEGORIES.intensite as unknown as string[], addCategories.intensite);
       this.refreshTrackList();
+    });
+
+    const batchBtn = form.createEl('button', { cls: 'trpg-btn', text: UI.SECTION_BATCH_ADD });
+    batchBtn.addEventListener('click', () => {
+      new BatchAddTrackModal(this.app, this.plugin, () => {
+        this.refreshTrackList();
+        this.plugin.refreshLibrary();
+      }).open();
     });
   }
 

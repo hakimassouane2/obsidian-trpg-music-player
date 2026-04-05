@@ -82,6 +82,15 @@ export const UI = {
   SEQUENTIAL_MODE: 'Mode séquentiel',
   SEQUENTIAL_ON: 'Mode séquentiel activé',
   SEQUENTIAL_OFF: 'Mode séquentiel désactivé',
+
+  // Batch add
+  SECTION_BATCH_ADD: 'Ajout batch de pistes',
+  BATCH_URL_PLACEHOLDER: 'Coller une URL YouTube...',
+  BATCH_ADD_ALL: 'Ajouter tout',
+  BATCH_TRACKS_READY: 'pistes prêtes',
+  BATCH_NO_TRACKS: 'Aucune piste dans la file',
+  BATCH_DUPLICATE_URL: 'Cette URL est déjà dans la file',
+  BATCH_FETCHING: 'Chargement...',
 } as const;
 
 export const LOG_PREFIX = '[TRPG Music]';

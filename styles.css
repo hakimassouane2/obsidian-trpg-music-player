@@ -753,6 +753,11 @@
   border-bottom-color: var(--interactive-accent);
 }
 
+.trpg-lib-add-btn-group {
+  display: flex;
+  align-items: center;
+}
+
 .trpg-lib-add-btn {
   display: flex;
   align-items: center;
@@ -1609,4 +1614,93 @@
 .trpg-edit-chip-active:hover {
   opacity: 0.85;
   color: var(--text-on-accent);
+}
+
+/* Batch Add Track Modal */
+.modal:has(.trpg-batch-modal) {
+  overflow: visible !important;
+  max-width: 500px;
+}
+
+.trpg-batch-modal {
+  overflow: visible !important;
+}
+
+.trpg-batch-url-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.trpg-batch-url-row .trpg-input {
+  flex: 1;
+}
+
+.trpg-batch-queue {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  padding: 4px;
+  min-height: 40px;
+}
+
+.trpg-batch-item-container {
+  margin-bottom: 2px;
+}
+
+.trpg-batch-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 4px;
+}
+
+.trpg-batch-item:hover {
+  background: var(--background-modifier-hover);
+}
+
+.trpg-batch-item-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--interactive-accent);
+  flex-shrink: 0;
+}
+
+.trpg-batch-item-name {
+  flex: 1;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trpg-batch-item-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.trpg-batch-item-expanded {
+  padding: 8px 12px;
+  margin: 2px 8px 4px 22px;
+  background: var(--background-secondary);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: visible;
+}
+
+.trpg-batch-item-expanded .trpg-category-selects {
+  overflow: visible;
+}
+
+.trpg-batch-counter {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 8px 0;
 }

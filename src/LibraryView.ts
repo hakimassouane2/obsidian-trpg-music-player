@@ -6,6 +6,7 @@ import { EditTrackModal } from './EditTrackModal';
 import { EditPresetModal } from './EditPresetModal';
 import { AddTrackModal } from './AddTrackModal';
 import { AddPresetModal } from './AddPresetModal';
+import { BatchAddTrackModal } from './BatchAddTrackModal';
 
 type LibraryTab = 'tracks' | 'presets' | 'playlist';
 
@@ -27,6 +28,7 @@ export class LibraryView extends ItemView {
   private playlistQueueEl: HTMLElement | null = null;
   private playlistFilters: { humeur: string[]; lieu: string[]; intensite: string[] } = { humeur: [], lieu: [], intensite: [] };
   private addBtn: HTMLElement | null = null;
+  private batchAddBtn: HTMLElement | null = null;
   private filtersRowEl: HTMLElement | null = null;
   private searchRowEl: HTMLElement | null = null;
   private presetSearchRowEl: HTMLElement | null = null;
@@ -74,18 +76,8 @@ export class LibraryView extends ItemView {
     contentEl.empty();
     contentEl.addClass('trpg-library-view');
 
-    // Ensure YouTube players are initialized (they may not exist if side panel was never opened)
-    if (!this.plugin.playerService.isPlayerInitialized('ambiance') || !this.plugin.playerService.isPlayerInitialized('musique')) {
-      const iframeContainer = contentEl.createDiv({ cls: 'trpg-youtube-containers' });
-      if (!this.plugin.playerService.isPlayerInitialized('ambiance')) {
-        const ambianceContainer = iframeContainer.createDiv({ cls: 'trpg-youtube-container' });
-        await this.plugin.playerService.createPlayer('ambiance', ambianceContainer);
-      }
-      if (!this.plugin.playerService.isPlayerInitialized('musique')) {
-        const musiqueContainer = iframeContainer.createDiv({ cls: 'trpg-youtube-container' });
-        await this.plugin.playerService.createPlayer('musique', musiqueContainer);
-      }
-    }
+    // Ensure YouTube players are ready (created in a persistent hidden container, not in this view's DOM)
+    await this.plugin.ensurePlayersReady();
 
     const header = contentEl.createDiv({ cls: 'trpg-lib-header' });
 
@@ -106,11 +98,19 @@ export class LibraryView extends ItemView {
     this.presetsTabEl.addEventListener('click', () => this.switchTab('presets'));
     this.playlistTabEl.addEventListener('click', () => this.switchTab('playlist'));
 
-    this.addBtn = tabBar.createEl('button', { cls: 'trpg-lib-add-btn' });
+    const addBtnGroup = tabBar.createDiv({ cls: 'trpg-lib-add-btn-group' });
+
+    this.addBtn = addBtnGroup.createEl('button', { cls: 'trpg-lib-add-btn' });
     const addIcon = this.addBtn.createSpan();
     setIcon(addIcon, 'plus');
     this.addBtn.createSpan({ text: 'Ajouter une piste' });
     this.addBtn.addEventListener('click', () => this.openAddModal());
+
+    this.batchAddBtn = addBtnGroup.createEl('button', { cls: 'trpg-lib-add-btn' });
+    const batchIcon = this.batchAddBtn.createSpan();
+    setIcon(batchIcon, 'layers');
+    this.batchAddBtn.createSpan({ text: 'Ajout batch' });
+    this.batchAddBtn.addEventListener('click', () => this.openBatchAddModal());
 
     // Search (tracks only)
     this.searchRowEl = header.createDiv({ cls: 'trpg-lib-search-row' });
@@ -207,7 +207,7 @@ export class LibraryView extends ItemView {
     this.presetsEl?.toggleClass('trpg-lib-hidden', tab !== 'presets');
     this.playlistEl?.toggleClass('trpg-lib-hidden', tab !== 'playlist');
 
-    // Update add button
+    // Update add buttons
     if (this.addBtn) {
       if (tab === 'playlist') {
         this.addBtn.toggleClass('trpg-lib-hidden', true);
@@ -216,6 +216,9 @@ export class LibraryView extends ItemView {
         const labelSpan = this.addBtn.querySelectorAll('span')[1];
         if (labelSpan) labelSpan.textContent = tab === 'presets' ? 'Ajouter un preset' : 'Ajouter une piste';
       }
+    }
+    if (this.batchAddBtn) {
+      this.batchAddBtn.toggleClass('trpg-lib-hidden', tab !== 'tracks');
     }
 
     if (tab === 'presets') this.refreshPresets();
@@ -234,6 +237,13 @@ export class LibraryView extends ItemView {
         this.plugin.refreshSidePanel();
       }).open();
     }
+  }
+
+  private openBatchAddModal(): void {
+    new BatchAddTrackModal(this.app, this.plugin, () => {
+      this.refreshGrid();
+      this.plugin.refreshSidePanel();
+    }).open();
   }
 
   // --- Mini player ---
