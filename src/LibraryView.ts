@@ -330,7 +330,7 @@ export class LibraryView extends ItemView {
       const slider = this.miniVolSliders[channel];
       const valEl = this.miniVolValues[channel];
       if (slider) slider.value = String(vol);
-      if (valEl) valEl.textContent = String(vol);
+      if (valEl) valEl.textContent = String(Math.round(vol));
     }
   }
 

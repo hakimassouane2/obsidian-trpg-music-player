@@ -246,7 +246,7 @@ export class PlayerService {
   }
 
   setVolume(channel: Channel, volume: number): void {
-    this.channels[channel].volume = volume;
+    this.channels[channel].volume = Math.round(volume);
     const state = this.channels[channel];
     if (state.player) {
       state.player.setVolume(this.getEffectiveVolume(channel));

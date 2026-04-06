@@ -333,7 +333,7 @@ export class MusicPlayerView extends ItemView {
       const slider = this.volSliders[channel];
       const valEl = this.volValues[channel];
       if (slider) slider.value = String(vol);
-      if (valEl) valEl.textContent = String(vol);
+      if (valEl) valEl.textContent = String(Math.round(vol));
     }
   }
 
