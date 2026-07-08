@@ -83,6 +83,16 @@ export const UI = {
   SEQUENTIAL_ON: 'Mode séquentiel activé',
   SEQUENTIAL_OFF: 'Mode séquentiel désactivé',
 
+  // One-shot (lecture rapide non sauvegardée)
+  SECTION_ONESHOT: 'One-shot rapide',
+  ONESHOT_URL_PLACEHOLDER: 'Colle une URL YouTube, puis choisis un canal…',
+  ONESHOT_HISTORY_TITLE: 'One-shots de la session',
+  ONESHOT_EMPTY: 'Aucun one-shot lancé cette session',
+  ONESHOT_LOADING: 'Chargement…',
+  ONESHOT_SAVE: 'Sauver dans la bibliothèque',
+  ONESHOT_REMOVE: 'Retirer de la liste',
+  ONESHOT_REPLAY_HINT: 'Cliquer pour relancer',
+
   // Batch add
   SECTION_BATCH_ADD: 'Ajout batch de pistes',
   BATCH_URL_PLACEHOLDER: 'Coller une URL YouTube...',

@@ -1,7 +1,8 @@
 import { Plugin, WorkspaceLeaf, setIcon, Notice } from 'obsidian';
-import type { PluginData, Channel } from './types';
+import type { PluginData, Channel, OneShotEntry } from './types';
 import { VIEW_TYPE, VIEW_TYPE_LIBRARY, DEFAULT_DATA, LOG_PREFIX, UI } from './constants';
 import { PlayerService, extractYoutubeId } from './PlayerService';
+import { generateId, fetchYoutubeTitle } from './utils';
 import { TrackLibrary } from './TrackLibrary';
 import { PresetManager } from './PresetManager';
 import { MusicPlayerView } from './MusicPlayerView';
@@ -15,6 +16,8 @@ export default class TRPGMusicPlugin extends Plugin {
   trackLibrary!: TrackLibrary;
   presetManager!: PresetManager;
   nowPlayingNames: Record<Channel, string> = { ambiance: '', musique: '' };
+  // Historique des one-shots de la session courante (non persisté)
+  oneShotHistory: OneShotEntry[] = [];
   private hiddenPlayerContainer: HTMLElement | null = null;
   private codeBlockButtons: Array<{
     btn: HTMLElement;
@@ -302,6 +305,68 @@ export default class TRPGMusicPlugin extends Plugin {
     }
     this.refreshLibrary();
     this.refreshCodeBlockButtons();
+  }
+
+  /**
+   * Joue immédiatement une URL YouTube sur le canal choisi, sans la sauvegarder.
+   * Ajoute une entrée à l'historique de session et récupère le titre en arrière-plan.
+   * Retourne un message d'erreur si l'URL est invalide, sinon null.
+   */
+  async playOneShot(url: string, channel: Channel): Promise<string | null> {
+    const youtubeId = extractYoutubeId(url);
+    if (!youtubeId) return UI.INVALID_URL;
+
+    await this.ensurePlayersReady();
+    await this.playerService.play(channel, youtubeId);
+
+    // Évite les doublons : on remonte l'entrée existante en tête plutôt que de dupliquer
+    this.oneShotHistory = this.oneShotHistory.filter(
+      (e) => !(e.youtubeId === youtubeId && e.channel === channel)
+    );
+    const entry: OneShotEntry = { id: generateId(), youtubeId, channel, name: UI.ONESHOT_LOADING };
+    this.oneShotHistory.unshift(entry);
+
+    this.updateNowPlaying(channel, entry.name);
+    this.refreshOneShot();
+
+    // Récupère le vrai titre en arrière-plan et le renseigne une fois disponible
+    fetchYoutubeTitle(url).then((title) => {
+      entry.name = title || `YouTube (${youtubeId})`;
+      const state = this.playerService.getChannelState(channel);
+      if (state.videoId === youtubeId) {
+        this.updateNowPlaying(channel, entry.name);
+      }
+      this.refreshOneShot();
+    });
+
+    return null;
+  }
+
+  /** Relance un one-shot déjà présent dans l'historique et le remonte en tête. */
+  async replayOneShot(entry: OneShotEntry): Promise<void> {
+    await this.ensurePlayersReady();
+    await this.playerService.play(entry.channel, entry.youtubeId);
+    this.updateNowPlaying(entry.channel, entry.name);
+    this.oneShotHistory = [entry, ...this.oneShotHistory.filter((e) => e.id !== entry.id)];
+    this.refreshOneShot();
+  }
+
+  /** Retire un one-shot de l'historique de session. */
+  removeOneShot(id: string): void {
+    this.oneShotHistory = this.oneShotHistory.filter((e) => e.id !== id);
+    this.refreshOneShot();
+  }
+
+  /** Re-render l'historique one-shot dans toutes les vues ouvertes. */
+  refreshOneShot(): void {
+    for (const leaf of this.app.workspace.getLeavesOfType(VIEW_TYPE)) {
+      const view = leaf.view as MusicPlayerView;
+      view.refreshOneShotHistory?.();
+    }
+    for (const leaf of this.app.workspace.getLeavesOfType(VIEW_TYPE_LIBRARY)) {
+      const view = leaf.view as LibraryView;
+      view.refreshOneShotHistory?.();
+    }
   }
 
   /** Ensure YouTube players are initialized, creating a hidden container if no view is open */

@@ -4,6 +4,7 @@ import type { Channel, Track } from './types';
 import { VIEW_TYPE, CATEGORIES, UI } from './constants';
 import { EditTrackModal } from './EditTrackModal';
 import { BatchAddTrackModal } from './BatchAddTrackModal';
+import { buildOneShotSection, renderOneShotHistory } from './OneShotSection';
 
 export class MusicPlayerView extends ItemView {
   private plugin: TRPGMusicPlugin;
@@ -13,6 +14,7 @@ export class MusicPlayerView extends ItemView {
     intensite: [],
   };
   private trackListEl: HTMLElement | null = null;
+  private oneShotHistoryEl: HTMLElement | null = null;
   private ambianceTrackNameEl: HTMLElement | null = null;
   private musiqueTrackNameEl: HTMLElement | null = null;
   private presetListEl: HTMLElement | null = null;
@@ -43,6 +45,7 @@ export class MusicPlayerView extends ItemView {
     contentEl.addClass('trpg-music-player');
 
     this.buildPlayerSection(contentEl);
+    this.buildOneShotSection(contentEl);
     this.buildLibrarySection(contentEl);
     this.buildAddTrackSection(contentEl);
     this.buildPresetsSection(contentEl);
@@ -140,6 +143,28 @@ export class MusicPlayerView extends ItemView {
     const state = this.plugin.playerService.getChannelState(channel);
     btn.empty();
     setIcon(btn, state.isPlaying ? 'pause' : 'play');
+  }
+
+  // --- One-shot Section ---
+
+  private buildOneShotSection(parent: HTMLElement): void {
+    const section = this.createSection(parent, UI.SECTION_ONESHOT, 'zap');
+    this.oneShotHistoryEl = buildOneShotSection(this.plugin, section, {
+      onAfterSave: () => {
+        this.refreshTrackList();
+        this.plugin.refreshLibrary();
+      },
+    });
+  }
+
+  refreshOneShotHistory(): void {
+    if (!this.oneShotHistoryEl) return;
+    renderOneShotHistory(this.plugin, this.oneShotHistoryEl, {
+      onAfterSave: () => {
+        this.refreshTrackList();
+        this.plugin.refreshLibrary();
+      },
+    });
   }
 
   // --- Library Section ---

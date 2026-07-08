@@ -7,6 +7,7 @@ import { EditPresetModal } from './EditPresetModal';
 import { AddTrackModal } from './AddTrackModal';
 import { AddPresetModal } from './AddPresetModal';
 import { BatchAddTrackModal } from './BatchAddTrackModal';
+import { buildOneShotSection, renderOneShotHistory } from './OneShotSection';
 
 type LibraryTab = 'tracks' | 'presets' | 'playlist';
 
@@ -34,6 +35,10 @@ export class LibraryView extends ItemView {
   private presetSearchRowEl: HTMLElement | null = null;
   private presetSearchQuery = '';
   private resetBtn: HTMLElement | null = null;
+
+  // One-shot
+  private oneShotHistoryEl: HTMLElement | null = null;
+  private oneShotPopover: HTMLElement | null = null;
 
   // Mini player refs
   private miniAmbianceNameEl: HTMLElement | null = null;
@@ -111,6 +116,8 @@ export class LibraryView extends ItemView {
     setIcon(batchIcon, 'layers');
     this.batchAddBtn.createSpan({ text: 'Ajout batch' });
     this.batchAddBtn.addEventListener('click', () => this.openBatchAddModal());
+
+    this.buildOneShotPopover(addBtnGroup);
 
     // Search (tracks only)
     this.searchRowEl = header.createDiv({ cls: 'trpg-lib-search-row' });
@@ -246,6 +253,56 @@ export class LibraryView extends ItemView {
     }).open();
   }
 
+  // --- One-shot popover ---
+
+  private buildOneShotPopover(group: HTMLElement): void {
+    const btn = group.createEl('button', { cls: 'trpg-lib-add-btn' });
+    const icon = btn.createSpan();
+    setIcon(icon, 'zap');
+    btn.createSpan({ text: UI.SECTION_ONESHOT });
+
+    const popover = group.createDiv({ cls: 'trpg-lib-oneshot-popover trpg-lib-hidden' });
+    this.oneShotPopover = popover;
+    this.oneShotHistoryEl = buildOneShotSection(this.plugin, popover, {
+      onAfterSave: () => {
+        this.refreshGrid();
+        this.plugin.refreshSidePanel();
+      },
+    });
+    // Évite que les clics à l'intérieur ne referment le popover
+    popover.addEventListener('click', (e) => e.stopPropagation());
+
+    const toggle = (open: boolean) => {
+      popover.toggleClass('trpg-lib-hidden', !open);
+      btn.toggleClass('trpg-lib-add-btn-active', open);
+      if (open) {
+        const input = popover.querySelector<HTMLInputElement>('.trpg-oneshot-input');
+        input?.focus();
+      }
+    };
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggle(popover.hasClass('trpg-lib-hidden'));
+    });
+
+    const closeHandler = (e: MouseEvent) => {
+      if (!popover.contains(e.target as Node) && e.target !== btn && !btn.contains(e.target as Node)) {
+        toggle(false);
+      }
+    };
+    document.addEventListener('click', closeHandler);
+    this.register(() => document.removeEventListener('click', closeHandler));
+
+    const escHandler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && !popover.hasClass('trpg-lib-hidden')) {
+        toggle(false);
+      }
+    };
+    document.addEventListener('keydown', escHandler);
+    this.register(() => document.removeEventListener('keydown', escHandler));
+  }
+
   // --- Mini player ---
 
   private buildMiniPlayer(parent: HTMLElement): void {
@@ -322,6 +379,16 @@ export class LibraryView extends ItemView {
         setIcon(btn, state.isPlaying ? 'pause' : 'play');
       }
     }
+  }
+
+  refreshOneShotHistory(): void {
+    if (!this.oneShotHistoryEl) return;
+    renderOneShotHistory(this.plugin, this.oneShotHistoryEl, {
+      onAfterSave: () => {
+        this.refreshGrid();
+        this.plugin.refreshSidePanel();
+      },
+    });
   }
 
   refreshVolumeSliders(): void {

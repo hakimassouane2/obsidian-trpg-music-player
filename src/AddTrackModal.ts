@@ -6,16 +6,23 @@ import { CATEGORIES, UI } from './constants';
 export class AddTrackModal extends Modal {
   private plugin: TRPGMusicPlugin;
   private onAdded: () => void;
+  private initial?: { url?: string; name?: string; channel?: Channel };
   private selectedCategories: { humeur: string[]; lieu: string[]; intensite: string[] } = {
     humeur: [],
     lieu: [],
     intensite: [],
   };
 
-  constructor(app: App, plugin: TRPGMusicPlugin, onAdded: () => void) {
+  constructor(
+    app: App,
+    plugin: TRPGMusicPlugin,
+    onAdded: () => void,
+    initial?: { url?: string; name?: string; channel?: Channel }
+  ) {
     super(app);
     this.plugin = plugin;
     this.onAdded = onAdded;
+    this.initial = initial;
   }
 
   onOpen(): void {
@@ -35,6 +42,9 @@ export class AddTrackModal extends Modal {
       attr: { type: 'text', placeholder: UI.TRACK_NAME_PLACEHOLDER },
     });
 
+    if (this.initial?.url) urlInput.value = this.initial.url;
+    if (this.initial?.name) nameInput.value = this.initial.name;
+
     urlInput.addEventListener('change', () => this.fetchYoutubeTitle(urlInput.value.trim(), nameInput));
     urlInput.addEventListener('paste', () => {
       setTimeout(() => this.fetchYoutubeTitle(urlInput.value.trim(), nameInput), 50);
@@ -47,6 +57,7 @@ export class AddTrackModal extends Modal {
     const channelSelect = channelWrapper.createEl('select', { cls: 'trpg-multiselect-trigger', attr: { style: 'width: 100%' } });
     channelSelect.createEl('option', { text: UI.CHANNEL_AMBIANCE, attr: { value: 'ambiance' } });
     channelSelect.createEl('option', { text: UI.CHANNEL_MUSIQUE, attr: { value: 'musique' } });
+    if (this.initial?.channel) channelSelect.value = this.initial.channel;
 
     this.createMultiSelectDropdown(catContainer, UI.FILTER_HUMEUR, CATEGORIES.humeur as unknown as string[], this.selectedCategories.humeur);
     this.createMultiSelectDropdown(catContainer, UI.FILTER_LIEU, CATEGORIES.lieu as unknown as string[], this.selectedCategories.lieu);

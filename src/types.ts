@@ -14,6 +14,14 @@ export interface Track {
   categories: TrackCategories;
 }
 
+/** Piste jouée en "one-shot" (session courante uniquement, non persistée). */
+export interface OneShotEntry {
+  id: string;
+  youtubeId: string;
+  channel: Channel;
+  name: string;
+}
+
 export interface Preset {
   id: string;
   name: string;
