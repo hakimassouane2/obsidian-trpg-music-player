@@ -40,6 +40,42 @@ export class TRPGMusicSettingsTab extends PluginSettingTab {
           })
       );
 
+    // Vérification de lisibilité de toute la bibliothèque
+    const scanSetting = new Setting(containerEl)
+      .setName(UI.SCAN_LIBRARY)
+      .setDesc(UI.SCAN_LIBRARY_DESC);
+
+    const scanResultEl = containerEl.createDiv({ cls: 'trpg-premium-test-result' });
+    const unavailable = this.plugin.trackLibrary.getUnavailableTracks();
+    if (unavailable.length > 0) {
+      scanResultEl.textContent = `${unavailable.length} piste(s) marquée(s) illisible(s) : ${unavailable.map((t) => t.name).join(', ')}`;
+      scanResultEl.className = 'trpg-premium-test-result trpg-test-fail';
+    }
+
+    scanSetting.addButton((btn) =>
+      btn.setButtonText('Vérifier').onClick(async () => {
+        if (this.plugin.isScanning()) return;
+
+        btn.setDisabled(true);
+        scanResultEl.className = 'trpg-premium-test-result trpg-test-pending';
+        scanResultEl.textContent = `${UI.SCAN_RUNNING}…`;
+
+        await this.plugin.scanLibrary((done, total) => {
+          scanResultEl.textContent = `${UI.SCAN_RUNNING} : ${done}/${total}`;
+        });
+
+        btn.setDisabled(false);
+        // Redessine la section pour refléter la nouvelle liste
+        this.display();
+      })
+    );
+
+    scanSetting.addButton((btn) =>
+      btn.setButtonText(UI.SCAN_CANCEL).onClick(() => {
+        this.plugin.cancelScan();
+      })
+    );
+
     // YouTube Premium test
     const premiumSetting = new Setting(containerEl)
       .setName('Test YouTube Premium')

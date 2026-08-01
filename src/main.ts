@@ -2,12 +2,15 @@ import { Plugin, WorkspaceLeaf, setIcon, Notice } from 'obsidian';
 import type { PluginData, Channel, OneShotEntry } from './types';
 import { VIEW_TYPE, VIEW_TYPE_LIBRARY, DEFAULT_DATA, LOG_PREFIX, UI } from './constants';
 import { PlayerService, extractYoutubeId } from './PlayerService';
-import { generateId, fetchYoutubeTitle } from './utils';
+import { generateId, fetchYoutubeTitle, isPersistentYoutubeError, canonicalYoutubeUrl } from './utils';
 import { TrackLibrary } from './TrackLibrary';
 import { PresetManager } from './PresetManager';
 import { MusicPlayerView } from './MusicPlayerView';
 import { LibraryView } from './LibraryView';
 import { TRPGMusicSettingsTab } from './SettingsTab';
+
+/** Vérifications menées de front lors d'un scan complet de la bibliothèque. */
+const SCAN_WORKERS = 3;
 
 export default class TRPGMusicPlugin extends Plugin {
   // F11: Deep-copy arrays to avoid mutating shared DEFAULT_DATA
@@ -18,6 +21,8 @@ export default class TRPGMusicPlugin extends Plugin {
   nowPlayingNames: Record<Channel, string> = { ambiance: '', musique: '' };
   // Historique des one-shots de la session courante (non persisté)
   oneShotHistory: OneShotEntry[] = [];
+  private scanInProgress = false;
+  private scanCancelled = false;
   private hiddenPlayerContainer: HTMLElement | null = null;
   private codeBlockButtons: Array<{
     btn: HTMLElement;
@@ -46,6 +51,25 @@ export default class TRPGMusicPlugin extends Plugin {
     // Show notice on player errors
     this.playerService.onError((_channel, message) => {
       new Notice(message, 5000);
+    });
+
+    // Une piste illisible ne doit plus interrompre une session : elle est signalée,
+    // marquée si le refus est définitif, et la playlist enchaîne toute seule.
+    this.playerService.onPlaybackFailure((channel, videoId, code, reason, skipped) => {
+      const track = videoId ? this.trackLibrary.findByYoutubeId(videoId) : undefined;
+      const label = track?.name ?? this.nowPlayingNames[channel] ?? '';
+
+      if (track && isPersistentYoutubeError(code)) {
+        this.trackLibrary.markUnavailable(videoId, code, reason);
+      }
+
+      const prefix = label ? `« ${label} » : ` : '';
+      new Notice(`${prefix}${reason}${skipped ? ` — ${UI.SKIPPING_TO_NEXT}` : ''}`, 7000);
+
+      if (!skipped && this.nowPlayingNames[channel]) {
+        this.updateNowPlaying(channel, '');
+      }
+      this.refreshLibrary();
     });
 
     // Sequential mode: update now-playing when track auto-advances
@@ -92,6 +116,14 @@ export default class TRPGMusicPlugin extends Plugin {
       name: 'Ouvrir la bibliothèque musicale dans une nouvelle fenêtre',
       callback: () => {
         this.activateLibrary('window');
+      },
+    });
+
+    this.addCommand({
+      id: 'scan-library-playability',
+      name: UI.SCAN_LIBRARY,
+      callback: () => {
+        void this.scanLibrary();
       },
     });
 
@@ -310,11 +342,18 @@ export default class TRPGMusicPlugin extends Plugin {
   /**
    * Joue immédiatement une URL YouTube sur le canal choisi, sans la sauvegarder.
    * Ajoute une entrée à l'historique de session et récupère le titre en arrière-plan.
-   * Retourne un message d'erreur si l'URL est invalide, sinon null.
+   * Retourne un message d'erreur si l'URL est invalide, sinon null. `info` signale
+   * sans bloquer que la vidéo est déjà en bibliothèque.
    */
-  async playOneShot(url: string, channel: Channel): Promise<string | null> {
+  async playOneShot(url: string, channel: Channel): Promise<{ error: string | null; info?: string }> {
     const youtubeId = extractYoutubeId(url);
-    if (!youtubeId) return UI.INVALID_URL;
+    if (!youtubeId) return { error: UI.INVALID_URL };
+
+    // Un one-shot n'écrit rien : le doublon est une information, pas un blocage
+    const existing = this.trackLibrary.findByYoutubeId(youtubeId);
+    const info = existing
+      ? `${UI.ONESHOT_ALREADY_IN_LIBRARY} : « ${existing.name} »`
+      : undefined;
 
     await this.ensurePlayersReady();
     await this.playerService.play(channel, youtubeId);
@@ -329,8 +368,9 @@ export default class TRPGMusicPlugin extends Plugin {
     this.updateNowPlaying(channel, entry.name);
     this.refreshOneShot();
 
-    // Récupère le vrai titre en arrière-plan et le renseigne une fois disponible
-    fetchYoutubeTitle(url).then((title) => {
+    // Récupère le vrai titre en arrière-plan et le renseigne une fois disponible.
+    // On interroge l'URL canonique : une URL de radio ferait remonter un autre titre.
+    fetchYoutubeTitle(canonicalYoutubeUrl(youtubeId)).then((title) => {
       entry.name = title || `YouTube (${youtubeId})`;
       const state = this.playerService.getChannelState(channel);
       if (state.videoId === youtubeId) {
@@ -339,7 +379,79 @@ export default class TRPGMusicPlugin extends Plugin {
       this.refreshOneShot();
     });
 
-    return null;
+    return { error: null, info };
+  }
+
+  /**
+   * Teste chaque piste de la bibliothèque dans un lecteur caché et met à jour les
+   * marquages « illisible ». Les pistes déjà marquées sont retestées : YouTube
+   * lève parfois ses restrictions.
+   */
+  async scanLibrary(onProgress?: (done: number, total: number) => void): Promise<{ checked: number; broken: number; fixed: number }> {
+    if (this.scanInProgress) {
+      new Notice(`${UI.SCAN_RUNNING}…`, 3000);
+      return { checked: 0, broken: 0, fixed: 0 };
+    }
+
+    const tracks = this.trackLibrary.getTracks();
+    this.scanInProgress = true;
+    this.scanCancelled = false;
+
+    let done = 0;
+    let broken = 0;
+    let fixed = 0;
+    const notice = new Notice(`${UI.SCAN_RUNNING} : 0/${tracks.length}`, 0);
+
+    try {
+      await this.ensurePlayersReady();
+
+      // File consommée par un petit nombre de workers : une annulation prend
+      // effet immédiatement, au lieu d'attendre une file de 300 tests déjà lancés.
+      const pending = [...tracks];
+      const workers = Array.from({ length: SCAN_WORKERS }, async () => {
+        while (!this.scanCancelled) {
+          const track = pending.shift();
+          if (!track) return;
+
+          const result = await this.playerService.probeEmbeddable(track.youtubeId);
+          if (this.scanCancelled) return;
+
+          if (result.status === 'error' && result.code !== undefined && isPersistentYoutubeError(result.code)) {
+            if (!track.unavailable) broken++;
+            this.trackLibrary.markUnavailable(track.youtubeId, result.code, result.reason ?? UI.VIDEO_UNAVAILABLE);
+          } else if (result.status === 'ok' && track.unavailable) {
+            this.trackLibrary.clearUnavailable(track.id);
+            fixed++;
+          }
+
+          done++;
+          notice.setMessage(`${UI.SCAN_RUNNING} : ${done}/${tracks.length}`);
+          onProgress?.(done, tracks.length);
+        }
+      });
+      await Promise.all(workers);
+    } finally {
+      this.scanInProgress = false;
+      notice.hide();
+      this.refreshLibrary();
+    }
+
+    const total = this.trackLibrary.getUnavailableTracks().length;
+    new Notice(
+      `${UI.SCAN_DONE} : ${done}/${tracks.length} vérifiées, ${broken} nouvelle(s) illisible(s), ${fixed} réhabilitée(s), ${total} illisible(s) au total`,
+      8000
+    );
+
+    return { checked: done, broken, fixed };
+  }
+
+  /** Interrompt un scan en cours. */
+  cancelScan(): void {
+    this.scanCancelled = true;
+  }
+
+  isScanning(): boolean {
+    return this.scanInProgress;
   }
 
   /** Relance un one-shot déjà présent dans l'historique et le remonte en tête. */

@@ -101,6 +101,35 @@ export const UI = {
   BATCH_NO_TRACKS: 'Aucune piste dans la file',
   BATCH_DUPLICATE_URL: 'Cette URL est déjà dans la file',
   BATCH_FETCHING: 'Chargement...',
+
+  // Doublons bibliothèque
+  DUPLICATE_IN_LIBRARY: 'Déjà dans la bibliothèque',
+  ONESHOT_ALREADY_IN_LIBRARY: 'Déjà en bibliothèque',
+
+  // Vérification de lecture (embed)
+  CHECK_PENDING: 'Vérification de la lecture…',
+  CHECK_OK: 'Vidéo lisible',
+  CHECK_UNKNOWN: 'Vérification impossible (réseau ?) — ajout autorisé',
+  CHECK_RECHECK: 'Revérifier',
+  ADD_ANYWAY: 'Ajouter quand même',
+  BATCH_FORCE_TOGGLE: 'Forcer l\'ajout de cette piste',
+  BATCH_SKIPPED_UNPLAYABLE: 'piste(s) illisible(s) non ajoutée(s) — clique sur ⚠ pour forcer',
+  TRACK_UNAVAILABLE_BADGE: 'Illisible',
+  SCAN_LIBRARY: 'Vérifier toute la bibliothèque',
+  SCAN_LIBRARY_DESC: 'Teste chaque piste dans un lecteur caché et marque celles qui ne peuvent pas être lues. Long : compte environ 3 secondes par piste.',
+  SCAN_RUNNING: 'Vérification en cours',
+  SCAN_CANCEL: 'Arrêter la vérification',
+  SCAN_DONE: 'Vérification terminée',
+
+  // Erreurs de lecture YouTube
+  ERR_INVALID_ID: 'Identifiant de vidéo invalide',
+  ERR_HTML5: 'Erreur du lecteur YouTube',
+  ERR_NOT_FOUND: 'Vidéo introuvable (supprimée ou privée)',
+  ERR_EMBED_DISABLED: 'Lecture externe désactivée par le propriétaire',
+  ERR_NO_START: 'La vidéo n\'a pas démarré',
+  ERR_UNKNOWN: 'Vidéo indisponible',
+  SKIPPING_TO_NEXT: 'passage à la suivante',
+  TOO_MANY_FAILURES: 'Trop de pistes illisibles d\'affilée — playlist arrêtée',
 } as const;
 
 export const LOG_PREFIX = '[TRPG Music]';

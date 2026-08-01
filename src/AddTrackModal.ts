@@ -2,6 +2,10 @@ import { Modal, App, requestUrl, setIcon } from 'obsidian';
 import type TRPGMusicPlugin from './main';
 import type { Channel } from './types';
 import { CATEGORIES, UI } from './constants';
+import { extractYoutubeId } from './PlayerService';
+import { canonicalYoutubeUrl } from './utils';
+
+type CheckState = 'idle' | 'invalid' | 'duplicate' | 'pending' | 'ok' | 'error' | 'unknown';
 
 export class AddTrackModal extends Modal {
   private plugin: TRPGMusicPlugin;
@@ -12,6 +16,14 @@ export class AddTrackModal extends Modal {
     lieu: [],
     intensite: [],
   };
+  private checkState: CheckState = 'idle';
+  private checkedUrl = '';
+  /** Incrémenté à chaque nouvelle URL : les vérifications obsolètes sont ignorées. */
+  private checkToken = 0;
+  /** Vérification en cours, attendue si l'utilisateur valide trop vite. */
+  private pendingCheck: Promise<void> | null = null;
+  private statusEl: HTMLElement | null = null;
+  private forceBtn: HTMLButtonElement | null = null;
 
   constructor(
     app: App,
@@ -42,13 +54,25 @@ export class AddTrackModal extends Modal {
       attr: { type: 'text', placeholder: UI.TRACK_NAME_PLACEHOLDER },
     });
 
+    // Badge de statut : doublon éventuel puis verdict de lisibilité
+    this.statusEl = form.createDiv({ cls: 'trpg-check-status trpg-check-hidden' });
+
     if (this.initial?.url) urlInput.value = this.initial.url;
     if (this.initial?.name) nameInput.value = this.initial.name;
 
-    urlInput.addEventListener('change', () => this.fetchYoutubeTitle(urlInput.value.trim(), nameInput));
+    const onUrlChanged = (): void => {
+      const url = urlInput.value.trim();
+      this.fetchYoutubeTitle(url, nameInput);
+      this.pendingCheck = this.runChecks(url);
+    };
+
+    urlInput.addEventListener('change', onUrlChanged);
     urlInput.addEventListener('paste', () => {
-      setTimeout(() => this.fetchYoutubeTitle(urlInput.value.trim(), nameInput), 50);
+      setTimeout(onUrlChanged, 50);
     });
+
+    // Une URL pré-remplie (sauvegarde d'un one-shot) est vérifiée d'emblée
+    if (this.initial?.url) this.pendingCheck = this.runChecks(this.initial.url);
 
     const catContainer = form.createDiv({ cls: 'trpg-category-selects' });
 
@@ -65,14 +89,45 @@ export class AddTrackModal extends Modal {
 
     const errorEl = form.createDiv({ cls: 'trpg-error' });
 
-    const addBtn = form.createEl('button', { cls: 'trpg-btn trpg-btn-primary', text: UI.ADD_BUTTON });
-    addBtn.addEventListener('click', () => {
+    const btnRow = form.createDiv({ cls: 'trpg-add-btn-row' });
+    const addBtn = btnRow.createEl('button', { cls: 'trpg-btn trpg-btn-primary', text: UI.ADD_BUTTON });
+
+    // Second bouton, révélé seulement quand la vidéo est déclarée illisible
+    this.forceBtn = btnRow.createEl('button', {
+      cls: 'trpg-btn trpg-btn-force trpg-check-hidden',
+      text: UI.ADD_ANYWAY,
+    });
+
+    const submit = async (force: boolean): Promise<void> => {
       errorEl.textContent = '';
       const url = urlInput.value.trim();
       const name = nameInput.value.trim();
 
       if (!url || !name) {
         errorEl.textContent = UI.MISSING_FIELDS;
+        return;
+      }
+
+      // Vérification encore en vol : on l'attend plutôt que de laisser passer
+      // une piste illisible parce que le clic a été plus rapide.
+      if (!force && this.pendingCheck && this.checkedUrl === url) {
+        addBtn.disabled = true;
+        addBtn.textContent = UI.CHECK_PENDING;
+        try {
+          await this.pendingCheck;
+        } finally {
+          addBtn.disabled = false;
+          addBtn.textContent = UI.ADD_BUTTON;
+        }
+        // La modale a pu être fermée entre-temps
+        if (!this.statusEl?.isConnected) return;
+      }
+
+      // La vérification n'est bloquante que sur un refus explicite de YouTube :
+      // un verdict indéterminé (réseau) ne doit pas empêcher l'ajout.
+      if (!force && this.checkState === 'error' && this.checkedUrl === url) {
+        errorEl.textContent = `${this.statusEl?.dataset.reason ?? UI.VIDEO_UNAVAILABLE} — ${UI.ADD_ANYWAY} ?`;
+        this.forceBtn?.removeClass('trpg-check-hidden');
         return;
       }
 
@@ -87,13 +142,101 @@ export class AddTrackModal extends Modal {
         return;
       }
 
+      // Ajout forcé d'une vidéo illisible : on garde la trace du diagnostic
+      if (force && this.checkState === 'error' && this.statusEl?.dataset.code) {
+        this.plugin.trackLibrary.markUnavailable(
+          result.youtubeId,
+          parseInt(this.statusEl.dataset.code, 10),
+          this.statusEl.dataset.reason ?? UI.VIDEO_UNAVAILABLE
+        );
+      }
+
       this.onAdded();
       this.close();
-    });
+    };
+
+    addBtn.addEventListener('click', () => void submit(false));
+    this.forceBtn.addEventListener('click', () => void submit(true));
   }
 
   onClose(): void {
+    // Invalide les vérifications encore en vol
+    this.checkToken++;
     this.contentEl.empty();
+  }
+
+  /**
+   * Vérifie l'URL en deux temps : doublon en bibliothèque (immédiat), puis
+   * lisibilité réelle dans un lecteur intégré (quelques secondes).
+   */
+  private async runChecks(url: string): Promise<void> {
+    const token = ++this.checkToken;
+    this.checkedUrl = url;
+    this.forceBtn?.addClass('trpg-check-hidden');
+
+    if (!url) {
+      this.setStatus('idle', '');
+      return;
+    }
+
+    const youtubeId = extractYoutubeId(url);
+    if (!youtubeId) {
+      this.setStatus('invalid', UI.INVALID_URL);
+      return;
+    }
+
+    const existing = this.plugin.trackLibrary.findByYoutubeId(youtubeId);
+    if (existing) {
+      this.setStatus('duplicate', this.plugin.trackLibrary.duplicateMessage(existing));
+      return;
+    }
+
+    this.setStatus('pending', UI.CHECK_PENDING);
+
+    const result = await this.plugin.playerService.probeEmbeddable(youtubeId);
+    if (token !== this.checkToken) return; // URL changée entre-temps
+    this.pendingCheck = null;
+
+    if (result.status === 'ok') {
+      this.setStatus('ok', UI.CHECK_OK);
+    } else if (result.status === 'error') {
+      this.setStatus('error', result.reason ?? UI.VIDEO_UNAVAILABLE, result.code);
+      this.forceBtn?.removeClass('trpg-check-hidden');
+    } else {
+      this.setStatus('unknown', UI.CHECK_UNKNOWN);
+    }
+  }
+
+  private setStatus(state: CheckState, message: string, code?: number): void {
+    this.checkState = state;
+    const el = this.statusEl;
+    if (!el) return;
+
+    el.empty();
+    el.className = `trpg-check-status trpg-check-${state}`;
+    delete el.dataset.code;
+    delete el.dataset.reason;
+
+    if (state === 'idle' || !message) {
+      el.addClass('trpg-check-hidden');
+      return;
+    }
+
+    const icons: Record<CheckState, string> = {
+      idle: 'circle',
+      invalid: 'x-circle',
+      duplicate: 'copy',
+      pending: 'loader',
+      ok: 'check-circle',
+      error: 'alert-triangle',
+      unknown: 'help-circle',
+    };
+    const icon = el.createSpan({ cls: 'trpg-check-icon' });
+    setIcon(icon, icons[state]);
+    el.createSpan({ text: message });
+
+    el.dataset.reason = message;
+    if (code !== undefined) el.dataset.code = String(code);
   }
 
   private createMultiSelectDropdown(parent: HTMLElement, label: string, options: string[], selected: string[]): void {
@@ -165,9 +308,12 @@ export class AddTrackModal extends Modal {
 
   private async fetchYoutubeTitle(url: string, nameInput: HTMLInputElement): Promise<void> {
     if (!url || nameInput.value.trim()) return;
+    // URL canonique : une URL de radio ferait remonter le titre de la playlist
+    const youtubeId = extractYoutubeId(url);
+    const queryUrl = youtubeId ? canonicalYoutubeUrl(youtubeId) : url;
     try {
       const resp = await requestUrl({
-        url: `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`,
+        url: `https://www.youtube.com/oembed?url=${encodeURIComponent(queryUrl)}&format=json`,
       });
       if (resp.status === 200 && resp.json?.title) {
         nameInput.value = resp.json.title;

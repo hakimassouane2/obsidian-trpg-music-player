@@ -1,7 +1,8 @@
-import { ItemView, WorkspaceLeaf, setIcon, Menu } from 'obsidian';
+import { ItemView, WorkspaceLeaf, setIcon, Menu, Notice } from 'obsidian';
 import type TRPGMusicPlugin from './main';
 import type { Channel, Track, Preset } from './types';
 import { VIEW_TYPE_LIBRARY, CATEGORIES, UI } from './constants';
+import { canonicalYoutubeUrl } from './utils';
 import { EditTrackModal } from './EditTrackModal';
 import { EditPresetModal } from './EditPresetModal';
 import { AddTrackModal } from './AddTrackModal';
@@ -612,7 +613,15 @@ export class LibraryView extends ItemView {
   }
 
   private getPlaylistFilteredTracks(): Track[] {
-    const filters: { channel: Channel; humeur?: string[]; lieu?: string[]; intensite?: string[] } = { channel: 'musique' };
+    // Les pistes connues comme illisibles ne sont jamais mises en file :
+    // inutile de subir un blanc de plusieurs secondes en pleine session.
+    const filters: {
+      channel: Channel;
+      excludeUnavailable: boolean;
+      humeur?: string[];
+      lieu?: string[];
+      intensite?: string[];
+    } = { channel: 'musique', excludeUnavailable: true };
     if (this.playlistFilters.humeur.length > 0) filters.humeur = this.playlistFilters.humeur;
     if (this.playlistFilters.lieu.length > 0) filters.lieu = this.playlistFilters.lieu;
     if (this.playlistFilters.intensite.length > 0) filters.intensite = this.playlistFilters.intensite;
@@ -900,6 +909,16 @@ export class LibraryView extends ItemView {
       text: track.channel === 'ambiance' ? UI.CHANNEL_AMBIANCE : UI.CHANNEL_MUSIQUE,
     });
 
+    // Piste détectée illisible : signalée visuellement et exclue des playlists
+    if (track.unavailable) {
+      card.addClass('trpg-lib-card-unavailable');
+      const warnBadge = thumbWrap.createDiv({
+        cls: 'trpg-lib-badge trpg-lib-badge-unavailable',
+        text: `⚠ ${UI.TRACK_UNAVAILABLE_BADGE}`,
+      });
+      warnBadge.setAttr('title', `${track.unavailable.reason} — clic droit pour revérifier`);
+    }
+
     const body = card.createDiv({ cls: 'trpg-lib-card-body' });
     const titleRow = body.createDiv({ cls: 'trpg-lib-card-title-row' });
     titleRow.createDiv({ cls: 'trpg-lib-card-name', text: track.name, attr: { title: track.name } });
@@ -938,6 +957,27 @@ export class LibraryView extends ItemView {
           new EditTrackModal(this.app, this.plugin, track).open();
         });
     });
+    menu.addItem((item) => {
+      item.setTitle(UI.CHECK_RECHECK)
+        .setIcon('refresh-cw')
+        .onClick(async () => {
+          const result = await this.plugin.playerService.probeEmbeddable(track.youtubeId);
+          if (result.status === 'ok') {
+            this.plugin.trackLibrary.clearUnavailable(track.id);
+            new Notice(`« ${track.name} » : ${UI.CHECK_OK}`, 5000);
+          } else if (result.status === 'error' && result.code !== undefined) {
+            this.plugin.trackLibrary.markUnavailable(
+              track.youtubeId,
+              result.code,
+              result.reason ?? UI.VIDEO_UNAVAILABLE
+            );
+            new Notice(`« ${track.name} » : ${result.reason}`, 5000);
+          } else {
+            new Notice(`« ${track.name} » : ${UI.CHECK_UNKNOWN}`, 5000);
+          }
+          this.refreshGrid();
+        });
+    });
     menu.addSeparator();
     menu.addItem((item) => {
       item.setTitle('Copier le nom')
@@ -950,7 +990,7 @@ export class LibraryView extends ItemView {
       item.setTitle('Copier l\'URL YouTube')
         .setIcon('link')
         .onClick(() => {
-          navigator.clipboard.writeText(`https://www.youtube.com/watch?v=${track.youtubeId}`);
+          navigator.clipboard.writeText(canonicalYoutubeUrl(track.youtubeId));
         });
     });
     menu.addItem((item) => {

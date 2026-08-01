@@ -3,6 +3,7 @@ import type TRPGMusicPlugin from './main';
 import type { Channel } from './types';
 import { CATEGORIES, UI } from './constants';
 import { extractYoutubeId } from './PlayerService';
+import { canonicalYoutubeUrl } from './utils';
 
 interface QueuedTrack {
   url: string;
@@ -14,6 +15,12 @@ interface QueuedTrack {
     intensite: string[] | null;
   };
   expanded: boolean;
+  /** Verdict de lisibilité de la vidéo dans un lecteur intégré. */
+  check: 'pending' | 'ok' | 'error' | 'unknown';
+  checkCode?: number;
+  checkReason?: string;
+  /** Ajout demandé malgré un verdict d'illisibilité. */
+  forced: boolean;
 }
 
 export class BatchAddTrackModal extends Modal {
@@ -129,24 +136,48 @@ export class BatchAddTrackModal extends Modal {
       return;
     }
 
+    // Doublon avec la bibliothèque : inutile de mettre la piste en file
+    const existing = this.plugin.trackLibrary.findByYoutubeId(youtubeId);
+    if (existing) {
+      this.errorEl.textContent = this.plugin.trackLibrary.duplicateMessage(existing);
+      return;
+    }
+
     const item: QueuedTrack = {
       url,
       youtubeId,
       name: UI.BATCH_FETCHING,
       overrides: { humeur: null, lieu: null, intensite: null },
       expanded: false,
+      check: 'pending',
+      forced: false,
     };
 
     this.queue.push(item);
     this.renderQueue();
 
-    this.fetchYoutubeTitle(url, item);
+    this.fetchYoutubeTitle(item);
+    this.checkPlayable(item);
   }
 
-  private async fetchYoutubeTitle(url: string, item: QueuedTrack): Promise<void> {
+  /** Teste la lisibilité de la vidéo en tâche de fond (3 tests en parallèle max). */
+  private async checkPlayable(item: QueuedTrack): Promise<void> {
+    const result = await this.plugin.playerService.probeEmbeddable(item.youtubeId);
+
+    // L'utilisateur a pu retirer la piste pendant la vérification
+    if (!this.queue.includes(item)) return;
+
+    item.check = result.status === 'ok' ? 'ok' : result.status === 'error' ? 'error' : 'unknown';
+    item.checkCode = result.code;
+    item.checkReason = result.reason;
+    this.renderQueue();
+  }
+
+  /** Le titre est demandé sur l'URL canonique, pas sur celle collée. */
+  private async fetchYoutubeTitle(item: QueuedTrack): Promise<void> {
     try {
       const resp = await requestUrl({
-        url: `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`,
+        url: `https://www.youtube.com/oembed?url=${encodeURIComponent(canonicalYoutubeUrl(item.youtubeId))}&format=json`,
       });
       if (resp.status === 200 && resp.json?.title) {
         item.name = resp.json.title;
@@ -174,8 +205,26 @@ export class BatchAddTrackModal extends Modal {
       const itemContainer = this.queueListEl.createDiv({ cls: 'trpg-batch-item-container' });
 
       const row = itemContainer.createDiv({ cls: 'trpg-batch-item' });
-      row.createDiv({ cls: 'trpg-batch-item-dot' });
+
+      // Pastille d'état : gris = vérification en cours, vert = lisible,
+      // rouge = refus de YouTube, orange = verdict indéterminé
+      const dot = row.createDiv({ cls: `trpg-batch-item-dot trpg-batch-dot-${item.check}` });
+      dot.setAttr('title', this.checkLabel(item));
+
       row.createDiv({ cls: 'trpg-batch-item-name', text: item.name });
+
+      if (item.check === 'error') {
+        const warn = row.createSpan({
+          cls: `trpg-batch-item-warn${item.forced ? ' trpg-batch-item-warn-forced' : ''}`,
+          text: item.forced ? `⚠ ${item.checkReason} (forcé)` : `⚠ ${item.checkReason}`,
+        });
+        warn.setAttr('title', UI.BATCH_FORCE_TOGGLE);
+        warn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          item.forced = !item.forced;
+          this.renderQueue();
+        });
+      }
 
       const actions = row.createDiv({ cls: 'trpg-batch-item-actions' });
 
@@ -223,18 +272,41 @@ export class BatchAddTrackModal extends Modal {
 
     // Update counter and button
     const count = this.queue.length;
-    this.counterEl.textContent = count > 0 ? `${count} ${UI.BATCH_TRACKS_READY}` : '';
-    this.addAllBtn.textContent = `${UI.BATCH_ADD_ALL} (${count})`;
-    this.addAllBtn.disabled = count === 0;
+    const addable = this.queue.filter((q) => this.isAddable(q)).length;
+    const blocked = count - addable;
+    this.counterEl.textContent = count > 0
+      ? `${addable} ${UI.BATCH_TRACKS_READY}${blocked > 0 ? ` — ${blocked} ${UI.BATCH_SKIPPED_UNPLAYABLE}` : ''}`
+      : '';
+    this.addAllBtn.textContent = `${UI.BATCH_ADD_ALL} (${addable})`;
+    this.addAllBtn.disabled = addable === 0;
+  }
+
+  /** Une piste illisible n'est ajoutée que si l'utilisateur l'a explicitement forcée. */
+  private isAddable(item: QueuedTrack): boolean {
+    return item.check !== 'error' || item.forced;
+  }
+
+  private checkLabel(item: QueuedTrack): string {
+    switch (item.check) {
+      case 'pending':
+        return UI.CHECK_PENDING;
+      case 'ok':
+        return UI.CHECK_OK;
+      case 'error':
+        return item.checkReason ?? UI.VIDEO_UNAVAILABLE;
+      default:
+        return UI.CHECK_UNKNOWN;
+    }
   }
 
   private addAllTracks(): void {
     this.errorEl.textContent = '';
     const errors: string[] = [];
-    const succeeded: number[] = [];
+    const succeeded: QueuedTrack[] = [];
 
-    for (let i = 0; i < this.queue.length; i++) {
-      const item = this.queue[i];
+    for (const item of this.queue) {
+      if (!this.isAddable(item)) continue;
+
       const categories = {
         humeur: item.overrides.humeur ? [...item.overrides.humeur] : [...this.sharedCategories.humeur],
         lieu: item.overrides.lieu ? [...item.overrides.lieu] : [...this.sharedCategories.lieu],
@@ -245,24 +317,32 @@ export class BatchAddTrackModal extends Modal {
       if (typeof result === 'string') {
         errors.push(`${item.name}: ${result}`);
       } else {
-        succeeded.push(i);
+        // Ajout forcé d'une vidéo illisible : le diagnostic est conservé
+        if (item.forced && item.check === 'error' && item.checkCode !== undefined) {
+          this.plugin.trackLibrary.markUnavailable(
+            result.youtubeId,
+            item.checkCode,
+            item.checkReason ?? UI.VIDEO_UNAVAILABLE
+          );
+        }
+        succeeded.push(item);
       }
     }
 
-    // Remove succeeded tracks from queue (reverse order to preserve indices)
-    for (let i = succeeded.length - 1; i >= 0; i--) {
-      this.queue.splice(succeeded[i], 1);
-    }
+    // Retire de la file les pistes effectivement ajoutées
+    this.queue = this.queue.filter((q) => !succeeded.includes(q));
 
     if (errors.length > 0) {
       this.errorEl.textContent = errors.join(' | ');
-      this.renderQueue();
     }
 
     this.onAdded();
 
-    if (errors.length === 0) {
+    // Il reste des pistes bloquées ou en erreur : la modale reste ouverte
+    if (this.queue.length === 0) {
       this.close();
+    } else {
+      this.renderQueue();
     }
   }
 

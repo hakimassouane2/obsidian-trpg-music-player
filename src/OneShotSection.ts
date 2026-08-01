@@ -2,6 +2,7 @@ import { setIcon } from 'obsidian';
 import type TRPGMusicPlugin from './main';
 import type { Channel, OneShotEntry } from './types';
 import { UI } from './constants';
+import { canonicalYoutubeUrl } from './utils';
 import { AddTrackModal } from './AddTrackModal';
 
 export interface OneShotSectionOptions {
@@ -29,18 +30,28 @@ export function buildOneShotSection(
   });
 
   const errorEl = form.createDiv({ cls: 'trpg-error' });
+  const infoEl = form.createDiv({ cls: 'trpg-oneshot-info trpg-check-hidden' });
 
   const launch = async (channel: Channel): Promise<void> => {
     errorEl.textContent = '';
+    infoEl.textContent = '';
+    infoEl.addClass('trpg-check-hidden');
+
     const url = urlInput.value.trim();
     if (!url) {
       errorEl.textContent = UI.MISSING_FIELDS;
       return;
     }
-    const err = await plugin.playOneShot(url, channel);
-    if (err) {
-      errorEl.textContent = err;
+
+    const { error, info } = await plugin.playOneShot(url, channel);
+    if (error) {
+      errorEl.textContent = error;
       return;
+    }
+    // Signale le doublon sans empêcher la lecture : un one-shot ne sauvegarde rien
+    if (info) {
+      infoEl.textContent = info;
+      infoEl.removeClass('trpg-check-hidden');
     }
     urlInput.value = '';
   };
@@ -125,7 +136,7 @@ function openSaveModal(plugin: TRPGMusicPlugin, entry: OneShotEntry, opts: OneSh
       opts.onAfterSave();
     },
     {
-      url: `https://www.youtube.com/watch?v=${entry.youtubeId}`,
+      url: canonicalYoutubeUrl(entry.youtubeId),
       name: entry.name === UI.ONESHOT_LOADING ? '' : entry.name,
       channel: entry.channel,
     }

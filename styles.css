@@ -1849,3 +1849,153 @@
   max-height: 220px;
   overflow-y: auto;
 }
+
+/* ==========================================================================
+   Vérification de lisibilité (embed) et doublons
+   ========================================================================== */
+
+.trpg-check-hidden {
+  display: none !important;
+}
+
+.trpg-check-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  line-height: 1.35;
+}
+
+.trpg-check-status .trpg-check-icon {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.trpg-check-status .trpg-check-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.trpg-check-pending {
+  color: var(--text-muted);
+  background: var(--background-modifier-hover);
+}
+
+.trpg-check-pending .trpg-check-icon {
+  animation: trpg-spin 1.2s linear infinite;
+}
+
+@keyframes trpg-spin {
+  to { transform: rotate(360deg); }
+}
+
+.trpg-check-ok {
+  color: var(--color-green);
+  background: rgba(0, 200, 0, 0.08);
+}
+
+.trpg-check-error,
+.trpg-check-invalid {
+  color: var(--text-error);
+  background: rgba(200, 0, 0, 0.08);
+}
+
+.trpg-check-duplicate {
+  color: var(--color-orange);
+  background: rgba(255, 165, 0, 0.1);
+}
+
+.trpg-check-unknown {
+  color: var(--text-muted);
+  background: var(--background-modifier-hover);
+}
+
+/* Ligne de boutons de la modale d'ajout */
+.trpg-add-btn-row {
+  display: flex;
+  gap: 8px;
+}
+
+.trpg-add-btn-row .trpg-btn {
+  flex: 1;
+}
+
+.trpg-btn-force {
+  border: 1px solid var(--text-error);
+  color: var(--text-error);
+  background: transparent;
+}
+
+.trpg-btn-force:hover {
+  background: rgba(200, 0, 0, 0.1);
+}
+
+/* Info non bloquante du one-shot */
+.trpg-oneshot-info {
+  font-size: 12px;
+  color: var(--color-orange);
+  padding: 2px 0;
+}
+
+/* Pastilles d'état de la file d'ajout batch */
+.trpg-batch-dot-pending {
+  background: var(--text-muted);
+  animation: trpg-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes trpg-pulse {
+  50% { opacity: 0.25; }
+}
+
+.trpg-batch-dot-ok {
+  background: var(--color-green);
+}
+
+.trpg-batch-dot-error {
+  background: var(--text-error);
+}
+
+.trpg-batch-dot-unknown {
+  background: var(--color-orange);
+}
+
+.trpg-batch-item-warn {
+  font-size: 11px;
+  color: var(--text-error);
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(200, 0, 0, 0.08);
+}
+
+.trpg-batch-item-warn:hover {
+  background: rgba(200, 0, 0, 0.18);
+}
+
+.trpg-batch-item-warn-forced {
+  color: var(--color-orange);
+  background: rgba(255, 165, 0, 0.12);
+  text-decoration: line-through;
+}
+
+/* Carte de piste marquée illisible */
+.trpg-lib-badge-unavailable {
+  top: auto;
+  bottom: 8px;
+  right: 8px;
+  background: var(--text-error);
+  color: white;
+}
+
+.trpg-lib-card-unavailable .trpg-lib-thumb {
+  filter: grayscale(1);
+  opacity: 0.55;
+}
+
+.trpg-lib-card-unavailable .trpg-lib-card-name {
+  text-decoration: line-through;
+  text-decoration-color: var(--text-error);
+}
