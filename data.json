@@ -1623,7 +1623,7 @@
       "channel": "musique",
       "categories": {
         "humeur": [
-          "Tendu"
+          "Calme"
         ],
         "lieu": [
           "Ville"
@@ -3250,23 +3250,6 @@
       }
     },
     {
-      "id": "71024cd8-86f4-409b-8aeb-d2a3dbeedee8",
-      "name": "Human Resource Violations | The Outer Worlds OST",
-      "youtubeId": "JVo3dp0R16E",
-      "channel": "musique",
-      "categories": {
-        "humeur": [
-          "Combat"
-        ],
-        "lieu": [
-          "Générique"
-        ],
-        "intensite": [
-          "Moyenne"
-        ]
-      }
-    },
-    {
       "id": "98b2c283-18c7-4fb4-8ac2-f536d28039f8",
       "name": "Caldera",
       "youtubeId": "LxWA7ODSH6M",
@@ -3585,7 +3568,7 @@
           "Générique"
         ],
         "intensite": [
-          "Moyenne"
+          "Élevée"
         ]
       }
     },
@@ -3959,7 +3942,7 @@
           "Générique"
         ],
         "intensite": [
-          "Moyenne"
+          "Élevée"
         ]
       }
     },
@@ -4217,6 +4200,1010 @@
           "Élevée"
         ]
       }
+    },
+    {
+      "id": "7dbff747-5198-4867-8008-e661cc8a6762",
+      "name": "The Dragon King",
+      "youtubeId": "TMNEFsTbNNE",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "2ff44dc8-e8ed-4ee7-bc1b-0e208d33ca1b",
+      "name": "Bombardment",
+      "youtubeId": "mWjVcIpXsAY",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "2f6d463b-1293-4933-bfa2-89ccd0f67226",
+      "name": "The Witcher 3: Wild Hunt - Welcome Imlerith Extended",
+      "youtubeId": "WzVjfkwi4LY",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "04cf617e-e487-4f98-8c2b-7401311b3a04",
+      "name": "Revolt Production Music - Acheron's Guard [Dark Orchestral Battle]",
+      "youtubeId": "PVvR4VKn8Og",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "3dde69b5-e864-4887-a06b-6afe489df225",
+      "name": "*Pieces of Eden* - Satan's Arrival [Evil Epic Music]",
+      "youtubeId": "_8BwHHEopec",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "1e0ee5f8-1a3a-4593-9b56-789372890fd2",
+      "name": "Soundmopi - Armageddon [Epic Choral Battle]",
+      "youtubeId": "vHqifHQwxM8",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "865a6cdb-1cb8-4670-bfe1-5af439094ce1",
+      "name": "Audiomachine - Kingbreaker (Decimus - Epic Choral Orchestral)",
+      "youtubeId": "DbzxXuzMuII",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "f8c52bb0-61c2-48e6-8b85-7b6d96fb34c7",
+      "name": "The Witcher 3 OST - Conjunction of the Spheres",
+      "youtubeId": "wu3qqaWJnWU",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "65168ef6-8780-4acc-a7a0-6026604cb543",
+      "name": "Bloodborne Soundtrack OST - Blood Starved Beast",
+      "youtubeId": "CvUmL8uaE48",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "45df0059-3afd-4370-b873-10416ee12b61",
+      "name": "Bloodborne Soundtrack OST - Terror (Chalice Dungeon Bosses)",
+      "youtubeId": "p0sJQkhEtTY",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "feed9d6b-485c-4667-8219-c253b6cbb859",
+      "name": "The Witcher 3: Blood and Wine - Titans of Infamy Extended",
+      "youtubeId": "ffNwaOPBOPU",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "a415dc57-42f8-4cf8-a912-d44c66307dcb",
+      "name": "Star Wars: Valkorion Theme (Darth Vitiate/Tenebrae) | EPIC VERSION (Knights of the Fallen Empire)",
+      "youtubeId": "B4Ni8Eu8w1Q",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "370fb591-a84c-4586-b07c-10637564ea0f",
+      "name": "Bloodborne Living Failures OST phase 2",
+      "youtubeId": "7mdgCnhQD2A",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "1d25c409-167c-4b91-a588-3ea1bef367ae",
+      "name": "The Devil Himself",
+      "youtubeId": "-1cTxKNpBUM",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "f064b164-d04c-4c7f-8c01-1edcbbc1a49b",
+      "name": "Darkest Dungeon - Butcher's Boulevard Music (Butcher's Circus Mod)",
+      "youtubeId": "h_hJEzMPaAE",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "556c048f-ca7f-474c-b3f1-8c20774f4e08",
+      "name": "Darkest Dungeon Soundtrack: The Final Combat (Extended Version)",
+      "youtubeId": "4EIAcIjnnQM",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "1b454eee-d870-4cc2-969a-9053ec104e21",
+      "name": "Berserk - My Brother (Extended) (Definitive Version) [by Shiro Sagisu]",
+      "youtubeId": "lBdnti4_UUg",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "f3fd1265-a14c-42fc-bce2-c23d89914d04",
+      "name": "The Witcher 3 OST - The Beast of Beauclair (Long Version)",
+      "youtubeId": "AA883-ajdWY",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "08515643-6bf6-4b80-b3e7-857e92071560",
+      "name": "Skyrim Music - Blood and Steel (Combat 4)",
+      "youtubeId": "i_33EgGdV9A",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "5ad8f1e5-4b73-4805-801b-ca1ccfe0334a",
+      "name": "The Witcher Music: Boss Battles",
+      "youtubeId": "IBKSLyrid2k",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "6ab28f77-af8f-4d84-acc9-2cc5b6f8198c",
+      "name": "The Witcher Music: Order Battles",
+      "youtubeId": "IqO9Wz0rz7g",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "fa7e868a-c8c5-4f9b-b273-643cbf09b71f",
+      "name": "Doom Upon All The World - Dragon age: Inquisition Soundtrack",
+      "youtubeId": "DJPicyW5rbw",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Combat"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "3f06e315-196d-4e6b-acce-048ef529300a",
+      "name": "Serpent's Shrine",
+      "youtubeId": "xueiWdugFt4",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "7c7307e7-bc7b-48a8-bcd5-c89fd0ef746b",
+      "name": "Sewers",
+      "youtubeId": "bTquM6Y6d1Y",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "ea1ae24a-9292-452d-993b-75230320b338",
+      "name": "The Witcher 3  Wild Hunt EXTENDED OST - In The Giant's Shadow",
+      "youtubeId": "dMcpF2j76KI",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "79a7de6c-fa91-44b3-a1e2-ab1d6bb18add",
+      "name": "Crevasse | Dark Ice Cave Music | ASKII",
+      "youtubeId": "zUZwzYYcsNM",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "96dbb832-4601-4d0e-8c3b-4ebe3964b206",
+      "name": "Year of the Elephant",
+      "youtubeId": "w6bxx9Z-r8M",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "f921ed9a-00dd-40a9-9d2a-d0009ca93e4f",
+      "name": "Fog Atmosphere 28",
+      "youtubeId": "MiBryZPtq1M",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "418ea87e-242d-4cb8-8695-6975884a0883",
+      "name": "Walking With You  - Xenoblade Chronicles 2 OST [027]",
+      "youtubeId": "xeQxp-nYsO0",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "95861059-f408-4fc8-9fbf-76a9f9d68e69",
+      "name": "Skies of Arcadia OST-Credits",
+      "youtubeId": "JWQh2yHhSCc",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "4ab85186-1382-433f-bc1e-0e5dc9a7461a",
+      "name": "Hack G.U. OST:Swaying Emotions",
+      "youtubeId": "EnSUxWuofAY",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "c7f81af0-d9f3-4bdb-91ef-7ceeef7bb68f",
+      "name": "星を盗んだ少女",
+      "youtubeId": "DhBY8BIJURo",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "38b52887-ee2e-4005-815a-40dc54803602",
+      "name": "Odin Sphere OST - A Fate Accepted",
+      "youtubeId": "xTAMdPaQ_oc",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "2219eea6-040f-4d83-9c0b-a954e69fe49d",
+      "name": "Romancing SaGa ~Minstrel Song~ - Unerasable Pain",
+      "youtubeId": "PszY7HlVJKI",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "13a92caa-bfb5-465b-8d20-1bebae441b34",
+      "name": "People Seized with Life from (Chrono Cross)",
+      "youtubeId": "KL6bp3OIEoY",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "e8b7d18a-94b7-481a-8d61-acfec8f6d68c",
+      "name": "FFVII REMAKE: ティファのテーマ -セブンスヘブン-",
+      "youtubeId": "y9OwMPZppMg",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "b8ed976b-d2e2-4a47-ba4d-ab190b8e0938",
+      "name": "FFVII Remake OST: Aerith's Theme Orchestra Version",
+      "youtubeId": "ujrn-yfo8Ts",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "d0ecf1a4-5dd6-4701-8983-0da8530f9b17",
+      "name": "ヨナ/Ver. ピアノ",
+      "youtubeId": "AyxUK-RhLek",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "45c09b81-2ac5-4bf1-a989-bd62307cc79e",
+      "name": "Forgotten Prayers (From \"Eternal Poison\")",
+      "youtubeId": "OB3UL9IhR1Y",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "1d0180c7-2d5a-4b2e-81c8-75fe1c5cf0c5",
+      "name": "Valkyrie Profile 2: Silmeria - Divine View 【Original Soundtrack】",
+      "youtubeId": "_y0RCWJLlAQ",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "b1eebe7d-9c97-45c9-a306-905dda5c5cfd",
+      "name": "夢のかけら",
+      "youtubeId": "N205sEEsWJ0",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "19489c41-6e07-42ab-b1a3-6bbe21e03e2e",
+      "name": ".hack//IMOQ OST - Harald's Theme (Vocal Version) [Extended]",
+      "youtubeId": "A96K5x3Un38",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "e45cdfc2-9a1c-4b54-a366-48c0698919a5",
+      "name": "去りにし者ども",
+      "youtubeId": "aFU217xBHXw",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "cca8b0fb-a152-43a1-ab0b-756aa047d156",
+      "name": "Dark and Hopeless",
+      "youtubeId": "nPxMTTZXZd4",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "b552772d-b187-4b1d-b790-eb53de9bbca5",
+      "name": "Nier Replicant OST - Dispossession",
+      "youtubeId": "zZkoTpaoiv4",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "35df850d-5bd4-483f-b739-891711187ab2",
+      "name": "Loneliness - Xenoblade Chronicles 2 OST [025]",
+      "youtubeId": "wQDBTGhmh0A",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "4e4c4f38-c468-453f-8959-f1ad68eedfbb",
+      "name": "Shadow of the Colossus OST - Memories [Extended]",
+      "youtubeId": "7IOEUHuJIIA",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "4a4b089c-70cb-4a27-98e1-f373bd6bba77",
+      "name": "Octopath Traveler: Melancholy",
+      "youtubeId": "dwiT_WRs_TU",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "f1b47dad-53ab-4d12-a2ee-d27ba735d523",
+      "name": "Divine: Broken Routine Extended",
+      "youtubeId": "Z6bI1kG8qEQ",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "e304fe80-948b-482a-93e9-73a56475642c",
+      "name": "Nier Automata OST - Blissful Death [extended]",
+      "youtubeId": "lUhpy_VRW4w",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "c4a9ff24-184b-48f8-82c9-0c018d44acf2",
+      "name": "Firelink Shrine - Dark Souls Soundtrack 03",
+      "youtubeId": "EL9dArwG5cE",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "bf381656-25c3-4a71-97dd-c718b998a74a",
+      "name": "Blish's Sacrifice | Guild Wars 2: Living World Season 4 Original Soundtrack",
+      "youtubeId": "OZ5DvUGk6bs",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "44d085c4-8664-4837-a00f-4f3f4ced4698",
+      "name": "TES V Skyrim Soundtrack - Solitude",
+      "youtubeId": "k5ulJFg7KxY",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "b11bd775-1c1c-4ba5-b393-697b76d16c8e",
+      "name": "Sorrow Without Solace",
+      "youtubeId": "DQcu18fcRNo",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Triste"
+        ],
+        "lieu": [
+          "Générique"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "b7ccd0a5-9190-4b8e-97aa-4c4e46f3b9be",
+      "name": "D&D Ambience -  City Sewer",
+      "youtubeId": "9QZ_2wKbb5o",
+      "channel": "ambiance",
+      "categories": {
+        "humeur": [
+          "Mystérieux",
+          "Tendu"
+        ],
+        "lieu": [
+          "Ville"
+        ],
+        "intensite": [
+          "Faible"
+        ]
+      }
+    },
+    {
+      "id": "34b5058b-94c2-44da-8f90-cfca9d79adbb",
+      "name": "Dungeon Exploration | D&D/TTRPG Music | 1 Hour | Copyright free",
+      "youtubeId": "sXDa5h4LgWM",
+      "channel": "musique",
+      "categories": {
+        "humeur": [],
+        "lieu": [
+          "Donjon"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "52a65b9a-5636-4d6f-abdb-ca1054cfdc58",
+      "name": "Mountain Realm vs Atrium Carceri - The Deep Calls // OSR OSE Shadowdark Megadungeon Background Music",
+      "youtubeId": "SkG09fUw4Yc",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Tendu"
+        ],
+        "lieu": [
+          "Donjon"
+        ],
+        "intensite": [
+          "Élevée"
+        ]
+      }
+    },
+    {
+      "id": "6f6ffbf8-9fba-4ff3-96d1-006c7fe40063",
+      "name": "The Elder Scrolls - Oblivion - Dungeon Music",
+      "youtubeId": "MDcxFm02bPE",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Tendu",
+          "Mystérieux"
+        ],
+        "lieu": [
+          "Donjon"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
+    },
+    {
+      "id": "a6b1195a-4d8e-42fb-9f03-c04821d3f1db",
+      "name": "TES V Skyrim Soundtrack - Silent Footsteps",
+      "youtubeId": "axGPHOGxVCA",
+      "channel": "musique",
+      "categories": {
+        "humeur": [
+          "Tendu",
+          "Mystérieux"
+        ],
+        "lieu": [
+          "Donjon"
+        ],
+        "intensite": [
+          "Moyenne"
+        ]
+      }
     }
   ],
   "presets": [
@@ -4230,8 +5217,8 @@
     }
   ],
   "settings": {
-    "ambianceVolume": 0.12,
-    "musiqueVolume": 0.49,
+    "ambianceVolume": 0.34,
+    "musiqueVolume": 1,
     "crossfadeDuration": 6000,
     "masterVolume": 1
   }
