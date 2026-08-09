@@ -1,9 +1,79 @@
 import { requestUrl } from 'obsidian';
-import { UI } from './constants';
+import { UI, TAG_ALIASES } from './constants';
+import type { Track } from './types';
 
 // F7: Shared utility — single source for ID generation
 export function generateId(): string {
   return crypto.randomUUID();
+}
+
+// --- Recherche ---
+
+/**
+ * Forme comparable d'un texte : minuscules, sans accent ni ligature.
+ * « Forêt » et « foret » se ramènent à la même chaîne, pour qu'une saisie
+ * rapide sans accent trouve quand même les tags accentués.
+ */
+export function normalizeSearch(text: string): string {
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/œ/gi, 'oe')
+    .replace(/æ/gi, 'ae')
+    .toLowerCase();
+}
+
+/** Découpe une saisie en termes normalisés. Tous doivent matcher (ET). */
+export function parseSearchTerms(raw: string): string[] {
+  return normalizeSearch(raw)
+    .split(/\s+/)
+    .filter((term) => term.length > 0);
+}
+
+/** Vrai si chaque terme apparaît dans le texte. Aucun terme = tout passe. */
+export function matchesTerms(text: string, terms: string[]): boolean {
+  if (terms.length === 0) return true;
+  const haystack = normalizeSearch(text);
+  return terms.every((term) => haystack.includes(term));
+}
+
+/**
+ * Texte indexé d'une piste : titre, canal, tags et synonymes des tags.
+ * C'est ce qui permet de retrouver une piste taguée « Ville » en tapant « city ».
+ */
+export function trackSearchText(track: Track): string {
+  const tags = [...track.categories.humeur, ...track.categories.lieu, ...track.categories.intensite];
+  const channel = track.channel === 'ambiance' ? UI.CHANNEL_AMBIANCE : UI.CHANNEL_MUSIQUE;
+
+  const parts = [track.name, channel, ...tags];
+  for (const tag of tags) {
+    const aliases = TAG_ALIASES[tag];
+    if (aliases) parts.push(...aliases);
+  }
+
+  return normalizeSearch(parts.join(' '));
+}
+
+/**
+ * Filtre des pistes sur les termes saisis, en remontant les correspondances de
+ * titre au-dessus de celles qui ne matchent que par tag. Le tri étant stable,
+ * l'ordre d'origine est conservé à pertinence égale.
+ */
+export function filterTracksBySearch(tracks: Track[], terms: string[]): Track[] {
+  if (terms.length === 0) return tracks;
+
+  const matched: { track: Track; score: number }[] = [];
+  for (const track of tracks) {
+    const haystack = trackSearchText(track);
+    if (!terms.every((term) => haystack.includes(term))) continue;
+
+    const name = normalizeSearch(track.name);
+    const score = terms.reduce((n, term) => (name.includes(term) ? n + 1 : n), 0);
+    matched.push({ track, score });
+  }
+
+  matched.sort((a, b) => b.score - a.score);
+  return matched.map((m) => m.track);
 }
 
 /** URL canonique d'une vidéo, sans paramètres de playlist/radio. */

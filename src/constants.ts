@@ -9,6 +9,39 @@ export const CATEGORIES = {
   intensite: ['Faible', 'Moyenne', 'Élevée'] as const,
 };
 
+/**
+ * Synonymes de recherche par tag : taper « city », « town » ou « village » ramène
+ * les pistes taguées « Ville ». Purement additif — enrichir librement, les valeurs
+ * sont comparées sans accent ni casse.
+ */
+export const TAG_ALIASES: Record<string, string[]> = {
+  // Humeur
+  'Tendu': ['tense', 'suspense', 'stress', 'danger', 'menace', 'angoisse'],
+  'Calme': ['calm', 'peaceful', 'chill', 'paisible', 'repos', 'ambient', 'serein'],
+  'Épique': ['epic', 'boss', 'heroique', 'grandiose', 'final', 'climax'],
+  'Mystérieux': ['mystery', 'mysterious', 'creepy', 'horror', 'horreur', 'etrange', 'enquete', 'occulte', 'sombre'],
+  'Triste': ['sad', 'melancolie', 'deuil', 'emouvant', 'tragique'],
+  'Joyeux': ['happy', 'joy', 'fete', 'festif', 'gai', 'celebration'],
+  'Comique': ['funny', 'comic', 'humour', 'rigolo', 'absurde'],
+  'Combat': ['fight', 'battle', 'war', 'guerre', 'bataille', 'boss', 'affrontement'],
+  'Poursuite': ['chase', 'course', 'fuite', 'run', 'traque'],
+  'Narratif': ['narrative', 'story', 'dialogue', 'roleplay', 'scene', 'intrigue'],
+  'Exploration': ['explore', 'exploring', 'decouverte', 'crawl', 'fouille'],
+  'Voyage': ['travel', 'journey', 'road', 'route', 'chemin', 'overland', 'caravane'],
+  // Lieu
+  'Taverne': ['tavern', 'inn', 'auberge', 'bar', 'pub'],
+  'Donjon': ['dungeon', 'cave', 'caverne', 'crypte', 'crypt', 'ruines', 'souterrain', 'labyrinthe', 'tombeau'],
+  'Forêt': ['forest', 'wood', 'woods', 'bois', 'jungle', 'nature', 'sylvestre', 'clairiere'],
+  'Ville': ['city', 'town', 'village', 'cite', 'urbain', 'marche', 'market', 'capitale', 'rue'],
+  'Océan': ['ocean', 'sea', 'mer', 'bateau', 'ship', 'navire', 'port', 'pirate', 'plage', 'naval'],
+  'Temple': ['church', 'eglise', 'cathedrale', 'sanctuaire', 'shrine', 'monastere', 'sacre', 'rituel'],
+  'Générique': ['generic', 'neutre', 'passe-partout', 'fond', 'background'],
+  // Intensité
+  'Faible': ['low', 'soft', 'doux', 'leger'],
+  'Moyenne': ['medium', 'moyen', 'mid'],
+  'Élevée': ['high', 'fort', 'intense', 'eleve', 'puissant'],
+};
+
 export const DEFAULT_SETTINGS: PluginSettings = {
   ambianceVolume: 0.8,
   musiqueVolume: 0.8,
@@ -69,7 +102,7 @@ export const UI = {
 
   // Library
   LIBRARY_TITLE: 'Bibliothèque Musicale',
-  SEARCH_PLACEHOLDER: 'Rechercher une piste...',
+  SEARCH_PLACEHOLDER: 'Rechercher : titre, tag, canal (ex. combat foret)...',
   ALL_CHANNELS: 'Tous les canaux',
   TRACK_COUNT: 'pistes',
   EDIT_BUTTON: 'Modifier',

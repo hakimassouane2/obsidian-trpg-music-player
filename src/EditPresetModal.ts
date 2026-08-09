@@ -2,6 +2,7 @@ import { Modal, App } from 'obsidian';
 import type TRPGMusicPlugin from './main';
 import type { Preset, Track } from './types';
 import { UI } from './constants';
+import { parseSearchTerms, filterTracksBySearch } from './utils';
 
 export class EditPresetModal extends Modal {
   private plugin: TRPGMusicPlugin;
@@ -96,8 +97,7 @@ export class EditPresetModal extends Modal {
 
     const renderOptions = (query: string) => {
       dropdown.empty();
-      const q = query.toLowerCase();
-      const filtered = q ? tracks.filter((t) => t.name.toLowerCase().includes(q)) : tracks;
+      const filtered = filterTracksBySearch(tracks, parseSearchTerms(query));
 
       const noneRow = dropdown.createDiv({ cls: 'trpg-autocomplete-option' });
       noneRow.textContent = UI.NONE;

@@ -2,7 +2,7 @@ import { ItemView, WorkspaceLeaf, setIcon, Menu, Notice } from 'obsidian';
 import type TRPGMusicPlugin from './main';
 import type { Channel, Track, Preset } from './types';
 import { VIEW_TYPE_LIBRARY, CATEGORIES, UI } from './constants';
-import { canonicalYoutubeUrl } from './utils';
+import { canonicalYoutubeUrl, parseSearchTerms, filterTracksBySearch, matchesTerms } from './utils';
 import { EditTrackModal } from './EditTrackModal';
 import { EditPresetModal } from './EditPresetModal';
 import { AddTrackModal } from './AddTrackModal';
@@ -15,7 +15,7 @@ type LibraryTab = 'tracks' | 'presets' | 'playlist';
 export class LibraryView extends ItemView {
   private plugin: TRPGMusicPlugin;
   private activeTab: LibraryTab = 'tracks';
-  private searchQuery = '';
+  private searchTerms: string[] = [];
   private filterChannel: Channel | '' = '';
   private filterHumeur: string[] = [];
   private filterLieu: string[] = [];
@@ -34,7 +34,7 @@ export class LibraryView extends ItemView {
   private filtersRowEl: HTMLElement | null = null;
   private searchRowEl: HTMLElement | null = null;
   private presetSearchRowEl: HTMLElement | null = null;
-  private presetSearchQuery = '';
+  private presetSearchTerms: string[] = [];
   private resetBtn: HTMLElement | null = null;
 
   // One-shot
@@ -130,7 +130,7 @@ export class LibraryView extends ItemView {
     setIcon(searchIcon, 'search');
 
     searchInput.addEventListener('input', () => {
-      this.searchQuery = searchInput.value.trim().toLowerCase();
+      this.searchTerms = parseSearchTerms(searchInput.value);
       this.refreshGrid();
     });
 
@@ -157,7 +157,7 @@ export class LibraryView extends ItemView {
     // Reset filters button (hidden by default, shown when filters are active)
     this.resetBtn = this.filtersRowEl.createEl('button', { cls: 'trpg-lib-reset-btn trpg-lib-hidden', text: 'Réinitialiser' });
     this.resetBtn.addEventListener('click', () => {
-      this.searchQuery = '';
+      this.searchTerms = [];
       this.filterChannel = '';
       this.filterHumeur = [];
       this.filterLieu = [];
@@ -177,7 +177,7 @@ export class LibraryView extends ItemView {
     const presetSearchIcon = this.presetSearchRowEl.createSpan({ cls: 'trpg-lib-search-icon' });
     setIcon(presetSearchIcon, 'search');
     presetSearchInput.addEventListener('input', () => {
-      this.presetSearchQuery = presetSearchInput.value.trim().toLowerCase();
+      this.presetSearchTerms = parseSearchTerms(presetSearchInput.value);
       this.refreshPresets();
     });
 
@@ -446,15 +446,14 @@ export class LibraryView extends ItemView {
 
     let tracks = this.plugin.trackLibrary.getTracks(Object.keys(filters).length > 0 ? filters : undefined);
 
-    if (this.searchQuery) {
-      tracks = tracks.filter((t) => t.name.toLowerCase().includes(this.searchQuery));
-    }
+    // Recherche libre : titre, canal, tags et synonymes des tags, sans accent ni casse
+    tracks = filterTracksBySearch(tracks, this.searchTerms);
 
     if (this.countEl) {
       this.countEl.textContent = `${tracks.length} ${UI.TRACK_COUNT}`;
     }
 
-    const hasActiveFilters = !!(this.searchQuery || this.filterChannel || this.filterHumeur.length || this.filterLieu.length || this.filterIntensite.length);
+    const hasActiveFilters = !!(this.searchTerms.length || this.filterChannel || this.filterHumeur.length || this.filterLieu.length || this.filterIntensite.length);
     this.resetBtn?.toggleClass('trpg-lib-hidden', !hasActiveFilters);
 
     if (tracks.length === 0) {
@@ -768,8 +767,8 @@ export class LibraryView extends ItemView {
 
     let presets = this.plugin.presetManager.getPresets();
 
-    if (this.presetSearchQuery) {
-      presets = presets.filter((p) => p.name.toLowerCase().includes(this.presetSearchQuery));
+    if (this.presetSearchTerms.length > 0) {
+      presets = presets.filter((p) => matchesTerms(p.name, this.presetSearchTerms));
     }
 
     if (presets.length === 0) {
