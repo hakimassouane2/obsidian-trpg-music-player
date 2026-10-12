@@ -1060,26 +1060,17 @@
 /* Grid — default large */
 .trpg-lib-grid {
   display: grid;
-  gap: 16px;
+  /* Largeur minimale et écart continus : le nombre de colonnes ne peut que
+     diminuer quand la vue rétrécit. Des paliers fixes (240px puis 180px puis
+     130px) le faisaient remonter juste après chaque palier. */
+  gap: clamp(8px, 2cqi, 16px);
   padding: 4px 12px 12px;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, clamp(130px, 30cqi, 240px)), 1fr));
   align-content: start;
-}
-
-/* Medium: container < 700px */
-@container (max-width: 700px) {
-  .trpg-lib-grid {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 12px;
-  }
 }
 
 /* Small: container < 400px */
 @container (max-width: 400px) {
-  .trpg-lib-grid {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 8px;
-  }
   .trpg-lib-card-body { padding: 6px 8px 8px; }
   .trpg-lib-card-name { font-size: 11px; }
   .trpg-lib-tags { display: none; }
@@ -2240,4 +2231,142 @@
 .trpg-ytkey-guide ol {
   margin: 8px 0;
   padding-left: 20px;
+}
+
+/* ==========================================================================
+   Bibliothèque : adaptation aux vues étroites (écran partagé)
+   ========================================================================== */
+
+.trpg-lib-tab-group {
+  flex-shrink: 0;
+}
+
+.trpg-lib-add-btn-group {
+  min-width: 0;
+}
+
+/* Vue moyenne : les actions de l'en-tête passent en icônes seules */
+@container (max-width: 720px) {
+  .trpg-lib-add-btn {
+    padding: 6px 9px;
+  }
+  .trpg-lib-add-btn-label {
+    display: none;
+  }
+  .trpg-lib-add-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Vue étroite : onglets resserrés */
+@container (max-width: 420px) {
+  .trpg-lib-tab {
+    padding: 6px 10px;
+  }
+  .trpg-lib-add-btn {
+    padding: 6px 7px;
+  }
+}
+
+/* Mini-lecteur : les deux canaux s'empilent au lieu de se chevaucher */
+@container (max-width: 640px) {
+  .trpg-lib-mini-player {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 5px 10px;
+  }
+  .trpg-lib-mini-sep {
+    display: none;
+  }
+  .trpg-lib-mini-slider {
+    width: auto;
+    flex: 0 1 90px;
+    min-width: 50px;
+  }
+}
+
+/* Playlist : en vue étroite, une pastille résume les tags pour laisser le nom respirer */
+.trpg-lib-playlist-tag-chip {
+  display: none;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+  cursor: help;
+}
+
+.trpg-lib-playlist-tag-chip-icon {
+  display: inline-flex;
+}
+
+.trpg-lib-playlist-tag-chip-icon svg {
+  width: 10px;
+  height: 10px;
+}
+
+.trpg-lib-playlist-name {
+  min-width: 0;
+}
+
+@container (max-width: 640px) {
+  .trpg-lib-playlist-tags {
+    display: none;
+  }
+  .trpg-lib-playlist-tag-chip {
+    display: inline-flex;
+  }
+  .trpg-lib-playlist-item {
+    gap: 8px;
+    padding: 6px 8px;
+  }
+}
+
+/* Couverture de preset : miniatures des deux pistes coupées en diagonale */
+.trpg-lib-preset-cover {
+  overflow: hidden;
+}
+
+.trpg-lib-preset-cover-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trpg-lib-preset-cover-split .trpg-lib-preset-cover-ambiance {
+  clip-path: polygon(0 0, 62% 0, 38% 100%, 0 100%);
+}
+
+.trpg-lib-preset-cover-split .trpg-lib-preset-cover-musique {
+  clip-path: polygon(62% 0, 100% 0, 100% 100%, 38% 100%);
+}
+
+.trpg-lib-preset-cover-line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.8));
+}
+
+.trpg-lib-preset-cover-line line {
+  stroke: rgba(255, 255, 255, 0.9);
+  stroke-width: 2;
+}
+
+.trpg-lib-preset-cover-split .trpg-lib-preset-cover-badge-ambiance {
+  right: auto;
+  left: 8px;
+}
+
+.trpg-lib-preset-cover-split .trpg-lib-preset-cover-badge-musique {
+  top: auto;
+  bottom: 8px;
+}
+
+.trpg-lib-preset-cover .trpg-lib-play-overlay {
+  z-index: 1;
 }

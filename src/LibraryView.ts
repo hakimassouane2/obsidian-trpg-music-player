@@ -106,16 +106,17 @@ export class LibraryView extends ItemView {
 
     const addBtnGroup = tabBar.createDiv({ cls: 'trpg-lib-add-btn-group' });
 
-    this.addBtn = addBtnGroup.createEl('button', { cls: 'trpg-lib-add-btn' });
+    // Les libellés disparaissent quand la vue est étroite : l'aria-label sert d'infobulle
+    this.addBtn = addBtnGroup.createEl('button', { cls: 'trpg-lib-add-btn', attr: { 'aria-label': 'Ajouter une piste' } });
     const addIcon = this.addBtn.createSpan();
     setIcon(addIcon, 'plus');
-    this.addBtn.createSpan({ text: 'Ajouter une piste' });
+    this.addBtn.createSpan({ cls: 'trpg-lib-add-btn-label', text: 'Ajouter une piste' });
     this.addBtn.addEventListener('click', () => this.openAddModal());
 
-    this.batchAddBtn = addBtnGroup.createEl('button', { cls: 'trpg-lib-add-btn' });
+    this.batchAddBtn = addBtnGroup.createEl('button', { cls: 'trpg-lib-add-btn', attr: { 'aria-label': 'Ajout batch' } });
     const batchIcon = this.batchAddBtn.createSpan();
     setIcon(batchIcon, 'layers');
-    this.batchAddBtn.createSpan({ text: 'Ajout batch' });
+    this.batchAddBtn.createSpan({ cls: 'trpg-lib-add-btn-label', text: 'Ajout batch' });
     this.batchAddBtn.addEventListener('click', () => this.openBatchAddModal());
 
     this.buildOneShotPopover(addBtnGroup);
@@ -257,10 +258,10 @@ export class LibraryView extends ItemView {
   // --- One-shot popover ---
 
   private buildOneShotPopover(group: HTMLElement): void {
-    const btn = group.createEl('button', { cls: 'trpg-lib-add-btn' });
+    const btn = group.createEl('button', { cls: 'trpg-lib-add-btn', attr: { 'aria-label': UI.SECTION_ONESHOT } });
     const icon = btn.createSpan();
     setIcon(icon, 'zap');
-    btn.createSpan({ text: UI.SECTION_ONESHOT });
+    btn.createSpan({ cls: 'trpg-lib-add-btn-label', text: UI.SECTION_ONESHOT });
 
     const popover = group.createDiv({ cls: 'trpg-lib-oneshot-popover trpg-lib-hidden' });
     this.oneShotPopover = popover;
@@ -741,15 +742,22 @@ export class LibraryView extends ItemView {
       thumb.onerror = () => { thumb.style.display = 'none'; };
 
       // Track name
-      row.createSpan({ cls: 'trpg-lib-playlist-name', text: track.name });
+      row.createSpan({ cls: 'trpg-lib-playlist-name', text: track.name, attr: { title: track.name } });
 
-      // Tags
+      // Tags : en vue large on les affiche, en vue étroite une pastille les résume.
+      // Ils ont été choisis comme filtres avant le lancement, le nom compte davantage.
       const allCats = [...track.categories.humeur, ...track.categories.lieu, ...track.categories.intensite];
       if (allCats.length > 0) {
         const tags = row.createSpan({ cls: 'trpg-lib-playlist-tags' });
         for (const cat of allCats.slice(0, 3)) {
           tags.createSpan({ cls: 'trpg-lib-tag', text: cat });
         }
+        const chip = row.createSpan({
+          cls: 'trpg-lib-tag trpg-lib-playlist-tag-chip',
+          attr: { 'aria-label': allCats.join(' · ') },
+        });
+        setIcon(chip.createSpan({ cls: 'trpg-lib-playlist-tag-chip-icon' }), 'tag');
+        chip.createSpan({ text: String(allCats.length) });
       }
 
       // Click to jump to this track
@@ -796,8 +804,7 @@ export class LibraryView extends ItemView {
 
     // Cover area with play overlay
     const cover = card.createDiv({ cls: 'trpg-lib-preset-cover' });
-    const iconEl = cover.createDiv({ cls: 'trpg-lib-preset-cover-icon' });
-    setIcon(iconEl, 'list-music');
+    this.buildPresetCover(cover, ambianceTrack, musiqueTrack);
 
     const overlay = cover.createDiv({ cls: 'trpg-lib-play-overlay' });
     const playIcon = overlay.createSpan();
@@ -862,6 +869,52 @@ export class LibraryView extends ItemView {
       });
       menu.showAtMouseEvent(e as MouseEvent);
     });
+  }
+
+  /**
+   * Couverture d'un preset : les miniatures de ses deux pistes, coupées en
+   * diagonale (ambiance en haut à gauche, musique en bas à droite). Une seule
+   * piste occupe toute la couverture ; aucune, l'icône par défaut.
+   */
+  private buildPresetCover(cover: HTMLElement, ambianceTrack: Track | null | undefined, musiqueTrack: Track | null | undefined): void {
+    const layers: Array<{ track: Track; channel: Channel }> = [];
+    if (ambianceTrack) layers.push({ track: ambianceTrack, channel: 'ambiance' });
+    if (musiqueTrack) layers.push({ track: musiqueTrack, channel: 'musique' });
+
+    if (layers.length === 0) {
+      const iconEl = cover.createDiv({ cls: 'trpg-lib-preset-cover-icon' });
+      setIcon(iconEl, 'list-music');
+      return;
+    }
+
+    const split = layers.length === 2;
+    if (split) cover.addClass('trpg-lib-preset-cover-split');
+
+    for (const { track, channel } of layers) {
+      const img = cover.createEl('img', {
+        cls: `trpg-lib-preset-cover-img trpg-lib-preset-cover-${channel}`,
+        attr: { src: `https://img.youtube.com/vi/${track.youtubeId}/mqdefault.jpg`, alt: '', loading: 'lazy' },
+      });
+      img.onerror = () => { img.style.visibility = 'hidden'; };
+    }
+
+    if (split) {
+      // Trait de coupe : SVG étiré sur la couverture, d'épaisseur constante
+      const svg = cover.createSvg('svg', {
+        cls: 'trpg-lib-preset-cover-line',
+        attr: { viewBox: '0 0 100 100', preserveAspectRatio: 'none' },
+      });
+      svg.createSvg('line', {
+        attr: { x1: '62', y1: '0', x2: '38', y2: '100', 'vector-effect': 'non-scaling-stroke' },
+      });
+    }
+
+    for (const { channel } of layers) {
+      cover.createSpan({
+        cls: `trpg-lib-badge trpg-lib-badge-${channel} trpg-lib-preset-cover-badge-${channel}`,
+        text: channel === 'ambiance' ? UI.CHANNEL_AMBIANCE : UI.CHANNEL_MUSIQUE,
+      });
+    }
   }
 
   // --- Track card ---
