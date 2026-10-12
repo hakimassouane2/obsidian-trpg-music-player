@@ -1,5 +1,5 @@
 import { Plugin, WorkspaceLeaf, setIcon, Notice } from 'obsidian';
-import type { PluginData, Channel, OneShotEntry } from './types';
+import type { PluginData, Channel, OneShotEntry, LastYoutubeSearch, Track } from './types';
 import { VIEW_TYPE, VIEW_TYPE_LIBRARY, DEFAULT_DATA, LOG_PREFIX, UI } from './constants';
 import { PlayerService, extractYoutubeId } from './PlayerService';
 import { generateId, fetchYoutubeTitle, isPersistentYoutubeError, canonicalYoutubeUrl } from './utils';
@@ -21,6 +21,8 @@ export default class TRPGMusicPlugin extends Plugin {
   nowPlayingNames: Record<Channel, string> = { ambiance: '', musique: '' };
   // Historique des one-shots de la session courante (non persisté)
   oneShotHistory: OneShotEntry[] = [];
+  // Dernière recherche YouTube de la session (non persistée)
+  lastYoutubeSearch: LastYoutubeSearch | null = null;
   private scanInProgress = false;
   private scanCancelled = false;
   private hiddenPlayerContainer: HTMLElement | null = null;
@@ -452,6 +454,13 @@ export default class TRPGMusicPlugin extends Plugin {
 
   isScanning(): boolean {
     return this.scanInProgress;
+  }
+
+  /** Joue une piste de la bibliothèque sur son propre canal. */
+  async playLibraryTrack(track: Track): Promise<void> {
+    await this.ensurePlayersReady();
+    await this.playerService.play(track.channel, track.youtubeId);
+    this.updateNowPlaying(track.channel, track.name);
   }
 
   /** Relance un one-shot déjà présent dans l'historique et le remonte en tête. */

@@ -1,6 +1,7 @@
 import { PluginSettingTab, App, Setting } from 'obsidian';
 import type TRPGMusicPlugin from './main';
 import { UI } from './constants';
+import { testApiKey } from './YoutubeSearch';
 
 export class TRPGMusicSettingsTab extends PluginSettingTab {
   plugin: TRPGMusicPlugin;
@@ -39,6 +40,67 @@ export class TRPGMusicSettingsTab extends PluginSettingTab {
             await this.plugin.savePluginData();
           })
       );
+
+    // Recherche YouTube intégrée
+    const keySetting = new Setting(containerEl)
+      .setName(UI.YT_KEY_NAME)
+      .setDesc(UI.YT_KEY_DESC)
+      .addText((text) => {
+        text.inputEl.type = 'password';
+        text
+          .setPlaceholder('AIza...')
+          .setValue(this.plugin.data.settings.youtubeApiKey)
+          .onChange(async (value) => {
+            this.plugin.data.settings.youtubeApiKey = value.trim();
+            // Les résultats en cache viennent peut-être de l'autre source
+            this.plugin.lastYoutubeSearch = null;
+            await this.plugin.savePluginData();
+          });
+      });
+
+    const keyResultEl = containerEl.createDiv({ cls: 'trpg-premium-test-result' });
+    keySetting.addButton((btn) =>
+      btn.setButtonText(UI.YT_KEY_TEST).onClick(async () => {
+        btn.setDisabled(true);
+        keyResultEl.className = 'trpg-premium-test-result trpg-test-pending';
+        keyResultEl.textContent = `${UI.YT_KEY_TEST}…`;
+        const result = await testApiKey(this.plugin.data.settings.youtubeApiKey);
+        keyResultEl.textContent = result.message;
+        keyResultEl.className = result.ok
+          ? 'trpg-premium-test-result trpg-test-pass'
+          : 'trpg-premium-test-result trpg-test-fail';
+        btn.setDisabled(false);
+      })
+    );
+
+    const guide = containerEl.createEl('details', { cls: 'trpg-ytkey-guide' });
+    guide.createEl('summary', { text: UI.YT_KEY_GUIDE_TITLE });
+    const steps = guide.createEl('ol');
+    const step = (build: (li: HTMLLIElement) => void): void => build(steps.createEl('li'));
+    step((li) => {
+      li.appendText('Ouvre la ');
+      li.createEl('a', { text: 'console Google Cloud', href: 'https://console.cloud.google.com/projectcreate' });
+      li.appendText(' et crée un projet (nom libre, par exemple « Obsidian JDR »).');
+    });
+    step((li) => {
+      li.appendText('Active l\'API ');
+      li.createEl('a', {
+        text: 'YouTube Data API v3',
+        href: 'https://console.cloud.google.com/apis/library/youtube.googleapis.com',
+      });
+      li.appendText(' pour ce projet (bouton « Activer »).');
+    });
+    step((li) => {
+      li.appendText('Dans ');
+      li.createEl('a', { text: 'Identifiants', href: 'https://console.cloud.google.com/apis/credentials' });
+      li.appendText(', clique sur « Créer des identifiants » puis « Clé API ».');
+    });
+    step((li) => li.appendText('Conseillé : modifie la clé et restreins-la à « YouTube Data API v3 ».'));
+    step((li) => li.appendText('Colle la clé dans le champ ci-dessus, puis clique sur « Tester la clé ».'));
+    guide.createEl('p', {
+      cls: 'setting-item-description',
+      text: 'Aucune carte bancaire n\'est nécessaire. Le quota gratuit (10 000 unités par jour) permet environ 100 recherches quotidiennes, et il se réinitialise chaque nuit.',
+    });
 
     // Vérification de lisibilité de toute la bibliothèque
     const scanSetting = new Setting(containerEl)

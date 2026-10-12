@@ -6,5 +6,5 @@
   "description": "Lecteur musical pour JDR avec lecture YouTube 2 canaux, bibliothèque de pistes, préréglages de scènes et fondu enchaîné.",
   "author": "Hakim",
   "authorUrl": "",
-  "isDesktopOnly": false
+  "isDesktopOnly": true
 }

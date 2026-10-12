@@ -475,6 +475,37 @@ export class PlayerService {
     });
   }
 
+  /** Vrai si au moins un canal est en train de jouer (lecture non mise en pause). */
+  isAnyChannelPlaying(): boolean {
+    return this.channels.ambiance.playing || this.channels.musique.playing;
+  }
+
+  /**
+   * Monte un petit lecteur visible, indépendant des deux canaux, pour écouter
+   * une vidéo avant de l'ajouter. Retourne la fonction qui le détruit.
+   */
+  async createPreview(container: HTMLElement, youtubeId: string): Promise<() => void> {
+    await this.loadYouTubeAPI();
+    const host = container.createDiv();
+    const player = new YT.Player(host, {
+      height: '100%',
+      width: '100%',
+      videoId: youtubeId,
+      playerVars: { autoplay: 1, controls: 1, fs: 0, modestbranding: 1 },
+      events: {
+        onReady: (event) => event.target.setVolume(this.channels.musique.volume),
+      },
+    });
+    return () => {
+      try {
+        player.destroy();
+      } catch {
+        // Le lecteur peut déjà être détruit
+      }
+      host.remove();
+    };
+  }
+
   setVolume(channel: Channel, volume: number): void {
     this.channels[channel].volume = Math.round(volume);
     const state = this.channels[channel];

@@ -4,6 +4,8 @@ import type { Channel, OneShotEntry } from './types';
 import { UI } from './constants';
 import { canonicalYoutubeUrl } from './utils';
 import { AddTrackModal } from './AddTrackModal';
+import { extractYoutubeId } from './PlayerService';
+import { YoutubeSearchPanel } from './YoutubeSearchPanel';
 
 export interface OneShotSectionOptions {
   /** Appelé après une sauvegarde réussie d'un one-shot dans la bibliothèque. */
@@ -32,28 +34,51 @@ export function buildOneShotSection(
   const errorEl = form.createDiv({ cls: 'trpg-error' });
   const infoEl = form.createDiv({ cls: 'trpg-oneshot-info trpg-check-hidden' });
 
-  const launch = async (channel: Channel): Promise<void> => {
+  const playUrl = async (url: string, channel: Channel): Promise<boolean> => {
     errorEl.textContent = '';
     infoEl.textContent = '';
     infoEl.addClass('trpg-check-hidden');
 
-    const url = urlInput.value.trim();
-    if (!url) {
-      errorEl.textContent = UI.MISSING_FIELDS;
-      return;
-    }
-
     const { error, info } = await plugin.playOneShot(url, channel);
     if (error) {
       errorEl.textContent = error;
-      return;
+      return false;
     }
     // Signale le doublon sans empêcher la lecture : un one-shot ne sauvegarde rien
     if (info) {
       infoEl.textContent = info;
       infoEl.removeClass('trpg-check-hidden');
     }
-    urlInput.value = '';
+    return true;
+  };
+
+  // Recherche YouTube : la liste reste ouverte après une lecture, pour pouvoir
+  // essayer le résultat suivant si le premier ne colle pas à la scène.
+  const searchPanel = new YoutubeSearchPanel(plugin, urlInput, form, {
+    mode: 'oneshot',
+    onPlay: (result, channel) => void playUrl(canonicalYoutubeUrl(result.youtubeId), channel),
+    onPick: (result) => {
+      new AddTrackModal(plugin.app, plugin, opts.onAfterSave, {
+        url: canonicalYoutubeUrl(result.youtubeId),
+        name: result.title,
+      }).open();
+    },
+  });
+
+  const launch = async (channel: Channel): Promise<void> => {
+    const text = urlInput.value.trim();
+    if (!text) {
+      errorEl.textContent = UI.MISSING_FIELDS;
+      return;
+    }
+    // Du texte qui n'est pas une URL : c'est une recherche
+    if (!extractYoutubeId(text)) {
+      errorEl.textContent = '';
+      void searchPanel.search(text);
+      return;
+    }
+    searchPanel.close();
+    if (await playUrl(text, channel)) urlInput.value = '';
   };
 
   const makeBtn = (channel: Channel, label: string, cls: string): void => {
@@ -66,8 +91,10 @@ export function buildOneShotSection(
   makeBtn('ambiance', UI.CHANNEL_AMBIANCE, 'trpg-oneshot-ambiance');
   makeBtn('musique', UI.CHANNEL_MUSIQUE, 'trpg-oneshot-musique');
 
-  // Entrée clavier → lance sur le canal Musique (cas le plus courant : "faire passer une musique")
+  // Entrée clavier → lance sur le canal Musique (cas le plus courant : "faire passer une musique"),
+  // ou cherche sur YouTube si le texte n'est pas une URL
   urlInput.addEventListener('keydown', (e) => {
+    if (searchPanel.handleKeydown(e)) return;
     if (e.key === 'Enter') {
       e.preventDefault();
       launch('musique');

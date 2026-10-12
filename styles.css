@@ -1999,3 +1999,245 @@
   text-decoration: line-through;
   text-decoration-color: var(--text-error);
 }
+
+/* ==========================================================================
+   Recherche YouTube intégrée (one-shot et modale d'ajout)
+   ========================================================================== */
+
+.trpg-ytsearch {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  background: var(--background-primary);
+  padding: 6px;
+}
+
+.trpg-ytsearch-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 11px;
+}
+
+.trpg-ytsearch-chip {
+  padding: 1px 8px;
+  height: auto;
+  font-size: 11px;
+  border-radius: 999px;
+  border: 1px solid var(--background-modifier-border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.trpg-ytsearch-chip.is-active {
+  background: var(--interactive-accent);
+  border-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+}
+
+.trpg-ytsearch-source {
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--background-modifier-hover);
+  color: var(--text-warning);
+  cursor: help;
+}
+
+.trpg-ytsearch-keys {
+  margin-left: auto;
+  color: var(--text-faint);
+}
+
+.trpg-ytsearch-status {
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 4px 2px;
+}
+
+.trpg-ytsearch-error {
+  color: var(--text-error);
+}
+
+.trpg-ytsearch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.trpg-ytsearch-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 3px;
+  border-radius: 4px;
+}
+
+.trpg-ytsearch-row.is-selected {
+  background: var(--background-modifier-hover);
+  box-shadow: inset 2px 0 0 var(--interactive-accent);
+}
+
+.trpg-ytsearch-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 0;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.trpg-ytsearch-thumb {
+  position: relative;
+  flex: 0 0 auto;
+  width: 64px;
+  height: 36px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--background-modifier-border);
+}
+
+.trpg-ytsearch-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.trpg-ytsearch-duration {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  padding: 0 3px;
+  border-radius: 2px;
+  font-size: 9px;
+  line-height: 13px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+
+.trpg-ytsearch-text {
+  min-width: 0;
+  flex: 1;
+}
+
+.trpg-ytsearch-title {
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trpg-ytsearch-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-muted);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.trpg-ytsearch-badge {
+  padding: 0 6px;
+  height: auto;
+  font-size: 10px;
+  line-height: 16px;
+  border-radius: 999px;
+  border: none;
+  box-shadow: none;
+  background: var(--background-modifier-success, rgba(0, 160, 80, 0.2));
+  color: var(--text-success);
+  cursor: pointer;
+}
+
+.trpg-ytsearch-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+  opacity: 0;
+  transition: opacity 100ms ease;
+}
+
+.trpg-ytsearch-row:hover .trpg-ytsearch-actions,
+.trpg-ytsearch-row.is-selected .trpg-ytsearch-actions {
+  opacity: 1;
+}
+
+.trpg-ytsearch-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 5px;
+  height: auto;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.trpg-ytsearch-action:hover {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+.trpg-ytsearch-action-icon {
+  display: inline-flex;
+}
+
+.trpg-ytsearch-action-icon svg {
+  width: 13px;
+  height: 13px;
+}
+
+.trpg-ytsearch-ambiance {
+  color: var(--color-blue);
+}
+
+.trpg-ytsearch-musique {
+  color: var(--color-orange);
+}
+
+.trpg-ytsearch-preview-btn.is-active {
+  color: var(--interactive-accent);
+}
+
+.trpg-ytsearch-preview {
+  flex: 0 0 100%;
+  height: 160px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.trpg-ytsearch-preview > div,
+.trpg-ytsearch-preview iframe {
+  width: 100%;
+  height: 100%;
+}
+
+/* Guide de création de la clé API, dans les réglages */
+.trpg-ytkey-guide {
+  margin: 4px 0 16px;
+  font-size: 13px;
+}
+
+.trpg-ytkey-guide summary {
+  cursor: pointer;
+  color: var(--text-accent);
+}
+
+.trpg-ytkey-guide ol {
+  margin: 8px 0;
+  padding-left: 20px;
+}

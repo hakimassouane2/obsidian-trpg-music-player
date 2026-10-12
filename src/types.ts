@@ -47,10 +47,34 @@ export interface PluginSettings {
   ambianceVolume: number;
   musiqueVolume: number;
   crossfadeDuration: number;
+  /** Clé de l'API YouTube Data v3. Vide = recherche en mode secours. */
+  youtubeApiKey: string;
 }
 
 export interface PluginData {
   tracks: Track[];
   presets: Preset[];
   settings: PluginSettings;
+}
+
+/** Une vidéo trouvée par la recherche YouTube intégrée. */
+export interface YoutubeSearchResult {
+  youtubeId: string;
+  title: string;
+  channelName: string;
+  /** Durée lisible (« 1:02:03 »), null si inconnue. */
+  duration: string | null;
+}
+
+export interface YoutubeSearchResponse {
+  results: YoutubeSearchResult[];
+  /** 'api' : clé API. 'fallback' : lecture de la page youtube.com. */
+  source: 'api' | 'fallback';
+}
+
+/** Dernière recherche de la session, réaffichée quand on revient dans le champ. */
+export interface LastYoutubeSearch {
+  query: string;
+  longOnly: boolean;
+  response: YoutubeSearchResponse;
 }

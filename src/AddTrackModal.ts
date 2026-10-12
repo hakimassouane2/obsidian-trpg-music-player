@@ -1,9 +1,15 @@
-import { Modal, App, requestUrl, setIcon } from 'obsidian';
+import { Modal, App, requestUrl, setIcon, type KeymapEventHandler } from 'obsidian';
 import type TRPGMusicPlugin from './main';
 import type { Channel } from './types';
 import { CATEGORIES, UI } from './constants';
 import { extractYoutubeId } from './PlayerService';
 import { canonicalYoutubeUrl } from './utils';
+import { YoutubeSearchPanel } from './YoutubeSearchPanel';
+
+/** Du texte qui ressemble à une URL est vérifié ; le reste est une recherche. */
+function looksLikeUrl(text: string): boolean {
+  return /^(https?:\/\/|www\.|(m\.)?youtube\.com\/|youtu\.be\/)/i.test(text);
+}
 
 type CheckState = 'idle' | 'invalid' | 'duplicate' | 'pending' | 'ok' | 'error' | 'unknown';
 
@@ -24,6 +30,7 @@ export class AddTrackModal extends Modal {
   private pendingCheck: Promise<void> | null = null;
   private statusEl: HTMLElement | null = null;
   private forceBtn: HTMLButtonElement | null = null;
+  private searchPanel: YoutubeSearchPanel | null = null;
 
   constructor(
     app: App,
@@ -46,8 +53,11 @@ export class AddTrackModal extends Modal {
 
     const urlInput = form.createEl('input', {
       cls: 'trpg-input',
-      attr: { type: 'text', placeholder: UI.YOUTUBE_URL_PLACEHOLDER },
+      attr: { type: 'text', placeholder: UI.ADD_URL_OR_SEARCH_PLACEHOLDER },
     });
+
+    // Résultats de recherche, glissés entre le champ URL et le champ nom
+    const searchHost = form.createDiv();
 
     const nameInput = form.createEl('input', {
       cls: 'trpg-input',
@@ -62,6 +72,11 @@ export class AddTrackModal extends Modal {
 
     const onUrlChanged = (): void => {
       const url = urlInput.value.trim();
+      // Une saisie de recherche n'est pas une URL invalide : pas de vérification
+      if (url && !looksLikeUrl(url)) {
+        this.runChecks('');
+        return;
+      }
       this.fetchYoutubeTitle(url, nameInput);
       this.pendingCheck = this.runChecks(url);
     };
@@ -70,6 +85,42 @@ export class AddTrackModal extends Modal {
     urlInput.addEventListener('paste', () => {
       setTimeout(onUrlChanged, 50);
     });
+
+    const searchPanel = new YoutubeSearchPanel(this.plugin, urlInput, searchHost, {
+      mode: 'add',
+      onPick: (result) => {
+        searchPanel.close();
+        urlInput.value = canonicalYoutubeUrl(result.youtubeId);
+        nameInput.value = result.title;
+        this.pendingCheck = this.runChecks(urlInput.value);
+        nameInput.focus();
+      },
+    });
+    this.searchPanel = searchPanel;
+
+    urlInput.addEventListener('keydown', (e) => {
+      if (searchPanel.handleKeydown(e)) return;
+      if (e.key !== 'Enter') return;
+      e.preventDefault();
+      const text = urlInput.value.trim();
+      if (!text) return;
+      if (looksLikeUrl(text)) onUrlChanged();
+      else void searchPanel.search(text);
+    });
+
+    // Échap ferme d'abord la liste de résultats, puis seulement la modale.
+    // Le scope d'Obsidian s'arrête au premier gestionnaire qui correspond et
+    // celui de la modale est enregistré avant : on place le nôtre en tête.
+    const escHandler = this.scope.register([], 'Escape', () => {
+      if (searchPanel.isOpen) searchPanel.close();
+      else this.close();
+      return false;
+    });
+    const keys = (this.scope as unknown as { keys?: KeymapEventHandler[] }).keys;
+    if (Array.isArray(keys)) {
+      keys.remove(escHandler);
+      keys.unshift(escHandler);
+    }
 
     // Une URL pré-remplie (sauvegarde d'un one-shot) est vérifiée d'emblée
     if (this.initial?.url) this.pendingCheck = this.runChecks(this.initial.url);
@@ -160,8 +211,10 @@ export class AddTrackModal extends Modal {
   }
 
   onClose(): void {
-    // Invalide les vérifications encore en vol
+    // Invalide les vérifications encore en vol et coupe une pré-écoute
     this.checkToken++;
+    this.searchPanel?.destroy();
+    this.searchPanel = null;
     this.contentEl.empty();
   }
 
